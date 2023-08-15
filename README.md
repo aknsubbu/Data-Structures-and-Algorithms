@@ -1,6 +1,9 @@
 # Data-Structures-and-Algorithms
 A place to share and collaborate  
-Here below is the course plan  
+Here below is the course plan     
+Just a little information: -   
+- I have added folders for each individual
+- I have added .md files to all folders so you can make your notes in those files   
 ## 19Z302 -> DATA STRUCTURES   
 
 ### INTRODUCTION :   
