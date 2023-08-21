@@ -27,12 +27,19 @@ int main(){
 }
 
 void bubbleSort(int *arr, int n){
+    int r=0;
     for (int c = 0; c < n - 1; ++c) {
         for (int x = 0; x < n - 1 - c; ++x) {
             if (arr[x] > arr[x + 1]) {
                 swap(&arr[x], &arr[x + 1]);
+                r++;
+                printf(" Number of Iterations: %d\n",r);
+            }
+            else{
+                continue;
             }
         }
+        break;
     }
 }
 
