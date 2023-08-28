@@ -1,13 +1,22 @@
+#include "swap.h"
+#include<time.h>
 //bubble sort  in ascending order
 
 int *bubblesort(int *array, int size){
-    int i, j, temp;
+    int i, j, temp,flag=0;
+    for(int i=0;i<size-1;i++){
+           if(array[i]>array[i+1]){
+                flag=1;
+               break;
+           }
+    }
+    if(flag==0){
+        return array;
+    }
     for(i = 0; i < size; i++){
         for(j = 0; j < size - i - 1; j++){
             if(array[j] > array[j + 1]){
-                temp = array[j];
-                array[j] = array[j+1];
-                array[j+1] = temp;
+                swap(&array[j],&array[j+1]);
             }
         }
     }
@@ -16,14 +25,12 @@ int *bubblesort(int *array, int size){
 
 //bubble sort in descending order
 
-int bubblesortdescending(int *array, int size){
+int *bubblesortdescending(int *array, int size){
     int i, j, temp;
     for(i = 0; i < size; i++){
         for(j = 0; j < size - i - 1; j++){
             if(array[j] < array[j + 1]){
-                temp = array[j];
-                array[j] = array[j+1];
-                array[j+1] = temp;
+                swap(&array[j],&array[j+1]);
             }
         }
     }
@@ -47,9 +54,3 @@ int *randomize(int arr[],int n){
 
 }
 
-void swap(int *a,int *b){
-    int temp;
-    temp=*a;
-    *a=*b;
-    *b=temp;
-}
