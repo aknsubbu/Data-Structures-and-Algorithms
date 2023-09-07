@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../../testCases.h"
+#include "../../../testCases.h"
 #define NUMBER_OF_ELEMENTS 100000
 
 int main(void)
