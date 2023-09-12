@@ -63,3 +63,22 @@ public class Main{
     }
 }
 ```
+
+### TIME COMPLEXITY
+
+The number of times a basic operation gets executed
+
+complexity analysis
+
+- Time
+- Space
+
+example
+add n numbers
+
+```
+sum=0
+for i=1 to n
+    sum=sum+i
+end
+```

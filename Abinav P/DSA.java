@@ -32,13 +32,13 @@ import java.util.*;
 // }
 // }
 
-public class DSA {
-    public static void main(String[] args) {
-        Queue<String> queue = new PriorityQueue<>(Collections.reverseOrder());
-        queue.offer("B");
-        queue.offer("A");
-        queue.offer("C");
-        System.out.println(queue);
-    }
+// public class DSA {
+// public static void main(String[] args) {
+// Queue<String> queue = new PriorityQueue<>(Collections.reverseOrder());
+// queue.offer("B");
+// queue.offer("A");
+// queue.offer("C");
+// System.out.println(queue);
+// }
 
-}
+// }

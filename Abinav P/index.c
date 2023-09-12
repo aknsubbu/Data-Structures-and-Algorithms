@@ -1,10 +1,11 @@
-//bubble sort 
+// //bubble sort 
 // #include<stdio.h>
 // #include<Stdlib.h>
 // #include<time.h>
 
 // int *bubble(double sampleLengthVar, int* sampleArrayPtr){
 //     int temp;
+//     for(i)
 //     for(int i=0;i<sampleLengthVar-1;i++){
 //         for(int j=0;j<sampleLengthVar-i-1;j++){
 //             if(sampleArrayPtr[j]>sampleArrayPtr[j+1]){
@@ -190,56 +191,59 @@
 // }
 
 //linear search
-#include<stdio.h>
-#include<Stdlib.h>
-#include<time.h>
+// #include<stdio.h>
+// #include<Stdlib.h>
+// #include<time.h>
 
-int linearSearch(int *sampleArrayPtr, int sampleLengthVar, double key){
-    for(int i=0;i<sampleLengthVar;i++){
-        if(sampleArrayPtr[i]==key){
-            return i;
-        }
-    }
-    return -1;
-}
+// int linearSearch(int *sampleArrayPtr, int sampleLengthVar, double key){
+//     for(int i=0;i<sampleLengthVar;i++){
+//         if(sampleArrayPtr[i]==key){
+//             return i;
+//         }
+//     }
+//     return -1;
+// }
 
-int* readFile(char filename[]){
-    FILE *fp;
-    fp = fopen(filename, "r");
+// int* readFile(char filename[]){
+//     FILE *fp;
+//     fp = fopen(filename, "r");
     
-    int  sampleElement;
-    double sampleLengthVar=100000; 
-    //fscanf(fp, "%d", &sampleLengthVar);
-    printf("Scanning a sample of length: %f\n", sampleLengthVar);
+//     int  sampleElement;
+//     double sampleLengthVar=100000; 
+//     //fscanf(fp, "%d", &sampleLengthVar);
+//     printf("Scanning a sample of length: %f\n", sampleLengthVar);
 
-    printf("    ALLOC-PTR_START\n");
-    int* sampleArrayPtr = (int*)malloc(sampleLengthVar * sizeof(int));
-    printf("    ALLOC-PTR_END\n");
+//     printf("    ALLOC-PTR_START\n");
+//     int* sampleArrayPtr = (int*)malloc(sampleLengthVar * sizeof(int));
+//     printf("    ALLOC-PTR_END\n");
 
-    for(int i = 0; i < sampleLengthVar; i++){
-        fscanf(fp, "%d", &sampleElement);
-        sampleArrayPtr[i] = sampleElement;
-    }
-    fclose(fp);
-    return sampleArrayPtr;
-}
+//     for(int i = 0; i < sampleLengthVar; i++){
+//         fscanf(fp, "%d", &sampleElement);
+//         sampleArrayPtr[i] = sampleElement;
+//     }
+//     fclose(fp);
+//     return sampleArrayPtr;
+// }
 
-int main(){
-    int *sampleArrayPtr;
-    sampleArrayPtr=readFile("nearlysorted.txt");
-    double sampleLengthVar;   
-    sampleLengthVar=100000;
-    // int input;
-    // srand(time(0));
-    // input=rand()%100000;
-    // printf("Input: %d\n",input);
-    clock_t start,end;
-    start=clock();
-    int result=linearSearch(sampleArrayPtr,sampleLengthVar,100000);
-    end=clock();
-    printf("Result: %d\n",result);
-    printf("%d\n",sampleArrayPtr[result]);
-    double time_taken=((double)(end-start))/CLOCKS_PER_SEC;
-    printf("Time taken: %f\n",time_taken);
-    return 0;
-}
+// int main(){
+//     int *sampleArrayPtr;
+//     sampleArrayPtr=readFile("nearlysorted.txt");
+//     double sampleLengthVar;   
+//     sampleLengthVar=100000;
+//     // int input;
+//     // srand(time(0));
+//     // input=rand()%100000;
+//     // printf("Input: %d\n",input);
+//     clock_t start,end;
+//     start=clock();
+//     int result=linearSearch(sampleArrayPtr,sampleLengthVar,100000);
+//     end=clock();
+//     printf("Result: %d\n",result);
+//     printf("%d\n",sampleArrayPtr[result]);
+//     double time_taken=((double)(end-start))/CLOCKS_PER_SEC;
+//     printf("Time taken: %f\n",time_taken);
+//     return 0;
+// }
+
+
+
