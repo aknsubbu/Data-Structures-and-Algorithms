@@ -1,4 +1,4 @@
-//add nodes at the end
+// add node at the beginging
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,29 +14,26 @@ void print(struct Node * node);
 
 int main(void)
 {
-
     printf("Enter the number of nodes: ");
     int numberOfNodes;
     scanf("%d", &numberOfNodes);
     struct Node * start;
-    struct Node * old;
+    struct Node * new;
     for(int i = 0; i < numberOfNodes; i++)
     {
         printf("Enter a number: ");
         int a;
         scanf("%d", &a);
-        struct Node * new = getNode(a);
-    
+
         if (i == 0)
         {
-            start = new;
-            old = new;
+            start = getNode(a);
         }
-        else
-        {
-            old -> next = new;
-            old = new;
-        }        
+        else{
+            new = getNode(a);
+            new -> next = start;
+            start = new;
+        }
     }
 
     print(start);
