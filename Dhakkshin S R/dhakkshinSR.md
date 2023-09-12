@@ -89,3 +89,25 @@ repeat this entire procedure on the first half of the list
 5.  If the current item is smaller than the target item then 
 repeat this entire procedure on the second half of the list
     - the items following, but not including, the middle item
+
+
+func to insert at beginning of linked list
+pass toInsert address and head address
+
+func to insert at end of linked list
+pass toInsert address and head address
+
+insert n nodes at beginning of linked list
+
+insert n nodes at end of linked list
+
+seacrh for a node with the given value
+takes start pointer and value to search as input
+
+display the linked list
+print address of node, address of data part and address of bext node
+
+insert after node x
+insert before node x
+
+

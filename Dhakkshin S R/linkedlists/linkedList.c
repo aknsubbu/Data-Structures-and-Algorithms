@@ -11,6 +11,7 @@ struct Node
 
 struct Node * getNode(int num);
 void print(struct Node * node);
+struct Node * insertNodeAtTheEnd(struct Node * start, struct Node * new, struct Node * nextNode);
 
 int main(void)
 {
@@ -38,10 +39,34 @@ int main(void)
             old = new;
         }        
     }
-
+    printf("\nExisting linked list:\n");
     print(start);
+
+    printf("\nEnter new value: ");
+    int newValue;
+    scanf("%d", &newValue);
+    insertNodeAtTheEnd(start, getNode(newValue), NULL);
+
+    printf("\nAltered linked list:\n");
+    print(start);
+    
 }
 
+struct Node * insertNodeAtTheEnd(struct Node * start, struct Node * new, struct Node * nextNode)
+{
+    if (nextNode == NULL)
+    {
+        nextNode = start;
+    }
+    if (nextNode -> next == NULL)
+    {
+        nextNode -> next = new;
+    }
+    else
+    {
+        insertNodeAtTheEnd(start, new, nextNode -> next);
+    }
+}
 struct Node * getNode(int num)
 {
     struct Node * node = malloc(sizeof(struct Node));
@@ -52,7 +77,7 @@ struct Node * getNode(int num)
 
 void print(struct Node * node)
 {
-    printf("Data: %d, Next: %p\n", node -> data, node -> next);
+    printf("(Data: %d, Current: %p Next: %p) -> ", node -> data, node, node -> next);
     if (node -> next != NULL) print(node -> next);
-    else return;
+    else printf("NULL\n");
 }
