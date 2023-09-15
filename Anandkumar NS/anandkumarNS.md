@@ -55,3 +55,15 @@ class LinkedList:
 
 ## Summary
 Linked lists are fundamental data structures used in computer science and programming. They provide dynamic memory allocation and efficient insertion/deletion operations, making them suitable for various applications. Understanding the different types of linked lists and their operations is essential for software development.
+
+
+
+Insert at begin
+insert at end 
+insert n nodes at begin
+insert n nodes at end
+search for a node with given data value
+display (print all the nodes) -start address  and data part and the address part
+insert after node x
+insert before node x
+
