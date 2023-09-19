@@ -67,3 +67,6 @@ display (print all the nodes) -start address  and data part and the address part
 insert after node x
 insert before node x
 
+
+//
+insert at the start of doubly linked list
