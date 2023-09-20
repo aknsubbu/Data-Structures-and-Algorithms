@@ -30,6 +30,15 @@ void insertAtBeginning(struct Node** head, int newData){
     *head = newNode;
 }
 
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
 int main(){
     struct Node* head = NULL; 
 
