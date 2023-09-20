@@ -1,7 +1,7 @@
-//linked list
+//circular singly linked list
 
 #include<stdio.h>
-#include<Stdlib.h>
+#include<stdlib.h>
 
 struct node *getnode(int data);
 
@@ -16,22 +16,18 @@ int main(){
     struct node *p3=getnode(5);
     st->next=p2;
     p2->next=p3;
-    p3->next=NULL;
+    p3->next=st;
     print(st);
-    print(st);
-    return 0;
-    
+    return 0;    
 }
 
 void print(struct node *start){
-    while(start!=NULL){
-        printf("the values of data is :%d\n",start->data);
-        start=start->next;
-    }
-    
+    struct node *temp=start;
+    do{
+        printf("the values of data is :%d\n",temp->data);
+        temp=temp->next;
+    }while(temp!=start);   
 }
-
-
 
 struct node *getnode(int data){
    struct node *head;
@@ -40,4 +36,3 @@ struct node *getnode(int data){
    head->next=NULL;
    return head;
 }
-
