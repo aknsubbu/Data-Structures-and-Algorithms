@@ -46,11 +46,18 @@ import java.util.*;
 /**
  * DSA
  */
+
+/**
+ * DSA
+ */
 public class DSA {
 
     public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
 
-        int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        list.add(1);
+        list.add(2);
+        Collections.sort(list);
 
     }
 }
