@@ -13,6 +13,7 @@ struct node *insertafter(struct node *head);
 struct node *insertbefore(struct node *head);
 struct node *delete(struct node *head);
 struct node *deletelast(struct node *head);
+struct node *deletebefore(struct node *head);
 struct node *deteteafter(struct node *head);
 
 struct node{
@@ -24,7 +25,7 @@ void main(){
     struct node *head = newLL();
 
     display(head);
-    struct node *head2=deteteafter(head);
+    struct node *head2=deletebefore(head);
     display(head2);
 
 }
@@ -199,5 +200,24 @@ struct node *deteteafter(struct node *head){
     struct node *prev=search(head);
     struct node *del=prev->next;
     prev->next=del->next;
+    return head;
+}
+
+struct node *deletebefore(struct node *head){
+    struct node *next=search(head);
+    //display(next);
+    struct node *current=head;
+    if(current->next==next){
+        current->next=next;
+        return head;
+    }
+    while(current->next->next!=next){
+        current=current->next;
+    }
+    if(current==NULL){
+        printf("NULL");
+        return NULL;
+    }
+     current->next=next;
     return head;
 }

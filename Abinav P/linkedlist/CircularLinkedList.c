@@ -43,5 +43,5 @@
 #include<stdlib.h>
 
 void main(){
-    int range=INT_MAX;
+    int range=INT_MAX;   
 }
