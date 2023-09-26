@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+void decryption(FILE *ptr,int n){
+    char ch[n];
+    for (int i = 0; i < n; i++) {
+        ch[i] = fgetc(ptr);
+        if (feof(ptr))
+            break;
+        printf("%c", ch[i]-2);
+    }
+}
+
+
+void encryption(FILE *rptr,FILE *wptr,int n,int k){
+    char ch[n];
+    for (int i = 0; i < n; i++) { 
+        ch[i] = fgetc(rptr)+k;   //Encryption
+        if (feof(rptr))
+            break;
+        printf("%c", ch[i]);
+    }
+    fputs(ch,wptr);
+}
+// leet code question 1 and 2
+
+
+int main(){
+    FILE *finptr;
+    FILE *foutptr;
+    finptr = fopen("text.txt","r");
+    foutptr = fopen("eoutput.txt","w");
+    encryption(finptr,foutptr,68,2);
+    fclose(foutptr);
+  printf("\n");
+    foutptr = fopen("eoutput.txt","r");
+    decryption(foutptr,68);
+}
