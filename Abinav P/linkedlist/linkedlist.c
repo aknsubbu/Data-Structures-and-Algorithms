@@ -208,7 +208,7 @@ struct node *deletebefore(struct node *head){
     //display(next);
     struct node *current=head;
     if(current->next==next){
-        current->next=next;
+        current-> next=next;
         return head;
     }
     while(current->next->next!=next){
