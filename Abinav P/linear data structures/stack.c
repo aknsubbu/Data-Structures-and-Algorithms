@@ -33,3 +33,5 @@ int main(){
 //evaluvating expression
 
 push pop evaluvating prefix to postfix and evaluvating postfix and array , linked list
+
+(3+2)*(4-5)/6*2/1
