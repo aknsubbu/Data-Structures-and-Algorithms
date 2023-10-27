@@ -100,13 +100,18 @@ struct node{
     struct node *left,*right;
 }*root;
 
+struct node *getnode(int data){
+    struct node *temp=(struct node *)malloc(sizeof(struct node));
+    temp->data=data;
+    temp->left=NULL;
+    temp->right=NULL;
+    return temp;
+}
+
 struct node *insert(struct node *root,int data){
+    struct node *current = root;
     if(root==NULL){
-        struct node *temp=(struct node *)malloc(sizeof(struct node));
-        temp->data=data;
-        temp->left=NULL;
-        temp->right=NULL;
-        return temp;
+        return getnode(data);
     }
     if(data<root->data){
         root->left=insert(root->left,data);
@@ -114,13 +119,34 @@ struct node *insert(struct node *root,int data){
     else if(data>root->data){
         root->right=insert(root->right,data);
     }
+    // while(current==NULL){
+    //     if(data<current->data){
+    //         current=current->left;
+    //     }
+    //     else if(data>current->data){
+    //         current=current->right;
+    //     }
+    // }
     return root;
 }
 
-struct node *getnode(int data){
-    struct node *temp=(struct node *)malloc(sizeof(struct node));
-    temp->data=data;
-    temp->left=NULL;
-    temp->right=NULL;
-    return temp;
+void display(struct node *root){
+    if(root!=NULL){
+        display(root->left);
+        printf("%d ",root->data);
+        display(root->right);
+    }
+}
+
+void main(){
+    int n;
+    printf("Enter the number of nodes: ");
+    scanf("%d",&n);
+    printf("Enter the elements: ");
+    for(int i=0;i<n;i++){
+        int temp;
+        scanf("%d",&temp);
+        root=insert(root,temp);
+    }
+    display(root);
 }
