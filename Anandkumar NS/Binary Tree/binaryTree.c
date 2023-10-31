@@ -1,50 +1,91 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
-void fillTree(int arr[],int length,int levels){
-    printf("Enter -1 if you want to enter a NULL node\n");
-    for(int i=0;i<length;i++){
-        int x;
-        
-        if(i==0){
-            printf("x----Root Node----x\n");
-        }
-        else if(i%2==0){
-            printf("x----Right Child----x\n");
-        }
-        else{
-            printf("x----Left Child----x\n");
-        }
-        printf("Enter the value of node %d: ",i);
-        scanf("%d",&x);
-        if(x==-1){
-            arr[i] = -1;
-        }
-        else{
-            arr[i] = x;
-        }
-    }
+#define MAX_NODES 100
 
-}
+int binaryTree[MAX_NODES];
+int root = -1; // Index of the root node
 
-void displayTree(int arr[],int length,int levels){
-    
-    for(int i=0;i<levels;i++){
-        for(int j=0;j<pow(2,i);j++){
-            printf("%d ",arr[j]);
-        }
-        printf("\n");
+// Initialize all pos in tree
+void initialize() {
+    for (int i = 0; i < MAX_NODES; i++) {
+        binaryTree[i] = -1; //giving empty value as -1 
     }
 }
 
-int main(){
-    int length,levels;
-    printf("Enter the number of levels of the binary tree: ");
-    scanf("%d",&levels);
-    length = (pow(2,levels))-1;
-    int *arr=(int *)malloc(length*sizeof(int));
-    fillTree(arr,length,levels);
-    displayTree(arr,length,levels);
+void insert(int data) {
+    if (root == -1) {
+        root = 0;
+        binaryTree[root] = data;
+    } else {
+        int current = root;
+        while (1) {
+            if (data < binaryTree[current]) {
+                if (binaryTree[2 * current + 1] == -1) {
+                    binaryTree[2 * current + 1] = data;
+                    break;
+                } else {
+                    current = 2 * current + 1;
+                }
+            } else {
+                if (binaryTree[2 * current + 2] == -1) {
+                    binaryTree[2 * current + 2] = data;
+                    break;
+                } else {
+                    current = 2 * current + 2;
+                }
+            }
+        }
+    }
+}
+//inorder print
+void printInOrder(int current) {
+    if (binaryTree[current] != -1) {
+        printInOrder(2 * current + 1);
+        printf("%d ", binaryTree[current]);
+        printInOrder(2 * current + 2);
+    }
+}
+
+//preorder print
+void printPreOrder(int current) {
+    if (binaryTree[current] != -1) {
+        printf("%d ", binaryTree[current]);
+        printPreOrder(2 * current + 1);
+        printPreOrder(2 * current + 2);
+    }
+}
+
+//postorder print
+void printPostOrder(int current) {
+    if (binaryTree[current] != -1) {
+        printPostOrder(2 * current + 1);
+        printPostOrder(2 * current + 2);
+        printf("%d ", binaryTree[current]);
+    }
+}
+
+int main() {
+    initialize();
+
+    // Insert nodes into the binary tree
+    insert(50);
+    insert(30);
+    insert(70);
+    insert(20);
+    insert(40);
+    insert(60);
+    insert(80);
+
+    // Print the binary tree in in-order
+    printf("In-order traversal: ");
+    printInOrder(root);
+    printf("\n");
+
     return 0;
 }
+
+
+//traverse in order the left subtree
+//crosses root
+//traverse in order the right subtree
