@@ -91,23 +91,40 @@ repeat this entire procedure on the second half of the list
     - the items following, but not including, the middle item
 
 
-func to insert at beginning of linked list
-pass toInsert address and head address
-
-func to insert at end of linked list
-pass toInsert address and head address
-
-insert n nodes at beginning of linked list
-
-insert n nodes at end of linked list
-
-seacrh for a node with the given value
-takes start pointer and value to search as input
-
-display the linked list
-print address of node, address of data part and address of bext node
-
-insert after node x
-insert before node x
+### 19/09/2023
+## Doubly Linked List
+###
+- A doubly linked list is a linked data structure that consists of a set of sequentially linked records called nodes. 
+- Each node contains two fields, called links, that are references to the previous and to the next node in the sequence of nodes. 
+- The beginning and ending nodes' previous and next links, respectively, point to some kind of terminator, typically a sentinel node or null, to facilitate traversal of the list. 
+- If there is only one sentinel node, then the list is circularly linked via the sentinel node. 
+- It can be conceptualized as two singly linked lists formed from the same data items, but in opposite sequential orders.
 
 
+evaluation of infix expression
+1. if operator:
+    - pop two operands
+    - apply operator
+    - push result
+1. if operand:
+    - push operand  
+
+
+For lab:
+1. stack using arrays and linked list
+1. infix to postfix
+1. evaluate postfix
+
+INfix to Postfix:
+1. Scan the infix expression from left to right. 
+1. If the scanned character is an operand, put it in the postfix expression. 
+1. Otherwise, do the following
+    - If the precedence and associativity of the scanned operator are greater than the precedence and associativity of the operator in the stack [or the stack is empty or the stack contains a ‘(‘ ], then push it in the stack. [‘^‘ operator is right associative and other operators like ‘+‘,’–‘,’*‘ and ‘/‘ are left-associative].
+        - Check especially for a condition when the operator at the top of the stack and the scanned operator both are ‘^‘. In this condition, the precedence of the scanned operator is higher due to its right associativity. So it will be pushed into the operator stack. 
+        - In all the other cases when the top of the operator stack is the same as the scanned operator, then pop the operator from the stack because of left associativity due to which the scanned operator has less precedence. 
+    - Else, Pop all the operators from the stack which are greater than or equal to in precedence than that of the scanned operator.
+        - After doing that Push the scanned operator to the stack. (If you encounter parenthesis while popping then stop there and push the scanned operator in the stack.) 
+1. If the scanned character is a ‘(‘, push it to the stack. 
+1. If the scanned character is a ‘)’, pop the stack and output it until a ‘(‘ is encountered, and discard both the parenthesis. 
+1. Repeat steps 2-5 until the infix expression is scanned. 
+1. Once the scanning is over, Pop the stack and add the operators in the postfix expression until it is not empty.
