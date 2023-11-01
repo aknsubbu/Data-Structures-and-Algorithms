@@ -49,8 +49,7 @@ struct Node * bst_iter(struct Node ** root, int num){
                 }
             }
         }
-    }
-    
+    }    
 }
 
 void inorder(struct Node *root){
@@ -103,7 +102,15 @@ struct Node * search(struct Node * root, int target, int *child_side){
     {
         search(root->left, target, child_side);
     }
-    els        
+    else if (target > root -> data)
+    {
+        search(root->right, target, child_side);
+    }
+    else
+    {
+        printf("Not found\n");
+        return NULL;
+    }
 }
 
 void display(struct Node *root){
@@ -138,11 +145,31 @@ int main(){
     scanf("%d", &num);
     bst_iter(&root, num);
     display_tree(root, 0);
-    printf("\nInorder: ");
-    inorder(root);
-    printf("\nPreorder: ");
-    preorder(root);
-    printf("\nPostorder: ");
-    postorder(root);
+    // printf("\nInorder: ");
+    // inorder(root);
+    // printf("\nPreorder: ");
+    // preorder(root);
+    // printf("\nPostorder: ");
+    // postorder(root);
+    printf("Enter element to search: ");
+    int target;
+    scanf("%d", &target);
+    int child_side;
+    struct Node *parent = search(root, target, &child_side);
+    printf("Parent: %d\n", parent->data);
+    switch (child_side)
+    {
+    case 0:
+        printf("this node is the target node\n");
+        break;
+    case 1:
+        printf("Left child\n");
+        break;
+    case 2:
+        printf("Right child\n");
+        break;
+    default:
+        break;
+    }
     return 0;
 }
