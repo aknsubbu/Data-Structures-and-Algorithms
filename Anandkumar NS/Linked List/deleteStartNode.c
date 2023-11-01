@@ -6,22 +6,22 @@ struct Node {
     struct Node* next;
 };
 
-
-void deletefirstNode(struct Node ** head,struct Node **temp){
-    struct Node *temp;
-    temp=head;
-    head=head->next;
+void deletefirstNode(struct Node ** head){
+    struct Node *temp = *head;
+    *head = (*head)->next;
     free(temp);
 }
 
 void deletelastElement(struct Node **head){
-    struct Node* current = head;
-    struct Node* after=current->next;
-    while (true) {
+    struct Node* current = *head;
+    struct Node* after = current->next;
+    while (1) {
         if(after->next==NULL){
             current->next=NULL;
             break;
         }
+        current = after;
+        after = after->next;
     }
     printf("NULL\n");
 }
@@ -39,7 +39,6 @@ void insertAtBeginning(struct Node** head, int newData) {
 
     *head = newNode;
 }
-
 
 // Function to print the elements of the linked list
 void printList(struct Node* head) {
@@ -59,8 +58,7 @@ struct Node *getData(int data) {
 }
 
 int main() {
-
-// Linked List with one element
+    // Linked List with one element
     // struct Node* head1 = (struct Node*)malloc(sizeof(struct Node));
     // if (head1 == NULL) {
     //     printf("Memory allocation failed.\n");
@@ -73,16 +71,7 @@ int main() {
     // printList(head1);
     // printf("Linked List with one element above");
 
-
-
-    
-    
-    
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
-
 
     return 0;
 }
-
-
