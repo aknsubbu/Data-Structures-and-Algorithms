@@ -3,7 +3,7 @@
 #include <math.h>
 
 int index_check(int index, int num){
-    if (index >= pow(2, num) - 1)
+    if (index >= pow(2, num) - 1) || (index < 0)
     {
         return 0;
     }
@@ -15,6 +15,10 @@ int left_child(int index){
 }
 int right_child(int index){
     return (2 * index) + 2;
+}
+
+int parent(int index){
+    return (index - 1) / 2;
 }
 
 int* bst_iter(int num){
@@ -119,21 +123,34 @@ int search(int *tree, int value, int num){
     return -1;
 }
 
-void delete(int *tree, int target, int num){
+int inorder_successor(int *tree, int target, int num){
     int index = search(tree, target, num);
     if (index == -1)
     {
         printf("Target not found in tree\n");
-        return;
+        return -1;
     }
-    if (index_check(right_child(index), num) && tree[left_child(index)] == 0 && tree[right_child(index)] == 0)
-    {
-        tree[index] = 0;
-        return;
-    } 
-    else
-    
+    if(index == right_child(parent(index))){
+        int successor = parent(index);
+        
+    }
 }
+
+// void delete(int *tree, int target, int num){
+//     int index = search(tree, target, num);
+//     if (index == -1)
+//     {
+//         printf("Target not found in tree\n");
+//         return;
+//     }
+//     if (index_check(right_child(index), num) && tree[left_child(index)] == 0 && tree[right_child(index)] == 0)
+//     {
+//         tree[index] = 0;
+//         return;
+//     } 
+//     else
+    
+// }
 
 int main(){
     int num;

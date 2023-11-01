@@ -113,6 +113,137 @@ struct Node * search(struct Node * root, int target, int *child_side){
     }
 }
 
+struct Node * inorder_successor(struct Node *root, int target){
+    int child_side;
+    struct Node *parent = search(root, target, &child_side);
+    if(parent == NULL){
+        printf("Target not found in tree\n");
+        return NULL;
+    }
+    struct Node *temp = NULL;
+    if (child_side = 0)
+    {
+        if (parent -> right != NULL)
+        {
+            temp = parent -> right;
+            while (temp -> left != NULL)
+            {
+                temp = temp -> left;
+            }
+            return temp;
+        }
+        else
+        {
+            printf("No inorder successor\n");
+            return NULL;
+        }        
+    }
+    else if (child_side = 1)
+    {
+        if (parent -> left -> left == NULL && parent -> left -> right == NULL)
+        {
+            return parent;
+        }
+        if (parent -> right ->right != NULL)
+        {
+            temp = parent -> right -> right;
+            while (temp -> left != NULL)
+            {
+                temp = temp -> left;
+            }
+            return temp;
+        }
+        else
+        {
+            return parent;
+        }
+    }
+    else if (child_side = 2)
+    {
+        while (child_side == 2)
+        {
+            parent = search(root, parent -> data, &child_side);
+        }
+        if (child_side == 1)
+        {
+            return parent;
+        }
+        else
+        {
+            printf("No inorder successor\n");
+            return NULL;
+        }
+    }    
+}
+
+struct Node * inorder_predecessor(struct Node *root, int target){
+    int child_side;
+    struct Node *parent = search(root, target, &child_side);
+    if(parent == NULL){
+        printf("Target not found in tree\n");
+        return NULL;
+    }
+    struct Node *temp = NULL;
+    if (child_side == 0)
+    {
+        if (parent -> left != NULL)
+        {
+            temp = parent -> left;
+            while (temp -> right != NULL)
+            {
+                temp = temp -> right;
+            }
+            return temp;
+        }
+        else
+        {
+            printf("No inorder predecessor\n");
+            return NULL;
+        }        
+    }
+    else if (child_side == 1)
+    {
+        if (parent -> left ->left != NULL)
+        {
+            temp = parent -> left -> left;
+            while (temp -> right != NULL)
+            {
+                temp = temp -> right;
+            }
+            return temp;
+        }
+        else
+        {
+            while (child_side == 1)
+            {
+                parent = search(root, parent -> data, &child_side);
+            }
+            if (child_side == 2)
+            {
+                return parent;
+            }
+            printf("No inorder predecessor\n");
+            return NULL;
+        }              
+    }
+    else if (child_side == 2)
+    {
+        if (parent -> right ->left != NULL)
+        {
+            temp = parent -> right -> left;
+            while (temp -> right != NULL)
+            {
+                temp = temp -> right;
+            }
+            return temp;
+        }
+        else
+        {
+            return parent;
+        }
+    }  
+}
+
 void display(struct Node *root){
     if (root == NULL)
     {
@@ -171,5 +302,14 @@ int main(){
     default:
         break;
     }
+    struct Node *inorder_successor_node = inorder_successor(root, target);
+    if(inorder_successor_node != NULL)
+        printf("Inorder successor: %d\n", inorder_successor_node->data);
+    struct Node *inorder_predecessor_node = inorder_predecessor(root, target);
+    if(inorder_predecessor_node != NULL)
+        printf("Inorder predecessor: %d\n", inorder_predecessor_node->data);
+    printf("Inorder: ");
+    inorder(root);
+
     return 0;
 }
