@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 struct Node {
   int value;
@@ -36,6 +37,46 @@ void inOrder(struct Node* root) {
   printf("%d ", root->value);
   inOrder(root->right);
 }
+
+
+void deleteNode(struct Node *root,int data){
+  if(root==NULL){
+    return;
+  }
+  if(root->value==data){
+    if(root->left==NULL && root->right==NULL){
+      free(root);
+      root=NULL;
+    }
+    else if(root->left==NULL){
+      struct Node *temp=root;
+      root=root->right;
+      free(temp);
+    }
+    else if(root->right==NULL){
+      struct Node *temp=root;
+      root=root->left;
+      free(temp);
+    }
+    else{
+      struct Node *temp=root->right;
+      while(temp->left!=NULL){
+        temp=temp->left;
+      }
+      root->value=temp->value;
+      deleteNode(root->right,temp->value);
+    }
+  }
+  else if(root->value>data){
+    deleteNode(root->left,data);
+  }
+  else{
+    deleteNode(root->right,data);
+}
+
+}
+
+
 
 int main() {
   struct Node* root = NULL;  

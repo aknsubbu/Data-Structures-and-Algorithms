@@ -65,6 +65,63 @@ void printPostOrder(int current) {
     }
 }
 
+
+int searchTree(int *arr,int data){
+    int i=0;
+    while(arr[i]!=-1){
+        if(arr[i]==data){
+        printf("Found\n");
+        return i;
+        }
+        else if(arr[i]>data){
+        i=2*i+1;
+        }
+        else{
+        i=2*i+2;
+        }
+    }
+    printf("Not Found\n");
+    return -1;
+}
+
+//delete the node using the search function
+void deleteNode(int *arr,int data){
+    int i=searchTree(arr,data);
+    if(i==-1){
+    printf("Not Found");
+    }
+    else{
+
+        //if there is not chlid 
+        if(arr[2*i+1]==-1 && arr[2*i+2]==-1){
+            arr[i]=-1;
+        }
+
+        // right child alone 
+        else if(arr[2*i+1]==-1 && arr[2*i+2]!=-1){
+            arr[i]=arr[2*i+2];
+            arr[2*i+2]=-1;
+        }
+
+        //left child alone
+        else if(arr[2*i+2]==-1 && arr[2*i+1]!=-1){
+            arr[i]=arr[2*i+1];
+            arr[2*i+1]=-1;
+        }
+
+        //both child
+        else{
+            int j=2*i+2;
+            while(arr[2*j+1]!=-1){
+                j=2*j+1;
+            }
+            arr[i]=arr[j];
+            arr[j]=-1;
+        }
+    }
+
+}
+
 int main() {
     initialize();
 
