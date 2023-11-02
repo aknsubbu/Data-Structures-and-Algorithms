@@ -26,36 +26,6 @@ struct node *insert(struct node *root, int data) {
     return root;
 }
 
-// void deletenode(struct node *root, int data) {
-//     if (root == NULL) {
-//         printf("Not found\n");
-//     } else if (data < root->data) {
-//         deletenode(root->left, data);
-//     } else if (data > root->data) {
-//         deletenode(root->right, data);
-//     } else {
-//         if (root->left == NULL && root->right == NULL) {
-//             free(root);
-//             root = NULL;
-//         } else if (root->left == NULL) {
-//             struct node *temp = root;
-//             root = root->right;
-//             free(temp);
-//         } else if (root->right == NULL) {
-//             struct node *temp = root;
-//             root = root->left;
-//             free(temp);
-//         } else {
-//             struct node *temp = root->right;
-//             while (temp->left != NULL) {
-//                 temp = temp->left;
-//             }
-//             root->data = temp->data;
-//             deletenode(root->right, temp->data);
-//         }
-//     }
-// }
-
 void deletenode(struct node *root, int data) {
     struct node *parent = NULL;
     int position;
