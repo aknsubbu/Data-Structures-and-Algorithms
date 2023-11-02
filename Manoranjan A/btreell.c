@@ -69,29 +69,29 @@ void deletenode(struct node *root, int data) {
             } else {
                 parent->right = NULL;
             }
-        //     free(temp);
-        // } else if (temp->left == NULL) {
-        //     if (position == 0) {
-        //         parent->left = temp->right;
-        //     } else {
-        //         parent->right = temp->right;
-        //     }
-        //     free(temp);
-        // } else if (temp->right == NULL) {
-        //     if (position == 0) {
-        //         parent->left = temp->left;
-        //     } else {
-        //         parent->right = temp->left;
-        //     }
-        //     free(temp);
-        // } else {
-        //     struct node *temp2 = temp->right;
-        //     while (temp2->left != NULL) {
-        //         temp2 = temp2->left;
-        //     }
-        //     temp->data = temp2->data;
-        //     deletenode(temp->right, temp2->data);
-        // }
+            free(temp);
+        } else if (temp->left == NULL) {
+            if (position == 0) {
+                parent->left = temp->right;
+            } else {
+                parent->right = temp->right;
+            }
+            free(temp);
+        } else if (temp->right == NULL) {
+            if (position == 0) {
+                parent->left = temp->left;
+            } else {
+                parent->right = temp->left;
+            }
+            free(temp);
+        } else {
+            struct node *temp2 = temp->right;
+            while (temp2->left != NULL) {
+                temp2 = temp2->left;
+            }
+            temp->data = temp2->data;
+            deletenode(temp->right, temp2->data);
+        }
     }
 }
 

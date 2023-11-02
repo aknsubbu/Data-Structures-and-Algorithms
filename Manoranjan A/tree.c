@@ -1,6 +1,6 @@
-traverse inorder the left sub tree
-process root
-traverse inorder the right sub tree
+// traverse inorder the left sub tree
+// process root
+// traverse inorder the right sub tree
 
 #include<stdio.h>
 #include<stdlib.h>
