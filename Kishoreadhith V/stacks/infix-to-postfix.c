@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 int precedence(char op){
     switch (op)
@@ -13,6 +14,9 @@ int precedence(char op){
     case '/':
     case '%':
         return 2;
+        break;
+    case '^':
+        return 3;
         break;    
     default:
         return 0;
@@ -50,39 +54,62 @@ void printArray(char * arr, int top){
 
 char * toPostfix(char * infix){
     int len = strlen(infix);
-    char * postfix = (char *) malloc (len * sizeof(char));
-    char * operators = (char *) malloc (len * sizeof(char));
-    int top = -1;
+    char * postfix = (char *) malloc ((len+1) * sizeof(char));
+    char * operators = (char *) malloc ((len+1) * sizeof(char));
+    int top = -1, pin = -1;
     for (int i = 0; i < len; i++)
     {
-        if (infix[i] >= '0' && infix[i] < '9')
+        if (isalnum(infix[i]))
         {
-            push(postfix, &top, infix[i], len);
+            postfix[++pin] = infix[i];
         }
         else if(infix[i] == '('){
             push(operators, &top, infix[i], len);
         }
-        else if(infix[i] == ')'){
-            char op;
-            while (op = pop(operators, &top) != '(')
-            {
-                push(postfix, &top, op, len);
+        else if (infix[i] == ')') {
+            while (top > -1 && operators[top] != '(') {
+                postfix[++pin] = pop(operators, &top);
+            }
+            if (top > -1 && operators[top] == '(') {
+                pop(operators, &top);
+            } else {
+                printf("Invalid expression!\n");
+                free(postfix);
+                free(operators);
+                return NULL;
             }
         }
-        else if(infix[i] == '+' || infix[i] == '-' || infix[i] == '*' || infix[i] == '/' || infix[i] == '%'){
+
+        else if(precedence(infix[i])){
             char op;
-            while (precedence(op = pop(operators, &top)) >= precedence(infix[i]))
+            while ((top > -1 && precedence(operators[top]) >= precedence(infix[i])) && operators[top] != '(')
             {
-                push(postfix, &top, op, len);
+                postfix[++pin] = pop(operators, &top);
             }
             push(operators, &top, infix[i], len);
         }
 
     }
+    while (top > -1)
+    {
+        if(operators[top] == '('){
+            printf("Invalid expression!\n");
+            return NULL;
+        }
+        postfix[++pin] = pop(operators, &top);
+    }
+    postfix[++pin] = '\0';
     return postfix;    
 }
 
-int main(){
-    printf("Postfix expression: %s\n", toPostfix("((a+b)/(c-d))"));
+int main() {
+    char *postfix1 = toPostfix("()");
+    char *postfix2 = toPostfix("(a+b)/(c-d)");
+    char *postfix3 = toPostfix("a+b/c-d");
+    char *postfix4 = toPostfix("a+b/c*d^e/f-g-h");
+    printf("%s\n", postfix1);
+    printf("%s\n", postfix2);
+    printf("%s\n", postfix3);
+    printf("%s\n", postfix4);
     return 0;
 }
