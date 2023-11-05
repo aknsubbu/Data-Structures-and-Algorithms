@@ -110,7 +110,8 @@ struct node *search(struct node *root, int data, struct node **parent, int *posi
         return search(root->right, data, parent, position);
     }
 }
-void inordersuccesor(struct node *root, int data) {
+
+struct node *inordersuccesor(struct node *root, int data) {
     struct node *parent = NULL;
     int position;
     struct node *temp = search(root, data, &parent, &position);
@@ -124,17 +125,13 @@ void inordersuccesor(struct node *root, int data) {
             }
             printf("Inorder succesor: %d\n", temp2->data);
         } else {
-            if (position == 0) {
-                printf("Inorder succesor: %d\n", parent->data);
+            struct node *temp2 = parent;
+            while (temp2 != NULL && temp2->data < data) {
+                temp2 = temp2->right;
+            }
+            if (temp2 == NULL) {
+                printf("Inorder succesor: NULL\n");
             } else {
-                struct node *temp2 = root;
-                while (temp2->data != parent->data) {
-                    if (data <= temp2->data) {
-                        temp2 = temp2->left;
-                    } else {
-                        temp2 = temp2->right;
-                    }
-                }
                 printf("Inorder succesor: %d\n", temp2->data);
             }
         }

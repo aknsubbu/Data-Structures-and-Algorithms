@@ -389,6 +389,42 @@ void delete(struct node *root, int data) {
     }
 }   
 
+struct node *inordersucessor(struct node *root,int data){
+    struct node *current=root;
+    while(current!=NULL){
+        if(data==current->data){
+            break;
+        }
+        else if(data<current->data){
+            current=current->left;
+        }
+        else if(data>current->data){
+            current=current->right;
+        }
+    }
+    if(current->right!=NULL){
+        struct node *temp=current->right;
+        while(temp->left!=NULL){
+            temp=temp->left;
+        }
+        return temp;
+    }
+    else{
+        struct node *successor=NULL;
+        struct node *ancestor=root;
+        while(ancestor!=current){
+            if(current->data<ancestor->data){
+                successor=ancestor;
+                ancestor=ancestor->left;
+            }
+            else{
+                ancestor=ancestor->right;
+            }
+        }
+        return successor;
+    }
+}
+
 struct node *search(int data,struct node *root){
     struct node *current=root;
     while(current!=NULL){
@@ -442,4 +478,3 @@ void main(){
 }
 
 
-//step1 find the inorder succesor of the node to be deleted
