@@ -326,43 +326,104 @@ struct node *insert(struct node *root, int data) {
     return root;
 }
 
-struct node *delete(struct node *head,int data){
-    struct node *current=head;
-    if(head==NULL){
-        return NULL;
+
+void delete(struct node *root, int data) {
+    struct node *current = root;
+    struct node *parent = NULL;
+    while (current != NULL && current->data != data) {
+        parent = current;
+        if (data < current->data) {
+            current = current->left;
+        } else {
+            current = current->right;
+        }
     }
-    if(data<current->data){
-        current->left=delete(current->left,data);
+
+    if (current == NULL) {
+        printf("Node to be deleted not found\n");
+        return;
     }
-    else if(data>current->data){
-        current->right=delete(current->right,data);
+
+    // Case 1: Node to be deleted has no children
+    if (current->left == NULL && current->right == NULL) {
+        if (current != root) {
+            if (parent->left == current) {
+                parent->left = NULL;
+            } else {
+                parent->right = NULL;
+            }
+        } else {
+            root = NULL;
+        }
+        free(current);
+    }
+    // Case 2: Node to be deleted has one child
+    else if (current->left == NULL || current->right == NULL) {
+        struct node *child = current->left != NULL ? current->left : current->right;
+        if (current != root) {
+            if (current == parent->left) {
+                parent->left = child;
+            } else {
+                parent->right = child;
+            }
+        } else {
+            root = child;
+        }
+        free(current);
+    }
+    // Case 3: Node to be deleted has two children
+    else {
+        struct node *successor = current->right;
+        struct node *successor_parent = current;
+        while (successor->left != NULL) {
+            successor_parent = successor;
+            successor = successor->left;
+        }
+        if (successor_parent->left == successor) {
+            successor_parent->left = successor->right;
+        } else {
+            successor_parent->right = successor->right;
+        }
+        current->data = successor->data;
+        free(successor);
+    }
+}   
+
+struct node *inordersucessor(struct node *root,int data){
+    struct node *current=root;
+    while(current!=NULL){
+        if(data==current->data){
+            break;
+        }
+        else if(data<current->data){
+            current=current->left;
+        }
+        else if(data>current->data){
+            current=current->right;
+        }
+    }
+    if(current->right!=NULL){
+        struct node *temp=current->right;
+        while(temp->left!=NULL){
+            temp=temp->left;
+        }
+        return temp;
     }
     else{
-        if(current->left==NULL && current->right==NULL){
-            free(current);
-            return NULL;
-        }
-        else if(current->left==NULL){
-            struct node *temp=current->right;
-            free(current);
-            return temp;
-        }
-        else if(current->right==NULL){
-            struct node *temp=current->left;
-            free(current);
-            return temp;
-        }
-        else{
-            struct node *temp=current->right;
-            while(temp->left!=NULL){
-                temp=temp->left;
+        struct node *successor=NULL;
+        struct node *ancestor=root;
+        while(ancestor!=current){
+            if(current->data<ancestor->data){
+                successor=ancestor;
+                ancestor=ancestor->left;
             }
-            current->data=temp->data;
-            current->right=delete(current->right,temp->data);
+            else{
+                ancestor=ancestor->right;
+            }
         }
+        return successor;
     }
 }
-
 
 struct node *search(int data,struct node *root){
     struct node *current=root;
@@ -415,3 +476,5 @@ void main(){
     }
 
 }
+
+

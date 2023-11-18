@@ -39,7 +39,25 @@ void inOrder(struct Node* root) {
 }
 
 
-void deleteNode(struct Node *root,int data){
+//create a function to traverse the tree and find the node
+struct Node* findNode(struct Node *root,int data){
+  if(root==NULL){
+    return NULL;
+  }
+  if(root->value==data){
+    return root;
+  }
+  else if(root->value>data){
+    return findNode(root->left,data);
+  }
+  else{
+    return findNode(root->right,data);
+  }
+}
+
+
+void deleteNode(struct Node *element,int data){
+  struct Node *root=findNode(element,data);
   if(root==NULL){
     return;
   }
@@ -48,15 +66,17 @@ void deleteNode(struct Node *root,int data){
       free(root);
       root=NULL;
     }
-    else if(root->left==NULL){
+    else if(root->left==NULL && root->right!=NULL){
       struct Node *temp=root;
       root=root->right;
       free(temp);
+      printf("Right Child is promoted\n");
     }
-    else if(root->right==NULL){
+    else if(root->right==NULL && root->left!=NULL){
       struct Node *temp=root;
       root=root->left;
       free(temp);
+      printf("Left Child is promoted\n");
     }
     else{
       struct Node *temp=root->right;
@@ -76,6 +96,21 @@ void deleteNode(struct Node *root,int data){
 
 }
 
+// ! Notes
+// ! Find the in-order successor of the node that needs to be deleted
+// ! It will always be a leaf node or a node with only one child
+// ! It will be in the left-most position of the right subtree of the node to be delete
+// ! Replace the node to be deleted with the in-order successor
+// ! Delete the in-order successor
+
+// * Find the in-order successor
+struct Node* findInorderSuccessor(struct Node *root){
+  struct Node *temp=root->right;
+  while(temp->left!=NULL){
+    temp=temp->left;
+  }
+  return temp;
+}
 
 
 int main() {

@@ -268,6 +268,89 @@ void display_tree(struct Node *root, int level){
     display_tree(root->left, level + 1);
 }
 
+void delete(struct Node ** root, int target){
+    int child_side;
+    struct Node * parent = search(*root, target, &child_side);
+    // printf("Parent: %d\n", parent->data);
+    struct Node * tn = NULL;
+    switch (child_side){
+        case 0:
+            tn = parent;
+            break;
+        case 1:
+            tn = parent->left;
+            break;
+        case 2:
+            tn = parent->right;
+            break;
+    }
+    // no children
+    if (tn ->left == NULL && tn->right == NULL)
+    {
+        switch (child_side)
+        {
+        case 0:
+            printf("root node deleted\n");
+            *root = NULL;
+            free(tn);
+            return;
+        case 1:
+            parent->left = NULL;
+            free(tn);
+            return;
+        case 2:
+            parent->right;
+            free(tn);
+            return;
+        }
+    }
+    // only left child
+    if (tn->left != NULL && tn->right == NULL)
+    {
+        printf("only left child\n");
+        switch (child_side)
+        {
+        case 0:
+            parent = parent->left;
+            free(tn);
+            return;
+        case 1:
+            parent->left = tn->left;
+            free(tn);
+            return;
+        
+        case 2:
+            parent->right = tn->left;
+            free(tn);
+            return;
+        }
+    }
+    // only right child
+    if (tn->left == NULL && tn->right != NULL)
+    {
+        printf("only right child\n");
+        switch (child_side)
+        {
+        case 0:
+            parent = parent->right;
+            free(tn);
+            return;
+        case 1:
+            parent->left = tn->right;
+            free(tn);
+            return;
+        
+        case 2:
+            parent->right = tn->right;
+            free(tn);
+            return;
+        }
+    }
+    // two children
+    struct Node *successor = inorder_successor(*root, target);
+    tn->data = successor->data;
+    delete(root, successor->data);
+}
 
 int main(){
     struct Node *root = NULL;
@@ -302,14 +385,16 @@ int main(){
     default:
         break;
     }
-    struct Node *inorder_successor_node = inorder_successor(root, target);
-    if(inorder_successor_node != NULL)
-        printf("Inorder successor: %d\n", inorder_successor_node->data);
-    struct Node *inorder_predecessor_node = inorder_predecessor(root, target);
-    if(inorder_predecessor_node != NULL)
-        printf("Inorder predecessor: %d\n", inorder_predecessor_node->data);
-    printf("Inorder: ");
-    inorder(root);
+    // struct Node *inorder_successor_node = inorder_successor(root, target);
+    // if(inorder_successor_node != NULL)
+    //     printf("Inorder successor: %d\n", inorder_successor_node->data);
+    // struct Node *inorder_predecessor_node = inorder_predecessor(root, target);
+    // if(inorder_predecessor_node != NULL)
+    //     printf("Inorder predecessor: %d\n", inorder_predecessor_node->data);
+    // printf("Inorder: ");
+    // inorder(root);
+    delete(&root, target);
+    display_tree(root, 0);
 
     return 0;
 }

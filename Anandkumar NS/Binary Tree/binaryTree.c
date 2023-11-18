@@ -6,7 +6,7 @@
 int binaryTree[MAX_NODES];
 int root = -1; // Index of the root node
 
-// Initialize all pos in tree
+//  Initialize all pos in tree
 void initialize() {
     for (int i = 0; i < MAX_NODES; i++) {
         binaryTree[i] = -1; //giving empty value as -1 

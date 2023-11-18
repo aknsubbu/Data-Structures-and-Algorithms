@@ -67,6 +67,7 @@ void display_tree(int *tree, int index, int num, int level){
     display_tree(tree, 2 * index + 1, num, level + 1);
 }
 
+
 int main(){
     int num;
     printf("Enter number of nodes: ");
