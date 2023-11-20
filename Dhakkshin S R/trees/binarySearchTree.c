@@ -95,7 +95,7 @@ void printPostorder(int* tree, int node, int treeLen)
 //     int location = search(tree, treeLen, delVal);
 //     if (location == -1) return;
 
-    
+//     if 
 // }
 
 int search(int* tree, int treeLen, int search)
@@ -122,7 +122,7 @@ int main(void)
     // int tree[7] = {1,2,3,4,5,6,7}, treeLen = 7; 
     print(tree, treeLen);
     printf("\n\n");
-    // printf("%d\n", search(tree, treeLen, 3));
+    printf("%d\n", search(tree, treeLen, 5));
 
     // printf("Inorder: ");
     // printInorder(tree, 0, treeLen);
