@@ -32,8 +32,4 @@ gradient_magnitude = np.sqrt(sobel_x_result**2 + sobel_y_result**2)
 output_path = r'D:\College\DSA\Data-Structures-and-Algorithms\Dhakkshin S R\gradient_magnitude.jpg' 
 cv2.imwrite(output_path, gradient_magnitude)
 
-# Display the original image
-# plt.imshow(gradient_magnitude, cmap='gray')
-# plt.title('Gradient Magnitude')
-# plt.axis('off')
-# plt.show()
+
