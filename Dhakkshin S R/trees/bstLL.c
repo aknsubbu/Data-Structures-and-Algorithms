@@ -91,7 +91,7 @@ void printTree(struct node* root, int space) {
     printTree(root->left, space);
 }
 
-struct node* inorderPredecessor(struct node* node)
+struct node* inorderSuccessor(struct node* node)
 {
     struct node* curr = node -> right;
 
@@ -174,7 +174,7 @@ struct node* deleteNode(struct node* root, int data) {
 
     // case 3 left yes right yes
     else if ((TBDel->left) && (TBDel->right)) {
-        struct node* IOSucc = inorderPredecessor(TBDel);
+        struct node* IOSucc = inorderSuccessor(TBDel);
         int tmp = IOSucc->data;
         root = deleteNode(root, tmp);
         TBDel->data = tmp;
