@@ -73,6 +73,10 @@ char push(char elem){
 }
 
 char pop(){
+    if (top == -1){
+        printf("\nStack is Empty\n");
+        return -1;
+    }
     char elem;
     elem = stack[top];
     top--;
