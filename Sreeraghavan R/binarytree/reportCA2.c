@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#define max(a,b) ((a>b)?a:b)
 
 
 struct node{
@@ -185,12 +186,72 @@ void countUnival(node* tree,int* count){
     if(tree->rc) countUnival(tree->rc,count);
 }
 
-char* serializeBT(node* tree){
-
+int power2(int a){
+    int i = 1;
+    int j = 1;
+    for(i;i<=a;i++){
+        j *= 2;
+    }
+    return j;
 }
 
-node* deserializeBT(char* exp){
+int heightTree(node* tree){
+    if (tree == NULL) {
+        return 0;
+    }
+    
+    int leftHeight = heightTree(tree->lc);
+    int rightHeight = heightTree(tree->rc);
+    
+    return 1 + max(leftHeight, rightHeight);
+}
 
+void addtoArray(node* tree,int* arr,int i){
+    arr[i] = tree->data;
+    if(tree->lc) addtoArray(tree->lc,arr,2*i+1);
+    if(tree->rc) addtoArray(tree->rc,arr,2*i+2);
+}
+
+void serializeBST(node* tree,char* s){
+    int size = power2(heightTree(tree));
+    int* array = (int*)calloc(size,sizeof(int));
+    int i = 0;
+    addtoArray(tree,array,i);
+
+    int offset = 0;
+    for (i = 0; i < size; i++) {
+        offset += sprintf(s + offset, "%d,", array[i]); // Convert integer to string and append
+    }
+}
+
+
+node* deserializeBST(char* exp){
+    int i = 0;
+    node* tree;
+    if(exp[i] > 47 && exp[i] < 58){
+        int num = 0;
+        while(exp[i] != ','){
+            num *= 10;
+            num += exp[i]-48;
+            i++;
+        }
+        tree = createNode(num);  
+    }
+
+    while(exp[i] != '\0'){
+        if(exp[i] > 47 && exp[i] < 58){
+            int num = 0;
+            while(exp[i] != ','){
+                num *= 10;
+                num += exp[i]-48;
+                i++;
+            }
+            if(num) insertElement(tree,num);
+        }
+        else i++;
+    }
+
+    return tree;
 }
 
 node* findMin(node* tree){
@@ -207,19 +268,21 @@ node *kthSmallest(node* tree,int k){
     return kthSmallestNode;
 }
 
-node* lowestAncestor(node* root,node* n1,node* n2){
+node* lowestAncestor(node* tree,node* n1,node* n2){
     
     // if any node is equal to the current value, that must be the LCA
-    if(root->data == n1->data || root->data == n2->data) return root;
+    if(tree->data == n1->data || tree->data == n2->data) return tree;
     
     // if any node is greater/lesser than both nodes, that must be the direction of the LCA
-    if(root->data > n1->data && root->data > n2->data) if(root->lc) return lowestAncestor(root->lc,n1,n2); else return emptyNode();
-    if(root->data < n1->data && root->data < n2->data) if(root->rc) return lowestAncestor(root->rc,n1,n2); else return emptyNode();
+    if(tree->data > n1->data && tree->data > n2->data) if(tree->lc) return lowestAncestor(tree->lc,n1,n2); else return emptyNode();
+    if(tree->data < n1->data && tree->data < n2->data) if(tree->rc) return lowestAncestor(tree->rc,n1,n2); else return emptyNode();
     
     // the only other case is if the two nodes are in different directions from the current node ie this is the LCA
 
-    return root;
+    return tree;
 }
+
+
 
 int main(){
     int arr[5] = {1,1,1,1,1};
@@ -232,7 +295,11 @@ int main(){
 
     inordernl(tree1);
 
-    printNode(inorderSuccessor(searchNode(tree1,4)));
-    printNode(kthSmallest(tree1,1));
-
+    // printNode(inorderSuccessor(searchNode(tree1,4)));
+    // printNode(kthSmallest(tree1,4));
+    char s[1000];
+    serializeBST(tree1,s);
+    printf("%s\n",s);
+    node* tree3 = deserializeBST(s);
+    inordernl(tree3);
 }

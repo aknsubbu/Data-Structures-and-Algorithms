@@ -7,6 +7,7 @@ struct node{
     int data;
     struct node* lc;
     struct node* rc;
+    int height;
 };
 
 typedef struct node node;
@@ -22,42 +23,46 @@ int typeNode(node* tree){
 }
 
 
-node* createNode(int val){
+node* createNode(int val,int height){
     node* newNode = (node*)malloc(sizeof(node));
     newNode-> data = val;
     newNode-> lc = NULL;
     newNode->rc = NULL;
+    newNode->height = height;
     return newNode;
 }
 
+int getHeight(node* cur){
+    return cur->height;
+}
+
+int balanceFactor(node* cur){
+    return getHeight(cur->lc) - getHeight(cur->rc);
+}
+
 node* emptyNode(){
-    return createNode(-1);
+    return createNode(-1,0);
 }
 
 void printNode(node* cur){
     printf("%d\n",cur->data);
 }
 
-node *insertNodeBST(node *tree,node *newNode)
-{
-    //printf("test");
+node *insertElement(node *tree,int val,int height){
     if (tree == NULL)
-        return newNode;
-    if (newNode->data < tree->data)
-        tree->lc = insertNodeBST(tree->lc, newNode);
+        return createNode(val,0);
+    if (val < tree->data)
+        tree->lc = insertElement(tree->lc,val,++height);
     else
-        tree->rc = insertNodeBST(tree->rc, newNode);
+        tree->rc = insertElement(tree->rc,val,++height);
     return tree;
 }
 
-node *insertElement(node *tree,int val){
-    return insertNodeBST(tree,createNode(val));
-}
 
 node *insertElements(node* tree,int* arr,int len){
     int i = 0;
-    if(!tree) tree = createNode(arr[i++]);
-    for(i;i<len;i++) tree = insertElement(tree,arr[i]); 
+    if(!tree) tree = createNode(arr[i++],0);
+    for(i;i<len;i++) tree = insertElement(tree,arr[i],0); 
     return tree;
 }
 
@@ -155,22 +160,23 @@ void rightRotate(node* tree,node* x){
     node* parent = searchParent(tree,x->data,tree);
     if(typeChild(tree,x->data) == LC) parent->lc = y;
     if(typeChild(tree,x->data) == RC) parent->rc = y;
+    if(typeChild(tree,x->data) == HEAD) tree = parent;
 }
 
 void LeftRotate(node* cur);
 
 
 int main(){
-    node* root1 = createNode(9);
+    node* root1 = createNode(9,0);
     
-    insertElement(root1,7);
-    insertElement(root1,4);
-    insertElement(root1,8);
-    insertElement(root1,12);
-    insertElement(root1,11);
-    insertElement(root1,16);
-    insertElement(root1,18);
-    insertElement(root1,2);
+    insertElement(root1,7,0);
+    insertElement(root1,4,0);
+    insertElement(root1,8,0);
+    insertElement(root1,12,0);
+    insertElement(root1,11,0);
+    insertElement(root1,16,0);
+    insertElement(root1,18,0);
+    insertElement(root1,2,0);
 
 
     
