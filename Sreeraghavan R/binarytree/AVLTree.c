@@ -101,9 +101,9 @@ int nodeExists(node* cur){
     return cur->data != -1;
 }
 
-node* inorderSuccessor(node* cur){
+node* inorderSuccessor(node* tree,node* cur){
     node* succ = cur;
-    if(cur->rc) succ = cur->rc; else return succ;
+    if(cur->rc) succ = cur->rc; else if(typeChild(tree,cur->data) == LC) return searchParent(tree,cur->data,tree); else return succ;
     while(succ->lc) succ = succ->lc;
     return succ;
 }

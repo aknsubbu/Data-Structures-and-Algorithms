@@ -13,6 +13,8 @@ struct node{
 typedef struct node node;
 
 enum type{BOTH,LEFT,RIGHT,NONE};
+enum childType{LC,RC,HEAD};
+
 
 int typeNode(node* tree){
     if(tree->lc && tree->rc) return BOTH;
@@ -73,6 +75,13 @@ node *searchParent(node* tree,int val,node* parent){
     return emptyNode();
 }
 
+int typeChild(node* tree,int val){
+    node* parent = searchParent(tree,val,tree);
+    if(parent->data == val) return HEAD;
+    if(val > parent->data) return RC;
+    if(val < parent->data) return LC;
+}
+
 void inorder(node* tree){
     if(tree->lc) inorder(tree->lc);
     printf("%d ",tree->data);
@@ -88,64 +97,68 @@ int nodeExists(node* cur){
     return cur->data != -1;
 }
 
-node* inorderSuccessor(node* cur){
+node* inorderSuccessor(node* tree,node* cur){
     node* succ = cur;
-    if(typeNode(cur) == RIGHT){
+    if(cur->rc){
         succ = cur->rc;
         while(succ->lc) succ = succ->lc;
         return succ;
     }
-    return searchParent(cur,cur->data,cur);
+    int temp = succ->data;
+    while(typeChild(tree,succ->data) != HEAD){
+        succ = searchParent(tree,succ->data,tree);
+        if(succ->data > temp) return succ;
+    }
+    return searchNode(tree,temp);
 }
 
-void deleteNode(node* tree,int val){
-    node* parent = searchParent(tree,val,tree);
-    if(val > parent->data){
-        node* cur = parent->rc;
-        if(!cur->lc && !cur->rc){
-            free(cur);
-            parent->rc = NULL;
-            return;
-        }
-        if(cur->lc && cur->rc){
-            node* tempNode = inorderSuccessor(cur);
-            int tempVal = tempNode->data;
-            deleteNode(tree,tempNode->data);
-            cur->data = tempNode->data;
-        }
-        if(cur->lc){
-            parent->rc = cur->lc;
-            free(cur);
-        }
-        if(cur->rc){
-            parent->rc = cur->rc;
-            free(cur);
-        }
-    }
-    if(val < parent->data){
-        node* cur = parent->lc;
-        if(!cur->lc && !cur->rc){
-            free(cur);
-            parent->lc = NULL;
-            return;
-        }
-        if(cur->lc && cur->rc){
-            node* tempNode = inorderSuccessor(cur);
-            int tempVal = tempNode->data;
-            deleteNode(tree,tempNode->data);
-            cur->data = tempNode->data;
-        }
-        if(cur->lc){
-            parent->lc = cur->lc;
-            free(cur);
-        }
-        if(cur->rc){
-            parent->lc = cur->rc;
-            free(cur);
-        }
-    }
-}
-
+// void deleteNode(node* tree,int val){
+//     node* parent = searchParent(tree,val,tree);
+//     if(val > parent->data){
+//         node* cur = parent->rc;
+//         if(!cur->lc && !cur->rc){
+//             free(cur);
+//             parent->rc = NULL;
+//             return;
+//         }
+//         if(cur->lc && cur->rc){
+//             node* tempNode = inorderSuccessor(cur);
+//             int tempVal = tempNode->data;
+//             deleteNode(tree,tempNode->data);
+//             cur->data = tempNode->data;
+//         }
+//         if(cur->lc){
+//             parent->rc = cur->lc;
+//             free(cur);
+//         }
+//         if(cur->rc){
+//             parent->rc = cur->rc;
+//             free(cur);
+//         }
+//     }
+//     if(val < parent->data){
+//         node* cur = parent->lc;
+//         if(!cur->lc && !cur->rc){
+//             free(cur);
+//             parent->lc = NULL;
+//             return;
+//         }
+//         if(cur->lc && cur->rc){
+//             node* tempNode = inorderSuccessor(cur);
+//             int tempVal = tempNode->data;
+//             deleteNode(tree,tempNode->data);
+//             cur->data = tempNode->data;
+//         }
+//         if(cur->lc){
+//             parent->lc = cur->lc;
+//             free(cur);
+//         }
+//         if(cur->rc){
+//             parent->lc = cur->rc;
+//             free(cur);
+//         }
+//     }
+// }
 
 bool isUnival(node* tree){
     switch(typeNode(tree)){
@@ -224,7 +237,6 @@ void serializeBST(node* tree,char* s){
     }
 }
 
-
 node* deserializeBST(char* exp){
     int i = 0;
     node* tree;
@@ -261,9 +273,9 @@ node* findMin(node* tree){
 
 node *kthSmallest(node* tree,int k){
     node* smallest = findMin(tree);
-    node* kthSmallestNode = emptyNode(); 
-    for(int i = 0;i < k;i++){
-        kthSmallestNode = inorderSuccessor(smallest);
+    node* kthSmallestNode = smallest; 
+    for(int i = 0;i < k-1;i++){
+        kthSmallestNode = inorderSuccessor(tree,kthSmallestNode);
     }
     return kthSmallestNode;
 }
@@ -293,13 +305,32 @@ int main(){
     node* tree1 = insertElements(NULL,arr1,10);
     node* tree2 = insertElements(NULL,arr2,1);
 
+    printf("Original Tree\n");
     inordernl(tree1);
 
-    // printNode(inorderSuccessor(searchNode(tree1,4)));
-    // printNode(kthSmallest(tree1,4));
+    printf("Inorder Successor of 2 (works for all nodes): ");
+    printNode(inorderSuccessor(tree1,searchNode(tree1,2)));
+
+    printf("Kth(4th) Smallest Node: ");
+    printNode(kthSmallest(tree1,4));
+
+    printf("Tree (has not been modified):\n");
+    inordernl(tree1);
+    
+    
     char s[1000];
     serializeBST(tree1,s);
-    printf("%s\n",s);
+    printf("Serialized BST:\n%s\n",s);
     node* tree3 = deserializeBST(s);
+    printf("Tree after being Deserialized:\n");
     inordernl(tree3);
+
+    
+    printf("Unival Tree:\n");
+    inordernl(tree);
+    int c = 0;
+    countUnival(tree,&c);
+    printf("Number of unival subtree = %d\n",c);
+
+    
 }
