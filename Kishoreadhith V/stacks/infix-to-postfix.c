@@ -76,7 +76,7 @@ char * toPostfix(char * infix){
     int top = -1, pin = -1;
     for (int i = 0; i < len; i++)
     {
-        if(infix[i] > '0' && infix[i] < '9'){
+        if(infix[i] >= '0' && infix[i] <= '9'){
             postfix[++pin] = infix[i];
             if(i < len - 1 && !isalnum(infix[i+1])){
                 postfix[++pin] = ' ';
@@ -195,3 +195,4 @@ int main() {
     printf("%s\n", postfix4);
     return 0;
 }
+

@@ -83,33 +83,27 @@ void postorder(struct Node *root){
 }
 
 struct Node * search(struct Node * root, int target, int *child_side){
-    if (root -> data == target)
-    {
+    if (root == NULL) {
+        printf("Not found\n");
+        return NULL;
+    }
+    else if (root->data == target) {
         *child_side = 0;
         return root;
     }
-    else if (root -> left -> data == target)
-    {
+    else if (root->left != NULL && root->left->data == target) {
         *child_side = 1;
         return root;
     }
-    else if (root -> right -> data == target)
-    {
+    else if (root->right != NULL && root->right->data == target) {
         *child_side = 2;
         return root;
     }  
-    else if (target < root -> data)
-    {
-        search(root->left, target, child_side);
+    else if (target < root->data) {
+        return search(root->left, target, child_side);
     }
-    else if (target > root -> data)
-    {
-        search(root->right, target, child_side);
-    }
-    else
-    {
-        printf("Not found\n");
-        return NULL;
+    else {
+        return search(root->right, target, child_side);
     }
 }
 
@@ -268,10 +262,24 @@ void display_tree(struct Node *root, int level){
     display_tree(root->left, level + 1);
 }
 
+struct Node * leftmostRsub(struct Node *root){
+    if (root == NULL)
+    {
+        return NULL;
+    }
+    if (root->right == NULL)
+    {
+        root = root->right;
+        while(root->left != NULL){
+            root = root->left;
+        }
+        return root;
+    }
+}
+
 void delete(struct Node ** root, int target){
     int child_side;
     struct Node * parent = search(*root, target, &child_side);
-    // printf("Parent: %d\n", parent->data);
     struct Node * tn = NULL;
     switch (child_side){
         case 0:
@@ -299,7 +307,7 @@ void delete(struct Node ** root, int target){
             free(tn);
             return;
         case 2:
-            parent->right;
+            parent->right = NULL;
             free(tn);
             return;
         }
@@ -311,7 +319,7 @@ void delete(struct Node ** root, int target){
         switch (child_side)
         {
         case 0:
-            parent = parent->left;
+            *root = tn->left;
             free(tn);
             return;
         case 1:
@@ -332,7 +340,7 @@ void delete(struct Node ** root, int target){
         switch (child_side)
         {
         case 0:
-            parent = parent->right;
+            *root = tn->right;
             free(tn);
             return;
         case 1:
@@ -347,11 +355,80 @@ void delete(struct Node ** root, int target){
         }
     }
     // two children
-    struct Node *successor = inorder_successor(*root, target);
-    tn->data = successor->data;
+    struct Node *successor = leftmostRsub(tn);
+    printf("successor: %d\n", successor->data);
+    int rData = successor->data;
     delete(root, successor->data);
+    tn->data = rData;
 }
 
+struct Node* minValueNode(struct Node* node) {
+    struct Node* current = node;
+  
+    /* loop down to find the leftmost leaf */
+    while (current && current->left != NULL)
+        current = current->left;
+  
+    return current;
+}
+
+// void delete(struct Node ** root, int target){
+//     struct Node *temp = *root, *parent = NULL;
+
+//     // Searching for the node to be deleted
+//     while (temp != NULL && temp->data != target) {
+//         parent = temp;
+//         if (target < temp->data)
+//             temp = temp->left;
+//         else
+//             temp = temp->right;
+//     }
+
+//     if (temp == NULL) {
+//         printf("Element not found\n");
+//         return;
+//     }
+
+//     // Node with two children
+//     if (temp->left != NULL && temp->right != NULL) {
+//         struct Node *successor = minValueNode(temp->right);
+//         int succData = successor->data;
+//         delete(root, succData);
+//         temp->data = succData;
+//     }
+//     // Node with one or no child
+//     else {
+//         struct Node *child = (temp->left != NULL)? temp->left: temp->right;
+
+//         // Node with one child
+//         if (child != NULL) {
+//             // Replace the node to be deleted with its child
+//             if (temp != *root) {
+//                 if (temp == parent->left)
+//                     parent->left = child;
+//                 else
+//                     parent->right = child;
+//             }
+//             // If node to be deleted is root node
+//             else
+//                 *root = child;
+//         }
+//         // Node with no child
+//         else {
+//             // If node to be deleted is root node
+//             if (temp != *root) {
+//                 if (temp == parent->left)
+//                     parent->left = NULL;
+//                 else
+//                     parent->right = NULL;
+//             }
+//             // If node to be deleted is root node
+//             else
+//                 *root = NULL;
+//         }
+//         free(temp);
+//     }
+// }
 int main(){
     struct Node *root = NULL;
     int num;

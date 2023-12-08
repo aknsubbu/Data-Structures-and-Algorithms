@@ -3,5 +3,8 @@
         "activityBar.background": "#000",
         "titleBar.activeBackground": "#000",
         "titleBar.activeForeground": "#F7FAFE"
+    },
+    "files.associations": {
+        "__node_handle": "c"
     }
 }
