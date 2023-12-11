@@ -1,146 +1,77 @@
-#include<stdio.h>
-#include<stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <math.h>
 
-struct deque{
-    int *arr;
-    int front;
-    int rear;
-};
+// int *createTree(int num) {
+//     int *tree = (int *)calloc((int)((pow(2, (double)(num))) - 1), sizeof(int));
+//     return tree;
+// }
 
-int isEmpty(struct deque *dq){
-    return dq->front== -1;
-}
+// void buildTree(int *tree, int num) {
+//     if (tree[0] == 0) {
+//         printf("Enter data for the root node: ");
+//         scanf("%d", &tree[0]);
+//     }
 
-int isFull(struct deque *dq,int size){
-     return (dq->front==0 && dq->rear==size-1)||(dq->front - dq->rear==1);
-}
+//     int currentIndex = 0;
+//     for (int i = 0; i < num; i++) {
+//         int data, choice;
+//         printf("Do you want to enter left child of %d? (1/0): ", tree[currentIndex]);
+//         scanf("%d", &choice);
+//         if (choice == 1) {
+//             printf("Enter data: ");
+//             scanf("%d", &data);
+//             tree[2 * currentIndex + 1] = data;
+//         }
 
+//         printf("Do you want to enter right child of %d? (1/0): ", tree[currentIndex]);
+//         scanf("%d", &choice);
+//         if (choice == 1) {
+//             printf("Enter data: ");
+//             scanf("%d", &data);
+//             tree[2 * currentIndex + 2] = data;
+//         }
 
-void initialize(struct deque *dq,int size){
-    dq->arr=malloc(size*sizeof(int));
-    dq->front=-1;
-    dq->rear=-1;
-}
+//         currentIndex++;
+//         while (tree[currentIndex] != 0) {
+//             currentIndex++;
+//         }
+//     }
+// }
 
-void insertfront(struct deque *dq,int data,int size){
-    if(isEmpty(dq)){
-        dq->front =0;
-        dq->rear=0;
-    }
-    else if(dq->front==0){
-        dq->front=size-1;
-    }
-    else{
-        dq->front--;
-    }
-    dq->arr[dq->front]=data;
-}
+// void display(int *tree, int index, int num) {
+//     if (index >= pow(2, num) - 1) {
+//         return;
+//     }
+//     display(tree, 2 * index + 1, num);
+//     printf("%d ", tree[index]);
+//     display(tree, 2 * index + 2, num);
+// }
 
-void insertrear(struct deque *dq,int data, int size){
-    if(isFull(dq,size)){
-        printf("the deque is overflown....!");
-        return;
-    }
-    if(isEmpty(dq)){
-        dq->front=0;
-        dq->rear=0;
-    }else if(dq->rear==size-1){
-        dq->rear=0;
-    }else{
-        dq->rear++;
-    }
-    dq->arr[dq->rear]=data;
-}
+// void display_tree(int *tree, int index, int num, int level) {
+//     if (index >= pow(2, num) - 1) {
+//         return;
+//     }
+//     if (tree[index] == 0) {
+//         return;
+//     }
 
+//     display_tree(tree, 2 * index + 2, num, level + 1);
+//     for (int i = 0; i < level; i++) {
+//         printf("|\t");
+//     }
+//     printf("|------>%d\n", tree[index]);
+//     display_tree(tree, 2 * index + 1, num, level + 1);
+// }
 
-void display(struct deque *dq, int size){
-    if(isEmpty(dq)){
-        printf("the deque is empty....!");
-        return;
-    }
-    int i=dq->front;
-    do{
-        printf("%d ",dq->arr[i]);
-        i=(i+1)%size;
-    }while(i != (dq->rear + 1)% size);
-    printf("\n");
-}
+// int main() {
+//     int num;
+//     printf("Enter number of nodes: ");
+//     scanf("%d", &num);
+//     int *tree = createTree(num);
+//     buildTree(tree, num);
+//     display_tree(tree, 0, num - 1, 0);
+//     return 0;
+// }
 
-
-int getFront(struct deque *dq){
-    if(isEmpty(dq)){
-        printf("the deque is empty....!");
-        return -1;
-    }
-    return dq->arr[dq->front];
-}
-
-
-int getrear(struct deque *dq){
-    if(isEmpty(dq)){
-        printf("the deque is empty...!");
-        return -1;
-    }
-    return dq->arr[dq->rear];
-}
-
-int  deletedFront(struct deque *dq,int size){
-   if(isEmpty(dq)){
-    printf("the deque is empty...!");
-    return -1 ;
-   }
-   int data=dq->arr[dq->front];
-   if(dq->front==dq->rear){
-      dq->front=-1;
-      dq->rear=-1;
-   }else if(dq->front ==size -1){
-      dq->front =0;
-   }else{
-    dq->front ++;
-   }
-   return data;
-}
-
-int deleterear(struct deque *dq,int size){
-    if(isEmpty(dq)){
-        printf("the deque is empty.....!");
-        return -1;
-    }
-    int data= dq->arr[dq->rear];
-    if(dq->front==dq->rear){
-        dq->rear=-1;
-        dq->front=-1;
-    }else if(dq->rear==0){
-        dq->rear=size-1;
-    }
-    else{
-        dq->rear--;
-    }
-    return data;
-}
-
-int main(){
-    struct deque dq;
-    int n;
-    printf("enter the number of elements:");
-    scanf("%d",&n);
-    initialize(&dq,n);
-   
-    insertfront(&dq,1,n);
-    insertrear(&dq,2,n);
-    insertfront(&dq,3,n);
-    insertrear(&dq,4,n);
-
-    display(&dq,n);
-
-    int front=getFront(&dq);
-    int rear=getrear(&dq);
-    printf("The front is %d and the rear is : %d\n",front,rear);
-
-
-    int frontdel=deletedFront(&dq,n);
-    int reardel=deleterear(&dq,n);
-     
-    printf("the deleted elements are :%d and %d\n",frontdel,reardel);
-    display(&dq,n);
-}
+//priority queue

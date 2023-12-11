@@ -3,7 +3,7 @@
 #include <math.h>
 
 int index_check(int index, int num){
-    if (index >= pow(2, num) - 1) || (index < 0)
+    if ((index >= pow(2, num) - 1) || (index < 0))
     {
         return 0;
     }

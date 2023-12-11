@@ -9,33 +9,33 @@
 //     int *a=(int *)malloc(n*sizeof(int));
 
 // }
-//construct a binary tree ask the user for the input 
+// construct a binary tree ask the user for the input 
 
-// //binary search tree
-// #include<stdio.h>
-// #include<stdlib.h>
-// #include<math.h>
-// int main(){
-//     int n;
-//     printf("Enter the number of nodes: ");
-//     scanf("%d",&n);
-//     int *array=(int *)calloc((pow(2,n)-1),sizeof(int));
-//     printf("Enter the elements: ");
-//     for(int i=0;i<n;i++){
-//         int temp;
-//         scanf("%d",&temp);
-//         int i=0;
-//         while(array[i]!=0){
-//             if(temp>array[i]){
-//                 i=2*i+2;
-//             }
-//             else{
-//                 i=2*i+1;
-//             }
-//         }
-//         array[i]=temp;
-//     }
-// }
+//binary search tree
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+int main(){
+    int n;
+    printf("Enter the number of nodes: ");
+    scanf("%d",&n);
+    int *array=(int *)calloc((pow(2,n)-1),sizeof(int));
+    printf("Enter the elements: ");
+    for(int i=0;i<n;i++){
+        int temp;
+        scanf("%d",&temp);
+        int i=0;
+        while(array[i]!=0){
+            if(temp>array[i]){
+                i=2*i+2;
+            }
+            else{
+                i=2*i+1;
+            }
+        }
+        array[i]=temp;
+    }
+}
 
 // #include <stdio.h>
 // #include <stdlib.h>
