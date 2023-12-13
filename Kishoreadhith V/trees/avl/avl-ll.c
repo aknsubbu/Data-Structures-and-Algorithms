@@ -127,21 +127,6 @@ void bst_insert(struct Node **root, int data){
     }
 }
 
-void avl_insert_rec(struct Node **root, int data){
-    if(*root == NULL){
-        *root = getNode(data);
-    }
-    else{
-        if(data < (*root)->data){
-            avl_insert_rec(&((*root)->left), data);
-        }
-        else{
-            avl_insert_rec(&((*root)->right), data);
-        }
-    }
-    rotate(*root);
-}
-
 int height(struct Node *root){
     if(root == NULL){
         return 0;
@@ -158,61 +143,194 @@ int height(struct Node *root){
     }
 }
 
-struct Node* rotate(struct Node *root){
-    int left_height = height(root->left);
-    int right_height = height(root->right);
-    if (left_height - right_height > 1)
-    {
-        if (height(root->left->left) > height(root->left->right))
-        {
-            return right_rotate(root);
-        }
-        else
-        {
-            root->left = left_rotate(root->left);
-            return right_rotate(root);
-        }
+int balance_factor(struct Node *root){
+    if(root == NULL){
+        return 0;
     }
-    else if (right_height - left_height > 1)
-    {
-        if (height(root->right->right) > height(root->right->left))
-        {
-            return left_rotate(root);
-        }
-        else
-        {
-            root->right = right_rotate(root->right);
-            return left_rotate(root);
-        }
+    else{
+        int left_height = height(root->left);
+        int right_height = height(root->right);
+        return left_height - right_height;
     }
 }
 
-struct Node* left_rotate(struct Node *root){
+struct Node * left_rotate(struct Node *root){
     struct Node *newRoot = root->right;
     root->right = newRoot->left;
     newRoot->left = root;
     return newRoot;
 }
 
-struct Node* right_rotate(struct Node *root){
+struct Node * right_rotate(struct Node *root){
     struct Node *newRoot = root->left;
     root->left = newRoot->right;
     newRoot->right = root;
     return newRoot;
 }
 
+struct Node * left_right_rotate(struct Node *root){
+    struct Node *newRoot = root->left;
+    root->left = left_rotate(newRoot);
+    return right_rotate(root);
+}
+
+struct Node * right_left_rotate(struct Node *root){
+    struct Node *newRoot = root->right;
+    root->right = right_rotate(newRoot);
+    return left_rotate(root);
+}
+
+struct Node * balance(struct Node *root){
+    if(root == NULL){
+        return NULL;
+    }
+    else{
+        root->left = balance(root->left);
+        root->right = balance(root->right);
+        int bf = balance_factor(root);
+        if(bf > 1){
+            if(balance_factor(root->left) > 0){
+                root = right_rotate(root);
+            }
+            else{
+                root = left_right_rotate(root);
+            }
+        }
+        else if(bf < -1){
+            if(balance_factor(root->right) < 0){
+                root = left_rotate(root);
+            }
+            else{
+                root = right_left_rotate(root);
+            }
+        }
+        return root;
+    }
+}
+
+struct Node * bst_delete(struct Node *root, int data){
+    if(root == NULL){
+        return NULL;
+    }
+    else{
+        if(data < root->data){
+            root->left = bst_delete(root->left, data);
+        }
+        else if(data > root->data){
+            root->right = bst_delete(root->right, data);
+        }
+        else{
+            if(root->left == NULL && root->right == NULL){
+                free(root);
+                return NULL;
+            }
+            else if(root->left == NULL){
+                struct Node *temp = root->right;
+                free(root);
+                return temp;
+            }
+            else if(root->right == NULL){
+                struct Node *temp = root->left;
+                free(root);
+                return temp;
+            }
+            else{
+                struct Node *temp = root->right;
+                while(temp->left != NULL){
+                    temp = temp->left;
+                }
+                root->data = temp->data;
+                root->right = bst_delete(root->right, temp->data);
+            }
+        }
+        root = balance(root);
+        return root;
+    }
+}
+
+// avl insert
+struct Node * avl_insert(struct Node *root, int data){
+    if(root == NULL){
+        root = getNode(data);
+        return root;
+    }
+    else{
+        if(data < root->data){
+            root->left = avl_insert(root->left, data);
+        }
+        else if(data > root->data){
+            root->right = avl_insert(root->right, data);
+        }
+        else{
+            printf("Duplicate data!\n");
+            return root;
+        }
+        root = balance(root);
+        return root;
+    }
+}
+
+// avl delete
+struct Node * avl_delete(struct Node *root, int data){
+    if(root == NULL){
+        return NULL;
+    }
+    else{
+        if(data < root->data){
+            root->left = avl_delete(root->left, data);
+        }
+        else if(data > root->data){
+            root->right = avl_delete(root->right, data);
+        }
+        else{
+            if(root->left == NULL && root->right == NULL){
+                free(root);
+                return NULL;
+            }
+            else if(root->left == NULL){
+                struct Node *temp = root->right;
+                free(root);
+                return temp;
+            }
+            else if(root->right == NULL){
+                struct Node *temp = root->left;
+                free(root);
+                return temp;
+            }
+            else{
+                struct Node *temp = root->right;
+                while(temp->left != NULL){
+                    temp = temp->left;
+                }
+                root->data = temp->data;
+                root->right = avl_delete(root->right, temp->data);
+            }
+        }
+        root = balance(root);
+        return root;
+    }
+}
+
 int main(){
     struct Node *root = NULL;
-    int num;
+    int num, data, target, child_side;
     printf("Enter number of nodes: ");
     scanf("%d", &num);
-    for(int i = 0; i < num; i++){
-        int data;
-        printf("Enter data: ");
-        scanf("%d", &data);
-        avl_insert_rec(&root, data);
-        display_tree(root, 0);
-        printf("\n\n");
-    }
+    bst_iter(&root, num);
+    display_tree(root, 0);
+    printf("Enter data to insert: ");
+    scanf("%d", &data);
+    bst_insert(&root, data);
+    display_tree(root, 0);
+    printf("Enter data to delete: ");
+    scanf("%d", &data);
+    root = bst_delete(root, data);
+    display_tree(root, 0);
+    printf("Enter data to search: ");
+    scanf("%d", &target);
+    struct Node *parent = search(root, target, &child_side);
+    printf("Parent: %d\n", parent->data);
+    printf("Child side: %d\n", child_side);
+    printf("Height: %d\n", height(root));
     return 0;
 }
