@@ -145,24 +145,24 @@
 // }
 
 // int* readFile(char filename[]){
-    // FILE *fp;
-    // fp = fopen(filename, "r");
+//     FILE *fp;
+//     fp = fopen(filename, "r");
     
-    // int  sampleElement;
-    // double sampleLengthVar=100000; 
-    // //fscanf(fp, "%d", &sampleLengthVar);
-    // printf("Scanning a sample of length: %f\n", sampleLengthVar);
+//     int  sampleElement;
+//     double sampleLengthVar=100000; 
+//     //fscanf(fp, "%d", &sampleLengthVar);
+//     printf("Scanning a sample of length: %f\n", sampleLengthVar);
 
-    // printf("    ALLOC-PTR_START\n");
-    // int* sampleArrayPtr = (int*)malloc(sampleLengthVar * sizeof(int));
-    // printf("    ALLOC-PTR_END\n");
+//     printf("    ALLOC-PTR_START\n");
+//     int* sampleArrayPtr = (int*)malloc(sampleLengthVar * sizeof(int));
+//     printf("    ALLOC-PTR_END\n");
 
-    // for(int i = 0; i < sampleLengthVar; i++){
-    //     fscanf(fp, "%d", &sampleElement);
-    //     sampleArrayPtr[i] = sampleElement;
-    // }
-    // fclose(fp);
-    // return sampleArrayPtr;
+//     for(int i = 0; i < sampleLengthVar; i++){
+//         fscanf(fp, "%d", &sampleElement);
+//         sampleArrayPtr[i] = sampleElement;
+//     }
+//     fclose(fp);
+//     return sampleArrayPtr;
 // }
 
 // int main(){
