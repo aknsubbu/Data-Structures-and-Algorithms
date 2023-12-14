@@ -1,45 +1,919 @@
-###### 22 - 09 - 2023   - PSG College of Technology
+###### 15 - 12 - 2023 - PSG College of Technology
+
 ---
+
 # 19z310 - Data Structures Laboratory
-## Leetcode questions solved 
-#### Kishoreadhith V 
+
+## Leetcode questions solved
+
+#### Kishoreadhith V
+
 #### 22z232
+
 #### BE CSE G1
----
-## Table of Contents
-
-| No. | Problem | Difficulty | Concept |
-| --- | ------- | ---------- | -------- |
-| 1 | Find the Highest Altitude - 1732 | Easy | Arrays |
-| 2 | Cells with Odd Values in a Matrix - 1252 | Easy | Arrays |
-| 3 | Matrix Diagonal Sum - 1572 | Easy | Arrays |
-| 4 | Convert Binary Number in a Linked List - 1290 | Easy | Linked Lists |
-| 5 | Merge Two Sorted Lists - 21 | Easy | Linked Lists |
-| 6 | Linked List Cycle - 141 | Easy | Linked Lists |
-| 7 | Set Matrix Zeros - 73 | Medium | Arrays |
-| 8 | House Robber - 198 | Medium | Arrays |
-| 9 | Spiral Matrix - 54 | Medium | Arrays |
-| 10 | Add Two Numbers - 2 | Medium | Linked Lists |
-| 11 | Remove Nth Node From End of List - 19 | Medium | Linked Lists |
-| 12 | Linked List Cycle 2 - 142 | Medium | Linked Lists |
-| 13 | Delete the Middle Node of a Linked List - 2095 | Medium | Linked Lists |
-| 14 | Median of Two Sorted Arrays - 4 | Hard | Arrays |
-| 15 | Reverse Nodes in k-Group - 25 | Hard | Linked Lists |
-
-Total Questions solved: 33
-- easy - 24
-- medium - 7
-- hard - 2
-
 
 ---
+
+## Arrays - sorting and searching algorithms
+
+### Linear Search
+
+```c
+#include <stdio.h>
+#include "../swap.h"
+#include <time.h>
+#include <stdlib.h>
+#define N 100000
+
+int linearSearch(int * arr, int len, int target){
+    for (int i = 0; i < len; i++)
+    {
+        if (arr[i] == target)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void readArrayFromFile(int * array, int len, char * fileName){
+    FILE * file = fopen(fileName, "r");
+    for (int i = 0; i < len; i++)
+    {
+        fscanf(file, "%d", array + i);
+    }
+    fclose(file);
+}
+
+int main() {
+    int* nums = (int *) malloc (N * sizeof(int));
+    readArrayFromFile(nums, N, "100k-random.txt");
+    // Measure the time before sorting
+    clock_t start_time = clock();
+
+    linearSearch(nums, 100000, 0);
+
+    // Measure the time after sorting
+    clock_t end_time = clock();
+
+    double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+    // printf("Sorted array: ");
+    // printArray(a, 5);
+    printf("Time taken: %f seconds\n", time_taken);
+
+    return 0;
+}
+```
+
+### Binary Search
+
+```c
+#include <stdio.h>
+
+int binarySearchIterative(int * arr, int len, int target){
+    int start = 0;
+    int end = len - 1;
+
+    while (start <= end)
+    {
+        int mid = (start + end)/2;
+        if (*(arr + mid) == target)
+        {
+            return mid;
+        }
+        else if (*(arr + mid) > target)
+        {
+            start = mid + 1;
+        }
+        else
+        {
+            end = mid - 1;
+        }
+    }
+    return -1;
+}
+
+int binarySearchRecursive(int * arr, int start, int end, int target){
+    if (start > end)
+    {
+        return -1;
+    }
+    else
+    {
+        int mid = (start + end)/2;
+        if (*(arr + mid) == target)
+        {
+            return mid;
+        }
+        else if (*(arr + mid) > target)
+        {
+            return binarySearchRecursive(arr, start, mid - 1, target);
+        }
+        else
+        {
+            return binarySearchRecursive(arr, mid + 1, end, target);
+        }
+    }
+}
+
+int main(){
+    int arr[] = {10,20,30,40,50,60,70,80,90,100};
+    int target = 50;
+    int result = binarySearchIterative(arr, 10, target);
+    int result2 = binarySearchRecursive(arr, 0, 9, target);
+    printf("%d \n %d", result, result2);
+}
+```
+
+### Bubble Sort
+
+```c
+#include <stdio.h>
+#include "../swap.h"
+#include <time.h>
+#include <stdlib.h>
+#define N 100000
+
+void readArrayFromFile(int * array, int len, char * fileName){
+    FILE * file = fopen(fileName, "r");
+    for (int i = 0; i < len; i++)
+    {
+        fscanf(file, "%d", array + i);
+    }
+    fclose(file);
+}
+
+void writeArrayToFile(int * array, int len, char * fileName){
+    FILE * file = fopen(fileName, "a");
+    for (int i = 0; i < len; i++)
+    {
+        fprintf(file, "%d ", *(array + i));
+    }
+    fprintf(file, "\n");
+    fclose(file);
+}
+
+
+
+void printArray(int * array, int len){
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d\t", *(array + i));
+    }
+    printf("\n");
+}
+
+void bubbleSort(int * arr, int len){
+    int swapsMadeInCurrentIteration, totalSwaps = 0, comparisons = 0;
+    for (int i = 0; i < len - 1; i++)
+    {
+        swapsMadeInCurrentIteration = 0;
+        for (int j = 0; j < len - i - 1; j++)
+        {
+            comparisons++;
+            if (*(arr + j) > *(arr + j + 1))
+            {
+                swap(j, j+1, arr);
+                swapsMadeInCurrentIteration++;
+                totalSwaps++;
+                // writeArrayToFile(arr, len, fileName);
+            }
+
+        }
+        if (!swapsMadeInCurrentIteration)
+        {
+            break;
+        }
+
+    }
+    // FILE * file = fopen(fileName, "a");
+    // fprintf(file, "Number of swaps: %d\nSwaps: %d", totalSwaps);
+    // fclose(file);
+
+}
+
+
+void bubbleSortIterDemo (int * arr, int len, char * fileName){
+    int swapsMadeInCurrentIteration, totalSwaps = 0, comparisons = 0;
+    for (int i = 0; i < len - 1; i++)
+    {
+        swapsMadeInCurrentIteration = 0;
+        for (int j = 0; j < len - i - 1; j++)
+        {
+            comparisons++;
+            if (*(arr + j) > *(arr + j + 1))
+            {
+                swap(j, j+1, arr);
+                swapsMadeInCurrentIteration++;
+                totalSwaps++;
+                writeArrayToFile(arr, len, fileName);
+            }
+
+        }
+        if (!swapsMadeInCurrentIteration)
+        {
+            break;
+        }
+
+    }
+    FILE * file = fopen(fileName, "a");
+    fprintf(file, "Number of swaps: %d\nComparisons: %d", totalSwaps);
+    fclose(file);
+
+}
+
+
+void reverseBubbleSort (int * arr, int len, char * fileName){
+    int swapsMadeInCurrentIteration, totalSwaps = 0, comparisons = 0;
+    for (int i = len - 1; i > 0; i--)
+    {
+        swapsMadeInCurrentIteration = 0;
+        for (int j = len - 1; j > i; j--)
+        {
+            comparisons++;
+            if (*(arr + j) < *(arr + j - 1))
+            {
+                swap(j, j-1, arr);
+                swapsMadeInCurrentIteration++;
+                totalSwaps++;
+                writeArrayToFile(arr, len, fileName);
+            }
+
+        }
+        if (!swapsMadeInCurrentIteration)
+        {
+            break;
+        }
+
+    }
+    FILE * file = fopen(fileName, "a");
+    fprintf(file, "Number of swaps: %d\nComparisons: %d", totalSwaps);
+    fclose(file);
+
+}
+
+
+
+int main() {
+    int* nums = (int *) malloc (N * sizeof(int));
+    readArrayFromFile(nums, N, "100k-random.txt");
+    // Measure the time before sorting
+    clock_t start_time = clock();
+
+    bubbleSort(nums, 100000);
+
+    // Measure the time after sorting
+    clock_t end_time = clock();
+
+    double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+    // printf("Sorted array: ");
+    // printArray(a, 5);
+    printf("Time taken: %f seconds\n", time_taken);
+
+    return 0;
+}
+```
+
+### Insertion sort
+
+```c
+#include <stdio.h>
+#include "../swap.h"
+#include <time.h>
+#include <stdlib.h>
+#define N 100000
+
+void readArrayFromFile(int * array, int len, char * fileName){
+    FILE * file = fopen(fileName, "r");
+    for (int i = 0; i < len; i++)
+    {
+        fscanf(file, "%d", array + i);
+    }
+    fclose(file);
+}
+
+void printArray(int * array, int len){
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d\t", *(array + i));
+    }
+    printf("\n");
+}
+void insertionSortUnoptimised(int * arr, int len){
+    for (int i = 1; i < len; i++)
+    {
+        for (int j = i; j > 0; j--)
+        {
+            if (arr[j] < arr[j-1])
+            {
+                swap(j, j-1, arr);
+                // printArray(arr, len);
+            } else {
+                break;
+            }
+        }
+    }
+}
+
+int main() {
+    int* nums = (int *) malloc (N * sizeof(int));
+    readArrayFromFile(nums, N, "100k-random.txt");
+    // Measure the time before sorting
+    clock_t start_time = clock();
+
+    insertionSortUnoptimised(nums, 100000);
+
+    // Measure the time after sorting
+    clock_t end_time = clock();
+
+    double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+    // printf("Sorted array: ");
+    // printArray(a, 5);
+    printf("Time taken: %f seconds\n", time_taken);
+
+    return 0;
+}
+```
+
+---
+
+## Linked Lists
+
+### Singly Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *next;
+};
+
+void insertFirst(struct Node **head, int data) {
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *head;
+    *head = newNode;
+}
+
+void insertLast(struct Node **head, int data) {
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+    struct Node *temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+void insertFirstN(struct Node **head, int n) {
+    int val;
+    for (int i = 0; i < n; i++) {
+        printf("Enter data for new Node: ");
+        scanf("%d", &val);
+        insertFirst(head, val);
+    }
+}
+
+void insertLastN(struct Node **head, int n) {
+    int val;
+    for (int i = 0; i < n; i++) {
+        printf("Enter data for new Node: ");
+        scanf("%d", &val);
+        insertLast(head, val);
+    }
+}
+
+void display(struct Node **head) {
+    struct Node *current = *head;
+    printf("---\n");
+    printf("Head: %p\n", *head);
+    printf("---\n");
+    if (*head == NULL)
+    {
+        printf("List is empty\n");
+        printf("---\n");
+        return;
+    }
+
+    while (current != NULL) {
+        printf("Address: %p\n", current);
+        printf("Data: %d\n", current->data);
+        printf("Next: %p\n", current->next);
+        printf("---\n");
+        current = current->next;
+    }
+}
+
+struct Node * search(struct Node ** head, int target){
+    if (*head == NULL)
+    {
+        printf("List is empty\n");
+        printf("---\n");
+        return NULL;
+    }
+    struct Node *current = *head;
+    while (current != NULL)
+    {
+        if (current->data == target)
+        {
+            return current;
+        }
+        current = current->next;
+    }
+    return NULL;
+}
+
+void insertAfter(struct Node ** head,int target, int data){
+    struct Node * prev = search(head, target);
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = data;
+    struct Node * next = prev->next;
+    prev->next = newNode;
+    newNode->next = next;
+}
+
+void insertBefore(struct Node ** head,int target, int data){
+    struct Node * next = search(head, target);
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = next;
+    struct Node * current = *head;
+    while (current->next != next)
+    {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+void deleteFirst(struct Node ** head){
+    if(*head == NULL){
+        return;
+    }
+    struct Node * del = *head;
+    *head = del->next;
+    free(del);
+}
+
+void deleteLast(struct Node ** head){
+    if(*head == NULL){
+        printf("List is empty\n");
+        return;
+    }
+    struct Node *temp = *head;
+    while (temp->next->next != NULL) {
+        temp = temp->next;
+    }
+    struct Node * del = temp->next;
+    temp->next = NULL;
+    free(del);
+}
+
+void deleteNode(struct Node ** head, int target){
+    struct Node * targetNode = search(head, target);
+    struct Node * current = *head;
+    while (current->next != targetNode)
+    {
+        current = current->next;
+    }
+    struct Node * del = current->next;
+    current->next = del->next;
+    free(del);
+}
+
+void deleteAfter(struct Node ** head, int target){
+    struct Node * prev = search(head, target);
+    struct Node * del = prev->next;
+    prev->next = del->next;
+    free(del);
+}
+
+
+void deleteBefore(struct Node ** head, int target){
+    struct Node * next = search(head, target);
+    struct Node * current = *head;
+    while (current->next->next != next)
+    {
+        current = current->next;
+    }
+    struct Node * del = current->next;
+    current->next = next;
+    free(del);
+}
+
+int main() {
+    struct Node *head = NULL;
+    int n;
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+    display(&head);
+    insertLastN(&head, n);
+    display(&head);
+    printf("Enter value to search: ");
+    int target;
+    scanf("%d", &target);
+    struct Node *result = search(&head, target);
+    if (result != NULL)
+    {
+        printf("Element found at %p\n", result);
+    } else {
+        printf("Element not found\n");
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        insertLast(&head, i);
+    }
+    display(&head);
+    printf("Enter value before which you want to insert: ");
+    int target;
+    scanf("%d", &target);
+    printf("Enter value to insert: ");
+    int data;
+    scanf("%d", &data);
+    insertBefore(&head, target, data);
+    display(&head);
+    int n;
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+    insertLastN(&head, n);
+    display(&head);
+    printf("Enter value after which you want to delete: ");
+    int target;
+    scanf("%d", &target);
+    deleteAfter(&head, target);
+    display(&head);
+    printf("Enter value before which you want to delete: ");
+    scanf("%d", &target);
+    deleteBefore(&head, target);
+    display(&head);
+    printf("Enter value to delete: ");
+    scanf("%d", &target);
+    deleteNode(&head, target);
+    display(&head);
+
+    return 0;
+}
+```
+
+### Doubly Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node * next, * prev;
+};
+
+struct Node * getNode(int val){
+    struct Node * newNode = (struct Node *) malloc(sizeof(struct Node *));
+    newNode->data = val;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+}
+
+void insertFirst(struct Node ** head, int val){
+    if (*head == NULL)
+    {
+    struct Node * newNode = getNode(val);
+    *head = newNode;
+    }
+
+    struct Node * newNode = getNode(val);
+    newNode->next = *head;
+    newNode->next->prev = newNode;
+    *head = newNode;
+}
+
+void display(struct Node * head){
+    struct Node *current = head;
+    printf("---\n");
+    printf("Head: %p\n", head);
+    printf("---\n");
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        printf("---\n");
+        return;
+    }
+    while (current != NULL) {
+        printf("Address: %p\n", current);
+        printf("Data: %d\n", current->data);
+        printf("Prev: %p\n", current->prev);
+        printf("Next: %p\n", current->next);
+        printf("---\n");
+        current = current->next;
+    }
+}
+
+void InsertLast(struct Node ** head, int val){
+    if (*head == NULL)
+    {
+        struct Node * newNode = getNode(val);
+        *head = newNode;
+        return;
+    }
+
+    struct Node * newNode = getNode(val);
+    struct Node * current = *head;
+    while (current->next != NULL)
+    {
+        current = current->next;
+    }
+    current->next = newNode;
+    newNode->prev = current;
+}
+
+struct Node * search(struct Node ** head, int target){
+    if (*head == NULL)
+    {
+        printf("List is empty\n");
+        printf("---\n");
+        return NULL;
+    }
+    struct Node *current = *head;
+    while (current != NULL)
+    {
+        if (current->data == target)
+        {
+            return current;
+        }
+        current = current->next;
+    }
+    return NULL;
+}
+
+
+void insertBefore(struct Node ** head,int target, int data){
+    struct Node * next = search(head, target);
+    struct Node *newNode = getNode(data);
+    newNode->next = next;
+    newNode->prev = next->prev;
+    newNode->prev->next = newNode;
+    next->prev = newNode;
+}
+
+void insertAfter(struct Node ** head, int target, int val){
+    struct Node * prev = search(head, target);
+    struct Node * newNode = getNode(val);
+    newNode->prev = prev;
+    newNode->next = prev->next;
+    prev->next = newNode;
+    newNode->next->prev = newNode;
+}
+
+void deleteFirst(struct Node ** head){
+    if(*head == NULL){
+        return;
+    }
+    struct Node * del = *head;
+    *head = del->next;
+    (*head)->prev = NULL;
+    free(del);
+}
+
+
+void deleteNode(struct Node * node){
+    if (node == NULL)
+    {
+        printf("Node not found\n");
+        return;
+    }
+    if (node->next == NULL)
+    {
+        node->prev->next = NULL;
+        free(node);
+        return;
+    }
+    node->prev->next = node->next;
+    node->next->prev = node->prev;
+    free(node);
+}
+
+void deleteLast(struct Node ** head){
+    if(*head == NULL){
+        printf("List is empty\n");
+        return;
+    }
+    struct Node *temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    deleteNode(temp);
+}
+void deleteNodeOf(struct Node ** head, int val){
+    struct Node * del = search(head, val);
+    deleteNode(del);
+}
+
+void deleteBefore(struct Node ** head, int target){
+    struct Node * next = search(head, target);
+    deleteNode(next->prev);
+}
+
+void deleteAfter(struct Node ** head, int target){
+    struct Node * prev = search(head, target);
+    deleteNode(prev->next);
+}
+
+int main(){
+    struct Node * head = NULL;
+    display(head);
+    insertFirst(&head, 1);
+    insertFirst(&head, 2);
+    display(head);
+    insertFirst(&head, 3);
+    display(head);
+}
+```
+
+### Circular Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *next;
+    struct Node *prev;
+};
+
+struct Node * getNode(int val){
+    struct Node * newNode = (struct Node *) malloc(sizeof(struct Node));
+    newNode->data = val;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+}
+
+void insertFirst(struct Node ** head, int val){
+    struct Node * newNode = getNode(val);
+    if(*head == NULL){
+        newNode->next = newNode;
+        newNode->prev = newNode;
+        *head = newNode;
+        return;
+    }
+    newNode->next = *head;
+    struct Node * last = (*head)->prev;
+    (*head)->prev = newNode;
+    newNode->prev = last;
+    last->next = newNode;
+    *head = newNode;
+}
+
+void insertLast(struct Node ** head, int val){
+    struct Node * newNode = getNode(val);
+    if(*head == NULL){
+        newNode->next = newNode;
+        newNode->prev = newNode;
+        *head = newNode;
+        return;
+    }
+    struct Node * last = (*head)->prev;
+    last->next = newNode;
+    newNode->prev = last;
+    newNode->next = *head;
+    (*head)->prev = newNode;
+}
+
+void display(struct Node * head){
+    struct Node *current = head;
+    printf("---\n");
+    printf("Head: %p\n", head);
+    printf("---\n");
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        printf("---\n");
+        return;
+    }
+    do
+    {
+        printf("Address: %p\n", current);
+        printf("Data: %d\n", current->data);
+        printf("Prev: %p\n", current->prev);
+        printf("Next: %p\n", current->next);
+        printf("---\n");
+        current = current->next;
+    } while (current != head);
+}
+
+struct Node * search(struct Node ** head, int target){
+    if (*head == NULL)
+    {
+        printf("List is empty\n");
+        printf("---\n");
+        return NULL;
+    }
+    struct Node *current = *head;
+    do
+    {
+        if (current->data == target)
+        {
+            return current;
+        }
+        current = current->next;
+    } while (current != NULL);
+    return NULL;
+}
+
+void insertBefore(struct Node ** head,int target, int data){
+    struct Node * next = search(head, target);
+    struct Node *newNode = getNode(data);
+    newNode->next = next;
+    newNode->prev = next->prev;
+    newNode->prev->next = newNode;
+    next->prev = newNode;
+}
+
+void insertAfter(struct Node ** head, int target, int val){
+    struct Node * prev = search(head, target);
+    struct Node * newNode = getNode(val);
+    newNode->prev = prev;
+    newNode->next = prev->next;
+    prev->next = newNode;
+    newNode->next->prev = newNode;
+}
+
+void deleteNode(struct Node * node){
+    if (node == NULL)
+    {
+        printf("Node not found\n");
+        return;
+    }
+    node->prev->next = node->next;
+    node->next->prev = node->prev;
+    free(node);
+}
+
+void deleteFirst(struct Node ** head){
+    if(*head == NULL){
+        printf("List is empty\n");
+        return;
+    }
+    struct Node * del = *head;
+    deleteNode(del);
+}
+
+void deleteLast(struct Node ** head){
+    if(*head == NULL){
+        printf("List is empty\n");
+        return;
+    }
+    struct Node *del = (*head)->prev;
+    deleteNode(del);
+}
+
+void deleteBefore(struct Node ** head, int target){
+    struct Node * next = search(head, target);
+    deleteNode(next->prev);
+}
+
+void deleteAfter(struct Node ** head, int target){
+    struct Node * prev = search(head, target);
+    deleteNode(prev->next);
+}
+
+int main(){
+    struct Node * head = NULL;
+    display(head);
+    insertFirst(&head, 1);
+    insertFirst(&head, 2);
+    insertFirst(&head, 3);
+    display(head);
+    insertLast(&head, 4);
+    insertLast(&head, 5);
+    display(head);
+    return 0;
+}
+```
+
+---
+
+## Arrays and Linked Lists leetcode questions
+
 ## 1. Find the Highest Altitude - 1732 | `Easy`
+
 ### Problem Statement
+
 There is a biker going on a road trip. The road trip consists of n + 1 points at different altitudes. The biker starts his trip on point 0 with altitude equal 0.
 
 You are given an integer array gain of length n where gain[i] is the net gain in altitude between points i​​​​​​ and i + 1 for all (0 <= i < n). Return the highest altitude of a point.
 
 ### Solution
+
 ```java
 class Solution {
     public int largestAltitude(int[] gain) {
@@ -51,22 +925,28 @@ class Solution {
             if(alt[i] > max){
                 max = alt[i];
             }
-        } 
+        }
         return max;
     }
 }
 ```
+
 ### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(n)
+
+- Time Complexity: O(n)
+- Space Complexity: O(n)
 
 ### Runtime Stats
-* Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Find the Highest Altitude.
-* Memory Usage: `41.2 MB`, less than `6.57%` of Java online submissions for Find the Highest Altitude.
+
+- Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Find the Highest Altitude.
+- Memory Usage: `41.2 MB`, less than `6.57%` of Java online submissions for Find the Highest Altitude.
 
 ---
+
 ## 2. Cells with Odd Values in a Matrix - 1252 | `Easy`
+
 ### Problem Statement
+
 There is an m x n matrix that is initialized to all 0's. There is also a 2D array indices where each indices[i] = [ri, ci] represents a 0-indexed location to perform some increment operations on the matrix.
 
 For each location indices[i], do both of the following:
@@ -75,8 +955,8 @@ Increment all the cells on row ri.
 Increment all the cells on column ci.
 Given m, n, and indices, return the number of odd-valued cells in the matrix after applying the increment to all locations in indices.
 
-
 ### Solution
+
 ```java
 class Solution {
     public int oddCells(int m, int n, int[][] indices) {
@@ -103,22 +983,27 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(indices.length * (mn))
-* Space Complexity: O(mn)
+
+- Time Complexity: O(indices.length \* (mn))
+- Space Complexity: O(mn)
 
 ### Runtime Stats
-* Runtime: `2 ms`, faster than `64.40%` of Java online submissions for Cells with Odd Values in a Matrix.
-* Memory Usage: `40.8 MB`, less than `19.49%` of Java online submissions for Cells with Odd Values in a Matrix.
+
+- Runtime: `2 ms`, faster than `64.40%` of Java online submissions for Cells with Odd Values in a Matrix.
+- Memory Usage: `40.8 MB`, less than `19.49%` of Java online submissions for Cells with Odd Values in a Matrix.
 
 ---
 
 ## 3. Matrix Diagonal Sum - 1572 | `Easy`
+
 ### Problem Statement
+
 Given a square matrix mat, return the sum of the matrix diagonals.
 
 Only include the sum of all the elements on the primary diagonal and all the elements on the secondary diagonal that are not part of the primary diagonal.
 
 ### Solution
+
 ```java
 class Solution {
     public int diagonalSum(int[][] mat) {
@@ -139,17 +1024,21 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(1)
+
+- Time Complexity: O(n)
+- Space Complexity: O(1)
 
 ### Runtime Stats
-* Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Matrix Diagonal Sum.
-* Memory Usage: `43.6 MB`, less than `77.92%` of Java online submissions for Matrix Diagonal Sum.
+
+- Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Matrix Diagonal Sum.
+- Memory Usage: `43.6 MB`, less than `77.92%` of Java online submissions for Matrix Diagonal Sum.
 
 ---
 
 ## 4. Convert Binary Number in a Linked List - 1290 | `Easy`
+
 ### Problem Statement
+
 Given head which is a reference node to a singly-linked list. The value of each node in the linked list is either 0 or 1. The linked list holds the binary representation of a number.
 
 Return the decimal value of the number in the linked list.
@@ -157,6 +1046,7 @@ Return the decimal value of the number in the linked list.
 The most significant bit is at the head of the linked list.
 
 ### Solution
+
 ```java
 class Solution {
     public int getDecimalValue(ListNode head) {
@@ -179,18 +1069,21 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n^2)
-* Space Complexity: O(1)
+
+- Time Complexity: O(n^2)
+- Space Complexity: O(1)
 
 ### Runtime Stats
-* Runtime: `1 ms`, faster than `20.85%` of Java online submissions for Convert Binary Number in a Linked List.
-* Memory Usage: `39.9 MB`, less than `52.66%` of Java online submissions for Convert Binary Number in a Linked List.
+
+- Runtime: `1 ms`, faster than `20.85%` of Java online submissions for Convert Binary Number in a Linked List.
+- Memory Usage: `39.9 MB`, less than `52.66%` of Java online submissions for Convert Binary Number in a Linked List.
 
 ---
 
 ## 5. Merge Two Sorted Lists - 21 | `Easy`
 
 ### Problem Statement
+
 You are given the heads of two sorted linked lists list1 and list2.
 
 Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
@@ -198,6 +1091,7 @@ Merge the two lists into one sorted list. The list should be made by splicing to
 Return the head of the merged linked list.
 
 ### Solution
+
 ```java
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
@@ -222,23 +1116,26 @@ class Solution {
             current.next = list2;
         }
         return head.next;
-    }    
+    }
 }
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(1)
+
+- Time Complexity: O(n)
+- Space Complexity: O(1)
 
 ### Runtime Stats
-* Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Merge Two Sorted Lists.
-* Memory Usage: `41.3 MB`, less than `60.7%` of Java online submissions for Merge Two Sorted Lists.
+
+- Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Merge Two Sorted Lists.
+- Memory Usage: `41.3 MB`, less than `60.7%` of Java online submissions for Merge Two Sorted Lists.
 
 ---
 
 ## 6. Linked List Cycle - 141 | `Easy`
 
 ### Problem Statement
+
 Given head, the head of a linked list, determine if the linked list has a cycle in it.
 
 There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
@@ -246,6 +1143,7 @@ There is a cycle in a linked list if there is some node in the list that can be 
 Return true if there is a cycle in the linked list. Otherwise, return false.
 
 ### Solution
+
 ```java
 public class Solution {
     public boolean hasCycle(ListNode head) {
@@ -264,23 +1162,27 @@ public class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(1)
+
+- Time Complexity: O(n)
+- Space Complexity: O(1)
 
 ### Runtime Stats
-* Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Linked List Cycle.
-* Memory Usage: `43.4 MB`, less than `59.93%` of Java online submissions for Linked List Cycle.
+
+- Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Linked List Cycle.
+- Memory Usage: `43.4 MB`, less than `59.93%` of Java online submissions for Linked List Cycle.
 
 ---
 
 ## 7. Set Matrix Zeros - 73 | `Medium`
 
 ### Problem Statement
+
 Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
 
 You must do it in place.
 
 ### Solution
+
 ```java
 class Solution {
     public void setZeroes(int[][] matrix) {
@@ -322,23 +1224,27 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(mn)
-* Space Complexity: O(m+n)
+
+- Time Complexity: O(mn)
+- Space Complexity: O(m+n)
 
 ### Runtime Stats
-* Runtime: `4 ms`, faster than `7.34%` of Java online submissions for Set Matrix Zeroes.
-* Memory Usage: `44.6 MB`, less than `58.23%` of Java online submissions for Set Matrix Zeroes.
+
+- Runtime: `4 ms`, faster than `7.34%` of Java online submissions for Set Matrix Zeroes.
+- Memory Usage: `44.6 MB`, less than `58.23%` of Java online submissions for Set Matrix Zeroes.
 
 ---
 
 ## 8. House Robber - 198 | `Medium`
 
 ### Problem Statement
+
 You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
 
 Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
 
 ### Solution
+
 ```java
 int isLootable(int h1, int h2){
     return ((h1 - h2 == 1)||(h2 - h1 == 1)) ? 0 : 1;
@@ -377,23 +1283,27 @@ int rob(int* nums, int numsSize){
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n^2)
-* Space Complexity: O(n)
+
+- Time Complexity: O(n^2)
+- Space Complexity: O(n)
 
 ### Runtime Stats
-* Runtime: `3 ms`, faster than `45.74%` of C online submissions for House Robber.
-* Memory Usage: `5.6 MB`, less than `90.70%` of C online submissions for House Robber.
+
+- Runtime: `3 ms`, faster than `45.74%` of C online submissions for House Robber.
+- Memory Usage: `5.6 MB`, less than `90.70%` of C online submissions for House Robber.
 
 ---
 
 ## 9. Spiral Matrix - 54 | `Medium`
 
 ### Problem Statement
+
 Given an m x n matrix, return all elements of the matrix in spiral order.
 
 ![Alt text](https://assets.leetcode.com/uploads/2020/11/13/spiral1.jpg)
 
 ### Solution
+
 ```java
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
@@ -437,24 +1347,27 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n^2)
-* Space Complexity: O(n)
+
+- Time Complexity: O(n^2)
+- Space Complexity: O(n)
 
 ### Runtime Stats
-* Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Spiral Matrix.
-* Memory Usage: `40.7 MB`, less than `35.76%` of Java online submissions for Spiral Matrix.
+
+- Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Spiral Matrix.
+- Memory Usage: `40.7 MB`, less than `35.76%` of Java online submissions for Spiral Matrix.
 
 ---
 
-## 10. Add Two Numbers - 2  | `Medium`
+## 10. Add Two Numbers - 2 | `Medium`
 
 ### Problem Statement
+
 You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
 
 You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
-
 ### Solution
+
 ```java
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -500,22 +1413,26 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(n)
-where n is the length of the longer list
+
+- Time Complexity: O(n)
+- Space Complexity: O(n)
+  where n is the length of the longer list
 
 ### Runtime Stats
-* Runtime: `1 ms`, faster than `100.00%` of Java online submissions for Add Two Numbers.
-* Memory Usage: `43 MB`, less than `83.18%` of Java online submissions for Add Two Numbers.
+
+- Runtime: `1 ms`, faster than `100.00%` of Java online submissions for Add Two Numbers.
+- Memory Usage: `43 MB`, less than `83.18%` of Java online submissions for Add Two Numbers.
 
 ---
 
 ## 11. Remove Nth Node From End of List - 19 | `Medium`
 
 ### Problem Statement
+
 Given the head of a linked list, remove the nth node from the end of the list and return its head.
 
 ### Solution
+
 ```java
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -524,7 +1441,7 @@ class Solution {
         while(temp != null){
             size++;
             temp = temp.next;
-        }  
+        }
         if(size == 1){
             return null;
         }
@@ -543,12 +1460,14 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(1)
+
+- Time Complexity: O(n)
+- Space Complexity: O(1)
 
 ### Runtime Stats
-* Runtime: `2 ms`, faster than `6.94%` of Java online submissions for Remove Nth Node From End of List.
-* Memory Usage: `40.2 MB`, less than `93.13%` of Java online submissions for Remove Nth Node From End of List.
+
+- Runtime: `2 ms`, faster than `6.94%` of Java online submissions for Remove Nth Node From End of List.
+- Memory Usage: `40.2 MB`, less than `93.13%` of Java online submissions for Remove Nth Node From End of List.
 
 ---
 
@@ -563,6 +1482,7 @@ There is a cycle in a linked list if there is some node in the list that can be 
 Do not modify the linked list.
 
 ### Solution
+
 ```java
 public class Solution {
     public ListNode detectCycle(ListNode head) {
@@ -571,7 +1491,7 @@ public class Solution {
         while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
-            
+
             if(slow == fast){
                 ListNode temp = slow;
                 int length = 0;
@@ -599,18 +1519,21 @@ public class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(1)
+
+- Time Complexity: O(n)
+- Space Complexity: O(1)
 
 ### Runtime Stats
-* Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Linked List Cycle II.
-* Memory Usage: `43.9 MB`, less than `22.49%` of Java online submissions for Linked List Cycle II.
+
+- Runtime: `0 ms`, faster than `100.00%` of Java online submissions for Linked List Cycle II.
+- Memory Usage: `43.9 MB`, less than `22.49%` of Java online submissions for Linked List Cycle II.
 
 ---
 
 ## 13. Delete the Middle Node of a Linked List - 2095 | `Medium`
 
 ### Problem Statement
+
 You are given the head of a linked list. Delete the middle node, and return the head of the modified linked list.
 
 The middle node of a linked list of size n is the ⌊n / 2⌋th node from the start using 0-based indexing, where ⌊x⌋ denotes the largest integer less than or equal to x.
@@ -618,6 +1541,7 @@ The middle node of a linked list of size n is the ⌊n / 2⌋th node from the st
 For n = 1, 2, 3, 4, and 5, the middle nodes are 0, 1, 1, 2, and 2, respectively.
 
 ### Solution
+
 ```java
 class Solution {
     public ListNode deleteMiddle(ListNode head) {
@@ -642,12 +1566,14 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(1)
+
+- Time Complexity: O(n)
+- Space Complexity: O(1)
 
 ### Runtime Stats
-* Runtime: `3 ms`, faster than `96.46%` of Java online submissions for Delete Middle of Linked List.
-* Memory Usage: `63 MB`, less than `98.28%` of Java online submissions for Delete Middle of Linked List.
+
+- Runtime: `3 ms`, faster than `96.46%` of Java online submissions for Delete Middle of Linked List.
+- Memory Usage: `63 MB`, less than `98.28%` of Java online submissions for Delete Middle of Linked List.
 
 ---
 
@@ -660,6 +1586,7 @@ Given two sorted arrays nums1 and nums2 of size m and n respectively, return the
 The overall run time complexity should be O(log (m+n)).
 
 ### Solution
+
 ```java
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -694,7 +1621,7 @@ class Solution {
         System.out.print(Arrays.toString(res));
         if(res.length % 2 == 0){
             median = ((double)res[res.length/2] + (double)res[res.length/2 -1])/2;
-            
+
         } else {
             median = res[res.length/2];
         }
@@ -705,18 +1632,21 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(m + n)
-* Space Complexity: O(m + n)
+
+- Time Complexity: O(m + n)
+- Space Complexity: O(m + n)
 
 ### Runtime Stats
-* Runtime: `16 ms`, faster than `6.81%` of Java online submissions for Median of Two Sorted Arrays.
-* Memory Usage: `45 MB`, less than `6.28%` of Java online submissions for Median of Two Sorted Arrays.
+
+- Runtime: `16 ms`, faster than `6.81%` of Java online submissions for Median of Two Sorted Arrays.
+- Memory Usage: `45 MB`, less than `6.28%` of Java online submissions for Median of Two Sorted Arrays.
 
 ---
 
 ## 15. Reverse Nodes in k-Group - 25 | `Hard`
 
 ### Problem Statement
+
 Given the head of a linked list, reverse the nodes of the list k at a time, and return the modified list.
 
 k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes, in the end, should remain as it is.
@@ -724,6 +1654,7 @@ k is a positive integer and is less than or equal to the length of the linked li
 You may not alter the values in the list's nodes, only nodes themselves may be changed.
 
 ### Solution
+
 ```java
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
@@ -736,7 +1667,7 @@ class Solution {
         if(size < k){
             return head;
         }
-        ListNode nextRec = current;        
+        ListNode nextRec = current;
         ListNode prev = null;
         current = head;
         System.out.println(current.val);
@@ -753,18 +1684,166 @@ class Solution {
 ```
 
 ### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(1)
+
+- Time Complexity: O(n)
+- Space Complexity: O(1)
 
 ### Runtime Stats
-* Runtime: `4 ms`, faster than `6.84%` of Java online submissions for Reverse Nodes in k-Group.
-* Memory Usage: `42.8 MB`, less than `92.87%` of Java online submissions for Reverse Nodes in k-Group.
+
+- Runtime: `4 ms`, faster than `6.84%` of Java online submissions for Reverse Nodes in k-Group.
+- Memory Usage: `42.8 MB`, less than `92.87%` of Java online submissions for Reverse Nodes in k-Group.
+
+---
+
+## Polynomial addition using linked lists
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+struct Node
+{
+    float coeff;
+    int exp;
+    struct Node *next;
+};
+
+void display(struct Node *head){
+    struct Node *current = head;
+    printf("---\n");
+    printf("Head: %p\n", head);
+    printf("---\n");
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        printf("---\n");
+        return;
+    }
+    while (current != NULL)
+    {
+        printf("%.2f X^%d", current->coeff, current->exp);
+        if (current->next != NULL)
+        {
+            printf(" + ");
+        }
+        current = current->next;
+    }
+    printf("\n");
+    printf("---\n");
+}
+
+void insertTerm(struct Node **head, float coeff, int exp){
+    struct Node * same = (struct Node *) malloc(sizeof(struct Node));
+    while(same->next != NULL){
+        if(same->exp == exp){
+            same->coeff += coeff;
+            return;
+        }
+    }
+    struct Node *newTerm = (struct Node *) malloc(sizeof(struct Node));
+    newTerm->coeff = coeff;
+    newTerm->exp = exp;
+    same = *head;
+    newTerm->next = NULL;
+    if (*head == NULL)
+    {
+        *head = newTerm;
+        return;
+    }
+    if ((*head)->exp < exp)
+    {
+        newTerm->next = *head;
+        *head = newTerm;
+        return;
+    }
+    struct Node *current = *head;
+    while (current->next != NULL && current->next->exp > exp)
+    {
+        current = current->next;
+    }
+    newTerm->next = current->next;
+    current->next = newTerm;
+}
+
+void createPolynomial(struct Node **head){
+    int n;
+    float coeff;
+    int exp;
+    printf("Enter number of terms: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+    {
+        printf("Enter coefficient: ");
+        scanf("%f", &coeff);
+        printf("Enter exponent: ");
+        scanf("%d", &exp);
+        insertTerm(head, coeff, exp);
+    }
+}
+
+void addPolynomials(struct Node **head1, struct Node **head2, struct Node **head3){
+    struct Node *current1 = *head1;
+    struct Node *current2 = *head2;
+    while (current1 != NULL && current2 != NULL)
+    {
+        if (current1->exp > current2->exp)
+        {
+            insertTerm(head3, current1->coeff, current1->exp);
+            current1 = current1->next;
+        }
+        else if (current1->exp < current2->exp)
+        {
+            insertTerm(head3, current2->coeff, current2->exp);
+            current2 = current2->next;
+        }
+        else
+        {
+            insertTerm(head3, current1->coeff + current2->coeff, current1->exp);
+            current1 = current1->next;
+            current2 = current2->next;
+        }
+    }
+    if (current1 != NULL)
+    {
+        struct Node * temp = (struct Node *) malloc(sizeof(struct Node));
+        temp = *head3;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = current1;
+    }
+    else if (current2 != NULL)
+    {
+        struct Node * temp = (struct Node *) malloc(sizeof(struct Node));
+        temp = *head3;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = current2;
+    }
+}
+
+int main(){
+    struct Node *head1 = NULL;
+    struct Node *head2 = NULL;
+    struct Node *head3 = NULL;
+    createPolynomial(&head1);
+    createPolynomial(&head2);
+    display(head1);
+    display(head2);
+    addPolynomials(&head1, &head2, &head3);
+    display(head3);
+    return 0;
+}
+```
 
 ---
 
 ## Stacks
 
 ### Stack implementation using Arrays
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -827,7 +1906,7 @@ int main() {
                 printf("exit\n");
                 break;
         }
-        
+
     } while (choice != 3);
 }
 ```
@@ -835,6 +1914,7 @@ int main() {
 ---
 
 ### Stack implementation using Linked Lists
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -916,6 +1996,7 @@ int main(){
 ---
 
 ### Stack implementation using Queues
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -1048,15 +2129,19 @@ int main(){
 ---
 
 ### Valid Parentheses - 20 | `Easy`
+
 #### Problem Statement
+
 Given a string s containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.
 
 An input string is valid if:
+
 1. Open brackets must be closed by the same type of brackets.
 2. Open brackets must be closed in the correct order.
 3. Every close bracket has a corresponding open bracket of the same type.
 
 #### Solution
+
 ```c
 void push(char * arr, int * top, char data, int size){
     if(*top >= size - 1){
@@ -1106,34 +2191,39 @@ bool isValid(char* s) {
 ```
 
 #### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(n)
+
+- Time Complexity: O(n)
+- Space Complexity: O(n)
 
 #### Runtime Stats
-* Runtime: `3 ms`, faster than `42.5%` of C online submissions for Valid Parentheses.
-* Memory Usage: `6.69 MB`, less than `17.02%` of C online submissions for Valid Parentheses.
+
+- Runtime: `3 ms`, faster than `42.5%` of C online submissions for Valid Parentheses.
+- Memory Usage: `6.69 MB`, less than `17.02%` of C online submissions for Valid Parentheses.
 
 ---
 
 ### Baseball Game - 682 | `Easy`
+
 #### Problem Statement
+
 You are keeping the scores for a baseball game with strange rules. At the beginning of the game, you start with an empty record.
 
 You are given a list of strings operations, where operations[i] is the ith operation you must apply to the record and is one of the following:
 
-* An integer x.
-Record a new score of x.
-* '+'.
-Record a new score that is the sum of the previous two scores.
-* 'D'.
-Record a new score that is the double of the previous score.
-* 'C'.
-Invalidate the previous score, removing it from the record.
-Return the sum of all the scores on the record after applying all the operations.
+- An integer x.
+  Record a new score of x.
+- '+'.
+  Record a new score that is the sum of the previous two scores.
+- 'D'.
+  Record a new score that is the double of the previous score.
+- 'C'.
+  Invalidate the previous score, removing it from the record.
+  Return the sum of all the scores on the record after applying all the operations.
 
 The test cases are generated such that the answer and all intermediate calculations fit in a 32-bit integer and that all operations are valid.
 
 #### Solution
+
 ```c
 void pushInt(int * arr, int * top, int data, int size){
     if(*top >= size - 1){
@@ -1186,16 +2276,19 @@ int calPoints(char** operations, int operationsSize) {
 ```
 
 #### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(n)
+
+- Time Complexity: O(n)
+- Space Complexity: O(n)
 
 #### Runtime Stats
-* Runtime: `0 ms`, faster than `100.00%` of C online submissions for Baseball Game.
-* Memory Usage: `6.96 MB`, less than `33.46%` of C online submissions for Baseball Game.
+
+- Runtime: `0 ms`, faster than `100.00%` of C online submissions for Baseball Game.
+- Memory Usage: `6.96 MB`, less than `33.46%` of C online submissions for Baseball Game.
 
 ---
 
 ## Infix to Postfix Conversion
+
 ```c
 int precedence(char op){
     switch (op)
@@ -1211,7 +2304,7 @@ int precedence(char op){
         break;
     case '^':
         return 3;
-        break;    
+        break;
     default:
         return 0;
         break;
@@ -1317,13 +2410,14 @@ char * toPostfix(char * infix){
         postfix[++pin] = pop(operators, &top);
     }
     postfix[++pin] = '\0';
-    return postfix;    
+    return postfix;
 }
 ```
 
 ---
 
 ## Postfix Evaluation
+
 ```c
 float eval_postfix(char *postfix){
     int len = strlen(postfix);
@@ -1388,6 +2482,7 @@ float eval_postfix(char *postfix){
 ## Queues
 
 ### Queue implementation using Arrays
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -1441,7 +2536,7 @@ int dequeue(int *arr, int *front, int *rear, int size){
         return data;
     }
     //normal case
-    return arr[(*front)++];    
+    return arr[(*front)++];
 }
 
 void printArray(int * arr, int front, int rear){
@@ -1460,14 +2555,14 @@ void printArray(int * arr, int front, int rear){
         for (int i = 0; i <= rear; i++)
         {
             printf("%d\t", arr[i]);
-        }   
-        printf("\n");    
+        }
+        printf("\n");
         return;
     }
     for (int i = front; i <= rear; i++)
     {
         printf("%d\t", arr[i]);
-    }        
+    }
     printf("\n");
 }
 ```
@@ -1475,7 +2570,8 @@ void printArray(int * arr, int front, int rear){
 ---
 
 ### Queue implementation using Linked Lists
-```c                            
+
+```c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -1507,7 +2603,7 @@ void enqueue(struct Queue * queue, int data){
         return;
     }
     queue->rear->next = newNode;
-    queue->rear = newNode;    
+    queue->rear = newNode;
 }
 
 int dequeue(struct Queue * queue){
@@ -1548,6 +2644,7 @@ void printQueue(struct Queue * queue){
 ---
 
 ### Implement Stack using Queues
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -1666,6 +2763,7 @@ void printQueue(struct Queue *queue){
 ---
 
 ### Deque implementation using Arrays
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -1841,6 +2939,7 @@ int main(){
 ```
 
 ### Deque implementation using Linked Lists
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -1887,7 +2986,7 @@ void enqueue_rear(struct Queue * queue, int data){
         return;
     }
     queue->rear->next = newNode;
-    queue->rear = newNode;    
+    queue->rear = newNode;
 }
 
 int dequeue_front(struct Queue * queue){
@@ -1979,6 +3078,7 @@ int main(){
 ```
 
 ---
+
 ## Priority Queues
 
 ### Priority Queue implementation using Linked Lists
@@ -2091,7 +3191,9 @@ int main(){
 ---
 
 ## Trees
+
 ### Binary tree implementation using Linked Lists
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -2130,7 +3232,7 @@ void buildTree(struct Node * node){
         scanf("%d", &data);
         node->right = getNode(data);
         buildTree(node->right);
-    }   
+    }
 }
 
 void display(struct Node *root){
@@ -2140,7 +3242,7 @@ void display(struct Node *root){
     }
     display(root->left);
     printf("%d ", root->data);
-    display(root->right);    
+    display(root->right);
 }
 
 void display_tree(struct Node *root, int level){
@@ -2172,6 +3274,7 @@ int main(){
 ---
 
 ### Binary Tree implementation using Arrays
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -2232,7 +3335,7 @@ void display_tree(int *tree, int index, int num, int level){
     {
         return;
     }
-    
+
     display_tree(tree, 2 * index + 2, num, level + 1);
     for (int i = 0; i < level; i++)
     {
@@ -2257,6 +3360,7 @@ int main(){
 ---
 
 ### Binary Search Tree implementation using Linked Lists
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -2309,7 +3413,7 @@ struct Node * bst_iter(struct Node ** root, int num){
                 }
             }
         }
-    }    
+    }
 }
 
 void inorder(struct Node *root){
@@ -2319,7 +3423,7 @@ void inorder(struct Node *root){
     }
     inorder(root->left);
     printf("%d ", root->data);
-    inorder(root->right);    
+    inorder(root->right);
 }
 
 void preorder(struct Node *root){
@@ -2329,7 +3433,7 @@ void preorder(struct Node *root){
     }
     printf("%d ", root->data);
     preorder(root->left);
-    preorder(root->right);    
+    preorder(root->right);
 }
 
 void postorder(struct Node *root){
@@ -2338,7 +3442,7 @@ void postorder(struct Node *root){
         return;
     }
     postorder(root->left);
-    postorder(root->right);    
+    postorder(root->right);
     printf("%d ", root->data);
 }
 
@@ -2358,7 +3462,7 @@ struct Node * search(struct Node * root, int target, int *child_side){
     else if (root->right != NULL && root->right->data == target) {
         *child_side = 2;
         return root;
-    }  
+    }
     else if (target < root->data) {
         return search(root->left, target, child_side);
     }
@@ -2390,7 +3494,7 @@ struct Node * inorder_successor(struct Node *root, int target){
         {
             printf("No inorder successor\n");
             return NULL;
-        }        
+        }
     }
     else if (child_side = 1)
     {
@@ -2427,7 +3531,7 @@ struct Node * inorder_successor(struct Node *root, int target){
             printf("No inorder successor\n");
             return NULL;
         }
-    }    
+    }
 }
 
 struct Node * inorder_predecessor(struct Node *root, int target){
@@ -2453,7 +3557,7 @@ struct Node * inorder_predecessor(struct Node *root, int target){
         {
             printf("No inorder predecessor\n");
             return NULL;
-        }        
+        }
     }
     else if (child_side == 1)
     {
@@ -2478,7 +3582,7 @@ struct Node * inorder_predecessor(struct Node *root, int target){
             }
             printf("No inorder predecessor\n");
             return NULL;
-        }              
+        }
     }
     else if (child_side == 2)
     {
@@ -2495,7 +3599,7 @@ struct Node * inorder_predecessor(struct Node *root, int target){
         {
             return parent;
         }
-    }  
+    }
 }
 
 void display(struct Node *root){
@@ -2505,7 +3609,7 @@ void display(struct Node *root){
     }
     display(root->left);
     printf("%d ", root->data);
-    display(root->right);    
+    display(root->right);
 }
 
 void display_tree(struct Node *root, int level){
@@ -2586,7 +3690,7 @@ void delete(struct Node ** root, int target){
             parent->left = tn->left;
             free(tn);
             return;
-        
+
         case 2:
             parent->right = tn->left;
             free(tn);
@@ -2607,7 +3711,7 @@ void delete(struct Node ** root, int target){
             parent->left = tn->right;
             free(tn);
             return;
-        
+
         case 2:
             parent->right = tn->right;
             free(tn);
@@ -2624,11 +3728,11 @@ void delete(struct Node ** root, int target){
 
 struct Node* minValueNode(struct Node* node) {
     struct Node* current = node;
-  
+
     /* loop down to find the leftmost leaf */
     while (current && current->left != NULL)
         current = current->left;
-  
+
     return current;
 }
 int main(){
@@ -2669,6 +3773,7 @@ int main(){
 ---
 
 ### Binary Search Tree implementation using Arrays
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -2744,7 +3849,7 @@ void inorder(int *tree, int index, int num){
     if (tree[index] == 0)
     {
         return;
-    }    
+    }
     inorder(tree, 2 * index + 1, num);
     printf("%d ", tree[index]);
     inorder(tree, 2 * index + 2, num);
@@ -2783,14 +3888,14 @@ int search(int *tree, int value, int num){
         if (value == tree[index])
         {
             return index;
-        }        
+        }
         else if (value < tree[index])
         {
             index = left_child(index);
         }
         else {
             index = right_child(index);
-        }        
+        }
     }
     return -1;
 }
@@ -2889,12 +3994,15 @@ int main(){
 ---
 
 ### Same Tree - 100 | `Easy`
+
 #### Problem Statement
+
 Given the roots of two binary trees p and q, write a function to check if they are the same or not.
 
 Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
 
 #### Solution
+
 ```c
 /**
  * Definition for a binary tree node.
@@ -2911,7 +4019,7 @@ bool symRec(struct TreeNode* left, struct TreeNode* right){
     if(left->val != right->val){
         return 0;
     }
-    
+
     if(left->left != NULL && right->left != NULL){
         if(symRec(left->left, right->left) == 0){
             return 0;
@@ -2937,20 +4045,25 @@ bool isSameTree(struct TreeNode* p, struct TreeNode* q) {
 ```
 
 #### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(n)
+
+- Time Complexity: O(n)
+- Space Complexity: O(n)
 
 #### Runtime Stats
-* Runtime: `0 ms`, faster than `100.00%` of C online submissions for Same Tree.
-* Memory Usage: `6.38 MB`, less than `93.56%` of C online submissions for Same Tree.
+
+- Runtime: `0 ms`, faster than `100.00%` of C online submissions for Same Tree.
+- Memory Usage: `6.38 MB`, less than `93.56%` of C online submissions for Same Tree.
 
 ---
 
 ### Symmetric Tree - 101 | `Easy`
+
 #### Problem Statement
+
 Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
 #### Solution
+
 ```c
 /**
  * Definition for a binary tree node.
@@ -2967,7 +4080,7 @@ bool symRec(struct TreeNode* left, struct TreeNode* right){
     if(left->val != right->val){
         return 0;
     }
-    
+
     if(left->left != NULL && right->right != NULL){
         if(symRec(left->left, right->right) == 0){
             return 0;
@@ -2993,23 +4106,27 @@ bool isSymmetric(struct TreeNode* root) {
 ```
 
 #### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(n)
+
+- Time Complexity: O(n)
+- Space Complexity: O(n)
 
 #### Runtime Stats
-* Runtime: `0 ms`, faster than `100.00%` of C online submissions for Symmetric Tree.
-* Memory Usage: `7.69 MB`, less than `29.83%` of C online submissions for Symmetric Tree.
+
+- Runtime: `0 ms`, faster than `100.00%` of C online submissions for Symmetric Tree.
+- Memory Usage: `7.69 MB`, less than `29.83%` of C online submissions for Symmetric Tree.
 
 ---
 
 ### Lowest Common Ancestor of a Binary Search Tree - 235 | `Medium`
 
 #### Problem Statement
+
 Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.
 
 According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
 
 #### Solution
+
 ```c
 /**
  * Definition for a binary tree node.
@@ -3029,23 +4146,26 @@ struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p,
     }
     else {
         return root;
-    }  
+    }
 }
 ```
 
 #### Complexity Analysis
-* Time Complexity: O(n)
-* Space Complexity: O(n)
+
+- Time Complexity: O(n)
+- Space Complexity: O(n)
 
 #### Runtime Stats
-* Runtime: `36 ms`, faster than `7.33%` of C online submissions for Lowest Common Ancestor of a Binary Search Tree.
-* Memory Usage: `27.6 MB`, less than `36.07%` of C online submissions for Lowest Common Ancestor of a Binary Search Tree.
+
+- Runtime: `36 ms`, faster than `7.33%` of C online submissions for Lowest Common Ancestor of a Binary Search Tree.
+- Memory Usage: `27.6 MB`, less than `36.07%` of C online submissions for Lowest Common Ancestor of a Binary Search Tree.
 
 ---
 
 ## AVL trees and expression trees
 
 ### AVL tree implementation using Linked Lists
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -3098,7 +4218,7 @@ struct Node * bst_iter(struct Node ** root, int num){
                 }
             }
         }
-    }    
+    }
 }
 
 struct Node * search(struct Node * root, int target, int *child_side){
@@ -3116,7 +4236,7 @@ struct Node * search(struct Node * root, int target, int *child_side){
     {
         *child_side = 2;
         return root;
-    }  
+    }
     else if (target < root -> data)
     {
         search(root->left, target, child_side);
@@ -3388,6 +4508,7 @@ int main(){
 ---
 
 ### AVL tree implementation using Arrays
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -3635,6 +4756,7 @@ int main(){
 ---
 
 ### Expression tree insertion using Linked Lists
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -3756,6 +4878,7 @@ int evaluate(struct Node *root){
     }
 }
 ```
+
 ---
 
 ### Expression tree insertion using Arrays
@@ -3915,7 +5038,7 @@ void percolate_up(int *arr, int index){
         arr[index] = temp;
     } else {
         return;
-    }    
+    }
     percolate_up(arr, parent(index));
 }
 
@@ -3946,7 +5069,7 @@ void percolate_down(int *arr, int index, int last){
             percolate_down(arr, right_child(index), last);
         }
     }
-    
+
 }
 
 void insert(struct Heap *h, int val) {
@@ -3955,7 +5078,7 @@ void insert(struct Heap *h, int val) {
         h->arr = (int *)realloc(h->arr, h->size * sizeof(int));
 
         for (int i = h->last + 1; i < h->size; ++i) {
-            h->arr[i] = 0;  
+            h->arr[i] = 0;
         }
     }
     h->last++;
@@ -3978,7 +5101,7 @@ void display_tree(int *tree, int index, int size, int level){
     if(tree[index] == 0){
         return;
     }
-    
+
     display_tree(tree, 2 * index + 2, size, level + 1);
     for(int i = 0; i < level; i++){
         printf("|\t");
@@ -4010,7 +5133,7 @@ int main(){
 
 ### Max Heap implementation using Arrays
 
-```c             
+```c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -4058,7 +5181,7 @@ void percolate_up(int *arr, int index){
         arr[index] = temp;
     } else {
         return;
-    }    
+    }
     percolate_up(arr, parent(index));
 }
 
@@ -4089,7 +5212,7 @@ void percolate_down(int *arr, int index, int last){
             percolate_down(arr, right_child(index), last);
         }
     }
-    
+
 }
 
 void insert(struct Heap *h, int val) {
@@ -4098,7 +5221,7 @@ void insert(struct Heap *h, int val) {
         h->arr = (int *)realloc(h->arr, h->size * sizeof(int));
 
         for (int i = h->last + 1; i < h->size; ++i) {
-            h->arr[i] = 0;  
+            h->arr[i] = 0;
         }
     }
     h->last++;
@@ -4121,7 +5244,7 @@ void display_tree(int *tree, int index, int size, int level){
     if(tree[index] == 0){
         return;
     }
-    
+
     display_tree(tree, 2 * index + 2, size, level + 1);
     for(int i = 0; i < level; i++){
         printf("|\t");
@@ -4194,7 +5317,7 @@ void heap_sort(int *arr, int size){
 ## Graphs
 
 ### Graph implementation using Adjacency Matrix
-    
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -4442,7 +5565,7 @@ void bfs(struct Graph *graph, int src){
         }
     }
     printf("\n");
-}                       
+}
 ```
 
 ---
@@ -4492,4 +5615,3 @@ void topological_sort(struct Graph *graph){
     printf("\n");
 }
 ```
-

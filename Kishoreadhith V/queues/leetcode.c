@@ -73,3 +73,17 @@ int countStudents(int* students, int studentsSize, int* sandwiches, int sandwich
     }
     return studentsSize;
 }
+
+int firstUniqChar(char* s) {
+    int len = strlen(s);
+    int *arr = (int *)calloc(sizeof(int) * 26);
+    int *queue = (int *)malloc(sizeof(int) * len);
+    int front = -1;
+    int rear = -1;
+    for(int i = 0; i < len; i++){
+        if(arr[s[i] - 'a'] == 1){
+            enqueue(queue, &front, &rear, len, s[i] - 'a');
+        }
+    }
+
+}
