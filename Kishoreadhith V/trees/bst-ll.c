@@ -371,64 +371,6 @@ struct Node* minValueNode(struct Node* node) {
   
     return current;
 }
-
-// void delete(struct Node ** root, int target){
-//     struct Node *temp = *root, *parent = NULL;
-
-//     // Searching for the node to be deleted
-//     while (temp != NULL && temp->data != target) {
-//         parent = temp;
-//         if (target < temp->data)
-//             temp = temp->left;
-//         else
-//             temp = temp->right;
-//     }
-
-//     if (temp == NULL) {
-//         printf("Element not found\n");
-//         return;
-//     }
-
-//     // Node with two children
-//     if (temp->left != NULL && temp->right != NULL) {
-//         struct Node *successor = minValueNode(temp->right);
-//         int succData = successor->data;
-//         delete(root, succData);
-//         temp->data = succData;
-//     }
-//     // Node with one or no child
-//     else {
-//         struct Node *child = (temp->left != NULL)? temp->left: temp->right;
-
-//         // Node with one child
-//         if (child != NULL) {
-//             // Replace the node to be deleted with its child
-//             if (temp != *root) {
-//                 if (temp == parent->left)
-//                     parent->left = child;
-//                 else
-//                     parent->right = child;
-//             }
-//             // If node to be deleted is root node
-//             else
-//                 *root = child;
-//         }
-//         // Node with no child
-//         else {
-//             // If node to be deleted is root node
-//             if (temp != *root) {
-//                 if (temp == parent->left)
-//                     parent->left = NULL;
-//                 else
-//                     parent->right = NULL;
-//             }
-//             // If node to be deleted is root node
-//             else
-//                 *root = NULL;
-//         }
-//         free(temp);
-//     }
-// }
 int main(){
     struct Node *root = NULL;
     int num;
@@ -436,12 +378,6 @@ int main(){
     scanf("%d", &num);
     bst_iter(&root, num);
     display_tree(root, 0);
-    // printf("\nInorder: ");
-    // inorder(root);
-    // printf("\nPreorder: ");
-    // preorder(root);
-    // printf("\nPostorder: ");
-    // postorder(root);
     printf("Enter element to search: ");
     int target;
     scanf("%d", &target);
@@ -462,14 +398,6 @@ int main(){
     default:
         break;
     }
-    // struct Node *inorder_successor_node = inorder_successor(root, target);
-    // if(inorder_successor_node != NULL)
-    //     printf("Inorder successor: %d\n", inorder_successor_node->data);
-    // struct Node *inorder_predecessor_node = inorder_predecessor(root, target);
-    // if(inorder_predecessor_node != NULL)
-    //     printf("Inorder predecessor: %d\n", inorder_predecessor_node->data);
-    // printf("Inorder: ");
-    // inorder(root);
     delete(&root, target);
     display_tree(root, 0);
 
