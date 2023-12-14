@@ -107,19 +107,14 @@ int main() {
     insert(&heap, 4);
     insert(&heap, 45);
 
-    // Print the heap
     printHeap(&heap);
 
-    // Extract   the minimum element
     printf("Extracted Min: %d\n", extractMin(&heap));
 
-    // Print the heap after extraction
     printHeap(&heap);
 
-    // Delete an element at index 2
     deleteKey(&heap, 2);
 
-    // Print the heap after deletion
     printHeap(&heap);
 
     return 0;
