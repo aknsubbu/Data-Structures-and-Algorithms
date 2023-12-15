@@ -187,8 +187,6 @@ struct node* delete(struct node* tree, int data) {
     return tree;
 }
 
-
-
 void printMenu() {
     printf("\nMenu:\n");
     printf("1. Create a new tree\n");
