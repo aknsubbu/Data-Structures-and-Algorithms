@@ -1,4 +1,4 @@
-// //bubble sort 
+// //bubble sort
 // #include<stdio.h>
 // #include<Stdlib.h>
 // #include<time.h>
@@ -15,17 +15,16 @@
 //             }
 //         }
 //     }
-   
+
 //     return sampleArrayPtr;
 // }
-
 
 // int* readFile(char filename[]){
 //     FILE *fp;
 //     fp = fopen(filename, "r");
-    
+
 //     int  sampleElement;
-//     double sampleLengthVar=100000; 
+//     double sampleLengthVar=100000;
 //     //fscanf(fp, "%d", &sampleLengthVar);
 //     printf("Scanning a sample of length: %f\n", sampleLengthVar);
 
@@ -61,9 +60,7 @@
 //     return 0;
 // }
 
-
-
-//insertion sort
+// insertion sort
 
 // #include<stdio.h>
 // #include<Stdlib.h>
@@ -80,15 +77,15 @@
 //         }
 //         sampleArrayPtr[j+1]=key;
 //     }
-//     return sampleArrayPtr; 
+//     return sampleArrayPtr;
 // }
 
 // int* readFile(char filename[]){
 //     FILE *fp;
 //     fp = fopen(filename, "r");
-    
+
 //     int  sampleElement;
-//     double sampleLengthVar=100000; 
+//     double sampleLengthVar=100000;
 //     //fscanf(fp, "%d", &sampleLengthVar);
 //     printf("Scanning a sample of length: %f\n", sampleLengthVar);
 
@@ -107,7 +104,7 @@
 // int main(){
 //     int *sampleArrayPtr;
 //     sampleArrayPtr=readFile("nearlysorted.txt");
-//     double sampleLengthVar;   
+//     double sampleLengthVar;
 //     sampleLengthVar=100000;
 //     clock_t start,end;
 //     start=clock();
@@ -124,8 +121,7 @@
 //     return 0;
 // }
 
-
-// BINARY SEARCH 
+// BINARY SEARCH
 // #include<stdio.h>
 // #include<Stdlib.h>
 // #include<time.h>
@@ -147,9 +143,9 @@
 // int* readFile(char filename[]){
 //     FILE *fp;
 //     fp = fopen(filename, "r");
-    
+
 //     int  sampleElement;
-//     double sampleLengthVar=100000; 
+//     double sampleLengthVar=100000;
 //     //fscanf(fp, "%d", &sampleLengthVar);
 //     printf("Scanning a sample of length: %f\n", sampleLengthVar);
 
@@ -168,7 +164,7 @@
 // int main(){
 //     int *sampleArrayPtr;
 //     sampleArrayPtr=readFile("random.txt");
-//     double sampleLengthVar;   
+//     double sampleLengthVar;
 //     sampleLengthVar=100000;
 //     // int input;
 //     // srand(time(0));
@@ -190,10 +186,10 @@
 //     return 0;
 // }
 
-//linear search
-// #include<stdio.h>
-// #include<Stdlib.h>
-// #include<time.h>
+// linear search
+//  #include<stdio.h>
+//  #include<Stdlib.h>
+//  #include<time.h>
 
 // int linearSearch(int *sampleArrayPtr, int sampleLengthVar, double key){
 //     for(int i=0;i<sampleLengthVar;i++){
@@ -207,9 +203,9 @@
 // int* readFile(char filename[]){
 //     FILE *fp;
 //     fp = fopen(filename, "r");
-    
+
 //     int  sampleElement;
-//     double sampleLengthVar=100000; 
+//     double sampleLengthVar=100000;
 //     //fscanf(fp, "%d", &sampleLengthVar);
 //     printf("Scanning a sample of length: %f\n", sampleLengthVar);
 
@@ -228,7 +224,7 @@
 // int main(){
 //     int *sampleArrayPtr;
 //     sampleArrayPtr=readFile("nearlysorted.txt");
-//     double sampleLengthVar;   
+//     double sampleLengthVar;
 //     sampleLengthVar=100000;
 //     // int input;
 //     // srand(time(0));
@@ -244,6 +240,3 @@
 //     printf("Time taken: %f\n",time_taken);
 //     return 0;
 // }
-
-
-

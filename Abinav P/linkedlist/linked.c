@@ -1,4 +1,4 @@
-// //linked list insert at beginning 
+// //linked list insert at beginning
 // #include<stdio.h>
 // #include<stdlib.h>
 // #include<time.h>
@@ -59,15 +59,11 @@
 //     }
 // }
 
-
-
 // // #include<Stdio.h>
 // // void main(){
 // //     int n=NULL;
 // //     printf("%s",n);
 // // }
-
-
 
 // //delete the node at beginning in linked list
 // #include<stdio.h>
@@ -90,9 +86,8 @@
 //     p1->next=p2;
 //     p2->next=p3;
 //     display(start);
-    
-// }   
 
+// }
 
 // struct node *getnode(int data){
 //     struct node *head;
@@ -117,68 +112,73 @@
 //     }
 // }
 
-//double linked list
+// double linked list
 
-#include<Stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+struct node
+{
+    int data;
+    struct node *next, *previous;
+};
 
-struct node{
-   int data;
-   struct node *next,*previous;    
-}
+struct node *head = NULL;
 
-struct node *head=NULL
-
-struct node *getnode(int data){
+struct node *getnode(int data)
+{
     struct node *new;
-    new->next=NULL;
-    new->previous=NULL;
-    new->data=data;
+    new->next = NULL;
+    new->previous = NULL;
+    new->data = data;
     return new;
 }
 
-int main(){
-    struct node *element1=getnode(10);
+int main()
+{
+    struct node *element1 = getnode(10);
 }
 
-//insert at beginning in double linked list 
+// insert at beginning in double linked list
 
-struct node *insertatbeginning(struct node *head,int data){
-    struct node *new=getnode(data);
-    new->next=head;
-    new->previous=NULL;
-    head->previous=new;
-    head=new;
+struct node *insertatbeginning(struct node *head, int data)
+{
+    struct node *new = getnode(data);
+    new->next = head;
+    new->previous = NULL;
+    head->previous = new;
+    head = new;
     return head;
 }
 
+// insert at end in double linked list
 
-//insert at end in double linked list
-
-
-struct node *insertatend(struct node *head,int data){
-    struct node *new=getnode(data);
-    struct node *temp=head;
-    while(temp->next!=NULL){
-        temp=temp->next;
+struct node *insertatend(struct node *head, int data)
+{
+    struct node *new = getnode(data);
+    struct node *temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
     }
-    temp->next=new;
-    new->previous=temp;
-    new->next=NULL;
+    temp->next = new;
+    new->previous = temp;
+    new->next = NULL;
     return head;
 }
 
+// insert after node x
 
-//insert after node x
-
-struct node *insertafternode(struct node *head,int data,int x){
-    struct node *new=getnode(data);
-    struct node *temp=head;
-    while(temp->data!=x){
-        temp=temp->next;
+struct node *insertafternode(struct node *head, int data, int x)
+{
+    struct node *new = getnode(data);
+    struct node *temp = head;
+    while (temp->data != x)
+    {
+        temp = temp->next;
     }
-    new->next=temp->next;
-    new->previous=temp;
-    temp->next=new;
+    new->next = temp->next;
+    new->previous = temp;
+    temp->next = new;
     return head;
 }
