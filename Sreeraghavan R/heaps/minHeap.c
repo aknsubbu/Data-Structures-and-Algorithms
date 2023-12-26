@@ -1,11 +1,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#define left(i) (2*i+1)
+#define right(i) (2*i+2)
 
 
+struct heap{
+    int* arr;
+    int last;
+};
 
-enum typeChild = {LEFT, RIGHT};
-enum typeNode = {BOTH,LEFT,RIGHT,NONE};
+typedef struct heap heap;
 
 void swap(int*l, int i, int j){
     int temp = l[i];
@@ -13,92 +18,87 @@ void swap(int*l, int i, int j){
     l[j] = temp;
 }
 
-int childType(int i){
-    if(i%2 == 1) return LEFT;
-    return RIGHT;
-}
 
-void percolateDown(int* heap,int i){
+void percolateDown(heap* heap,int i){
 
-    //already a heap
-    if(heap[i]>heap[2*i+1] && heap[i]>heap[2*i+2]) return;
+    if(heap->arr[i]<heap->arr[left(i)] && heap->arr[i]<heap->arr[right(i)]) return;
 
-    switch (heap[2*i+1]>heap[2*i+2])
+    switch (heap->arr[left(i)]>heap->arr[right(i)])
     {
     case true:
-        swap(heap,i,2*i+1);
-        percolateDown(heap,2*i+1);
+        swap(heap->arr,i,left(i));
+        percolateDown(heap,left(i));
         break;   
     default:
-        swap(heap,i,2*i+2);
-        percolateDown(heap,2*i+2);
+        swap(heap->arr,i,right(i));
+        percolateDown(heap,right(i));
         break;
     }
 
     
 }
 
-void percolateUp(int* heap,int i){
-    // in correct position
-    int prevIndex = (i-1)/2;
-    if(heap[i] < heap[prevIndex]) return;
-    else{
-        swap(heap,i,prevIndex);
-        i = prevIndex;
-        percolateUp(heap,prevIndex);
+void heapSort(int* arr, int size) {
+    for (int i = size - 1; i > 0; i--) {
+        swap(arr, 0, i);
+        percolateDown(arr,i);
     }
 }
 
-void insert(int* heap,int val){
-    heap[heap->last] = val;
+void percolateUp(heap* heap,int i){
+    // in correct position
+    int prevIndex = (i-1)/2;
+    if(prevIndex < 0 ) return;
+    if(heap->last <= 0) return;
+    if(heap->arr[i] < heap->arr[prevIndex]) return;
+    printf("Hello World!\n");
+
+    swap(heap->arr,i,prevIndex);
+    i = prevIndex;
+    percolateUp(heap,prevIndex);
+    
+}
+
+void insert(heap* heap,int val){
+    heap->arr[heap->last] = val;
     percolateUp(heap,heap->last);
-    heap->last = 2*(heap->last)+1;
+    heap->last++;
 }
 
-int* createHeap(){
-    int* newheap = (int*) malloc(sizeof(heap));
-    return newheap;
+heap* createHeap(int size){
+    heap* new = (heap*)malloc(sizeof(heap));
+    new->arr = (int*) calloc(size,sizeof(int));
+    new->last = 0;
+    return new;
 }
 
-void inorder(int* heap,int i){
-    if(heap[2*i+1] != 0) inorder(heap,2*i+1);
-    printf("%d ",heap[i]);
-    if(heap[2*i+2] != 0) inorder(heap,2*i+2);
+void inorder(heap* heap,int i){
+    printf("%d %d\n",left(i),right(i));
+    if(heap->arr[left(i)] != 0) inorder(heap,left(i));
+    printf("%d ",heap->arr[i]);
+    if(heap->arr[right(i)] != 0) inorder(heap,right(i));
 }
 
-void inordernl(int* heap){
+void inordernl(heap* heap){
     inorder(heap,0);
     printf("\n");
 }
 
-void deleteMin(int* heap) {
-    if (heap->last == 0) {
-        printf("Heap is empty. Nothing to delete.\n");
-        return;
-    }
 
-    swap(heap, 0, heap->last);
-    heap->last--;
-
-    percolateDown(heap, 0);
-
-    free(&heap[heap->last + 1]);
-}
-
-int extractMin(int* heap){
-    return heap[0];
+int extractMin(heap* heap){
+    return heap->arr[0];
 }
 
 int main(){
-    int* heap1 = createHeap();
+    heap* heap1 = createHeap(15);
+    insert(heap1,8);
     insert(heap1,1);
     insert(heap1,2);
+    insert(heap1,7);
     insert(heap1,3);
     insert(heap1,4);
-    insert(heap1,5);
     insert(heap1,6);
-    insert(heap1,7);
-    insert(heap1,8);
-    inordernl(heap1);
-    for(int i = 0;i<8;i++) printf("%d ",heap1->arr[i]);
+    insert(heap1,5);
+    for(int i = 0;i<15;i++) printf("%d ",heap1->arr[i]);
+    // inordernl(heap1);
 }

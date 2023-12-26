@@ -1,15 +1,15 @@
 struct Queue{
     int size;
-    int arr[size];
+    int* arr[size];
     int* front;
     int* rear;
-}
+};
 
 struct PQueue{
     int priority;
     struct Queue* cur;
     struct Queue* next;
-}
+};
 
 typedef struct Queue Queue;
 typedef struct PQueue PQueue;

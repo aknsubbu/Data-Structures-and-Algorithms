@@ -1,14 +1,12 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
+#include<stdio.h> 
+#include<stdlib.h> 
+#define max(a,b) ((a>b)?a:b)
 
-
-struct node{
-    int data;
-    struct node* lc;
-    struct node* rc;
-    int height;
-};
+struct node{ 
+	int data; 
+	struct node *lc; 
+	struct node *rc;
+}; 
 
 typedef struct node node;
 
@@ -23,54 +21,25 @@ int typeNode(node* tree){
 }
 
 
-node* createNode(int val,int height){
+
+
+
+
+int height(node *n) { 
+	if (!n) return 0; 
+	return 1+max(height(n->lc),height(n->rc)); 
+} 
+
+node* createNode(int val){
     node* newNode = (node*)malloc(sizeof(node));
     newNode-> data = val;
     newNode-> lc = NULL;
     newNode->rc = NULL;
-    newNode->height = height;
     return newNode;
 }
 
-int getHeight(node* cur){
-    return cur->height;
-}
-
-int balanceFactor(node* cur){
-    return getHeight(cur->lc) - getHeight(cur->rc);
-}
-
 node* emptyNode(){
-    return createNode(-1,0);
-}
-
-void printNode(node* cur){
-    printf("%d\n",cur->data);
-}
-
-node *insertElement(node *tree,int val,int height){
-    if (tree == NULL)
-        return createNode(val,0);
-    if (val < tree->data)
-        tree->lc = insertElement(tree->lc,val,++height);
-    else
-        tree->rc = insertElement(tree->rc,val,++height);
-    return tree;
-}
-
-
-node *insertElements(node* tree,int* arr,int len){
-    int i = 0;
-    if(!tree) tree = createNode(arr[i++],0);
-    for(i;i<len;i++) tree = insertElement(tree,arr[i],0); 
-    return tree;
-}
-
-node *searchNode(node* tree,int val){
-    if(tree->data == val) return tree;
-    if(tree->lc) if(val < tree->data) return searchNode(tree->lc,val);
-    if(tree->rc) if(val > tree->data) return searchNode(tree->rc,val);
-    return emptyNode();
+    return createNode(-1);
 }
 
 node *searchParent(node* tree,int val,node* parent){
@@ -86,6 +55,131 @@ int typeChild(node* tree,int val){
     if(val > parent->data) return RC;
     if(val < parent->data) return LC;
 }
+
+node *searchNode(node* tree,int val){
+    if(tree->data == val) return tree;
+    if(tree->lc) if(val < tree->data) return searchNode(tree->lc,val);
+    if(tree->rc) if(val > tree->data) return searchNode(tree->rc,val);
+    return emptyNode();
+}
+
+
+node* inorderSuccessor(node* cur){
+    node* succ = cur;
+    if(cur->rc) succ = cur->rc; else return succ;
+    while(succ->lc) succ = succ->lc;
+    return succ;
+}
+
+
+node* newNode(int data){ 
+	node* new = (node*)malloc(sizeof(node));
+	new->data = data; 
+	new->lc = NULL; 
+	new->rc = NULL; 
+	return(new); 
+} 
+
+
+node *rightRotate(node* y) { 
+	node* x = y->lc;
+	node* T2 = x->rc;
+
+	x->rc = y;
+	y->lc = T2;
+
+	return x;
+} 
+
+node *leftRotate(node *x) { 
+	node *y = x->rc; 
+	node *T2 = y->lc; 
+
+	y->lc = x; 
+	x->rc = T2; 
+
+	return y; 
+} 
+
+int getBalance(node *N){ 
+	if (N == NULL) 
+		return 0; 
+	return height(N->lc) - height(N->rc); 
+} 
+
+node* reBalance(node* tree,int val){
+	int balance = getBalance(tree);
+
+	if(balance > 1 && val < tree->lc->data) return rightRotate(tree); //LL
+	if(balance < -1 && val > tree->rc->data) return leftRotate(tree); //RR
+
+	//LR
+	if(balance > 1 && val > tree->lc->data){
+		tree->lc = leftRotate(tree->lc);
+		return rightRotate(tree);
+	}
+
+	//RL
+	if(balance < -1 && val < tree->rc->data){
+		tree->rc = rightRotate(tree->rc);
+		return leftRotate(tree);
+	}
+
+	return tree;
+}
+
+node* insert(node* tree,int val){
+	if(!tree) return createNode(val);
+	if(val > tree->data) tree-> rc = insert(tree->rc,val);
+	else if(val < tree->data) tree->rc = insert(tree->lc,val);
+
+	tree = reBalance(tree,val);
+
+	return tree;
+}
+
+node* deleteNode(node* tree,int val){
+    node* cur = searchNode(tree,val);
+    node* parent = searchParent(tree,val,tree);
+    node* temp;
+
+    if(typeNode(cur) == NONE){
+        if(typeChild(tree,val) == LC){
+            parent->lc = NULL;            
+        }
+        parent->rc = NULL;
+    }
+
+    node* child;
+    if(typeNode(cur) == LEFT){
+        child = cur->lc;
+        if(typeChild(tree,val) == LC){
+            parent->lc = child;     
+        }
+        parent->rc = child;
+
+    }
+
+    if(typeNode(cur) == RIGHT){
+        child = cur->rc;
+        if(typeChild(tree,val) == LC){
+            parent->lc = child;
+        }
+        parent->rc = child;
+    }
+
+    if(typeNode(cur) == BOTH){
+        int temp = inorderSuccessor(cur)->data;
+        deleteNode(tree,temp);
+        cur->data = temp;
+    }
+
+	
+
+}
+
+
+
 void inorder(node* tree){
     if(tree->lc) inorder(tree->lc);
     printf("%d ",tree->data);
@@ -97,91 +191,48 @@ void inordernl(node* tree){
     printf("\n");
 }
 
-int nodeExists(node* cur){
-    return cur->data != -1;
+void printTree(node* tree, int level) {
+	if (tree == NULL)
+		return;
+
+	printTree(tree->rc, level + 1);
+
+	for (int i = 0; i < level; i++)
+		printf("    ");
+
+	printf("%d\n", tree->data);
+
+	printTree(tree->lc, level + 1);
 }
-
-node* inorderSuccessor(node* tree,node* cur){
-    node* succ = cur;
-    if(cur->rc) succ = cur->rc; else if(typeChild(tree,cur->data) == LC) return searchParent(tree,cur->data,tree); else return succ;
-    while(succ->lc) succ = succ->lc;
-    return succ;
-}
-
-void deleteNode(node* tree,int val){
-    node* cur = searchNode(tree,val);
-    node* parent = searchParent(tree,val,tree);
-    node* temp;
-
-    if(typeNode(cur) == NONE){
-        if(typeChild(tree,val) == LC){
-            parent->lc = NULL;            
-            return;
-        }
-        parent->rc = NULL;
-        
-    }
-
-    node* child;
-    if(typeNode(cur) == LEFT){
-        child = cur->lc;
-        if(typeChild(tree,val) == LC){
-            parent->lc = child;
-            
-            return;
-        }
-        parent->rc = child;
-    }
-
-    if(typeNode(cur) == RIGHT){
-        child = cur->rc;
-        if(typeChild(tree,val) == LC){
-            parent->lc = child;
-
-            return;
-        }
-        parent->rc = child;
-    }
-
-    if(typeNode(cur) == BOTH){
-        int temp = inorderSuccessor(cur)->data;
-        deleteNode(tree,temp);
-        cur->data = temp;
-    }
-}
-
-void rightRotate(node* tree,node* x){
-    node* y = x->lc;
-    node* T3;
-    if(y->rc) T3 = y->rc;
-    y->rc = x;
-    x->lc = T3;
-
-    node* parent = searchParent(tree,x->data,tree);
-    if(typeChild(tree,x->data) == LC) parent->lc = y;
-    if(typeChild(tree,x->data) == RC) parent->rc = y;
-    if(typeChild(tree,x->data) == HEAD) tree = parent;
-}
-
-void LeftRotate(node* cur);
-
 
 int main(){
-    node* root1 = createNode(9,0);
-    
-    insertElement(root1,7,0);
-    insertElement(root1,4,0);
-    insertElement(root1,8,0);
-    insertElement(root1,12,0);
-    insertElement(root1,11,0);
-    insertElement(root1,16,0);
-    insertElement(root1,18,0);
-    insertElement(root1,2,0);
+	node *root = NULL;
 
+	root = insert(root, 1);
+	root = insert(root, 2);
+	root = insert(root, 3);
+	root = insert(root, 4);
+	root = insert(root, 5);
+	root = insert(root, 6);
+	printTree(root, 0);
 
-    
-    inordernl(root1);
-    rightRotate(root1,searchNode(root1,9));
-    inorder(root1);
-
+	return 0;
 }
+
+
+
+// /* Driver program to test above function*/
+// int main() { 
+// 	node *root = NULL; 
+
+// 	root = insert(root, 1); 
+// 	root = insert(root, 2); 
+// 	root = insert(root, 3); 
+// 	root = insert(root, 4); 
+// 	root = insert(root, 5); 
+// 	root = insert(root, 6); 
+
+// 	inordernl(root); 
+
+// 	return 0; 
+// } 

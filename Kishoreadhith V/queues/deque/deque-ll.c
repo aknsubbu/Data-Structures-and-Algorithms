@@ -1,25 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node{
+struct node{
     int data;
-    struct Node * next;
+    node * next;
 };
+
+typedef struct node node;
 
 struct Queue{
-    struct Node * front;
-    struct Node * rear;
+    node * front;
+    node * rear;
 };
 
-struct Queue * createQueue(){
-    struct Queue * q = (struct Queue *)malloc(sizeof(struct Queue));
+typedef struct Queue Queue;
+
+Queue * createQueue(){
+    Queue * q = (Queue *)malloc(sizeof(Queue));
     q->front = NULL;
     q->rear = NULL;
     return q;
 }
 
-void enqueue_front(struct Queue * queue, int data){
-    struct Node * newNode = (struct Node *)malloc(sizeof(struct Node));
+void enqueue_front(Queue * queue, int data){
+    node * newNode = (node *)malloc(sizeof(node));
     newNode->data = data;
     // empty
     if (queue->front == NULL && queue->rear == NULL)
@@ -32,8 +36,8 @@ void enqueue_front(struct Queue * queue, int data){
     queue->front = newNode;
 }
 
-void enqueue_rear(struct Queue * queue, int data){
-    struct Node * newNode = (struct Node *)malloc(sizeof(struct Node));
+void enqueue_rear(Queue * queue, int data){
+    node * newNode = (node *)malloc(sizeof(node));
     newNode->data = data;
     // empty
     if (queue->front == NULL && queue->rear == NULL)
@@ -46,7 +50,7 @@ void enqueue_rear(struct Queue * queue, int data){
     queue->rear = newNode;    
 }
 
-int dequeue_front(struct Queue * queue){
+int dequeue_front(Queue * queue){
     // last element
     if (queue->front == queue->rear)
     {
@@ -66,7 +70,7 @@ int dequeue_front(struct Queue * queue){
     return data;
 }
 
-int dequeue_rear(struct Queue * queue){
+int dequeue_rear(Queue * queue){
     // last element
     if (queue->front == queue->rear)
     {
@@ -82,7 +86,7 @@ int dequeue_rear(struct Queue * queue){
         return -999999;
     }
     int data = queue->rear->data;
-    struct Node * temp = queue->front;
+    node * temp = queue->front;
     while (temp->next != queue->rear)
     {
         temp = temp->next;
@@ -92,12 +96,12 @@ int dequeue_rear(struct Queue * queue){
     return data;
 }
 
-void printQueue(struct Queue * queue){
+void printQueue(Queue * queue){
     if(queue->front == NULL && queue->rear == NULL){
         printf("Empty queue\n");
         return;
     }
-    struct Node * temp = queue->front;
+    node * temp = queue->front;
     while (temp != NULL)
     {
         printf("%d\t", temp->data);
@@ -107,7 +111,7 @@ void printQueue(struct Queue * queue){
 }
 
 int main(){
-    struct Queue * queue = createQueue();
+    Queue * queue = createQueue();
     enqueue_front(queue, 1);
     enqueue_front(queue, 2);
     enqueue_front(queue, 3);

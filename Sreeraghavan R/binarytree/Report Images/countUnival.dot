@@ -1,0 +1,23 @@
+digraph{
+    node [shape = circle, style = filled, fillcolor = white, fontcolor = black]
+
+    2[fillcolor = blue]
+    1[fillcolor = blue]
+    3[fillcolor = lightseagreen]
+    1.0[fillcolor = lightseagreen]
+    1.1[fillcolor = blue]
+    3.0[fillcolor = lightseagreen]
+    3.1[fillcolor = lightseagreen]
+    1.10[fillcolor = lightseagreen]
+    1.1[fillcolor = lightseagreen]
+    1[fillcolor = lightseagreen]
+    2[fillcolor = red]
+    2->1
+    2->3
+    1->1.0
+    1->1.1
+    1.1->1.10
+    3->3.0
+    3->3.1
+
+}

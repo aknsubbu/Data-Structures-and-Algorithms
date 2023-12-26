@@ -5,6 +5,7 @@
         "titleBar.activeForeground": "#F7FAFE"
     },
     "files.associations": {
-        "__node_handle": "c"
+        "__node_handle": "c",
+        "stdlib.h": "c"
     }
 }

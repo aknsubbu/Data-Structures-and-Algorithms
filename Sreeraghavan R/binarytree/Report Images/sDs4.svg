@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="49pt" height="121pt" viewBox="0.00 0.00 49.39 121.39">
+<g id="graph0" class="graph" transform="translate(16.533403395505037,96.5807194092531) scale(0.6896511938074722)" data-name="">
+<polygon fill="white" stroke="none" points="-4,4 -4,-117.39 45.39,-117.39 45.39,4 -4,4"/>
+<!-- node1 -->
+<g id="node1" class="node" pointer-events="visible" data-name="10" data-comment="node1">
+
+<ellipse fill="white" stroke="black" cx="20.69" cy="-92.69" rx="20.89" ry="20.89"/>
+<text text-anchor="middle" x="20.69" y="-88.49" font-family="Times,serif" font-size="14.00">10</text>
+</g>
+<!-- 1 -->
+<g id="node2" class="node" pointer-events="visible" data-name="5" data-comment="1">
+
+<ellipse fill="white" stroke="black" cx="20.69" cy="-18" rx="18" ry="18" style=""/>
+<text text-anchor="middle" x="20.69" y="-13.8" font-family="Times,serif" font-size="14.00" style="">5</text>
+</g>
+<!-- 10&#45;&gt;5 -->
+<g id="edge1" class="edge" data-name="10-&gt;5">
+
+<path fill="none" stroke="black" d="M20.69,-71.44C20.69,-64.08 20.69,-55.61 20.69,-47.65"/>
+<polygon fill="black" stroke="black" points="24.19,-47.7 20.69,-37.7 17.19,-47.7 24.19,-47.7"/>
+</g>
+</g>
+</svg>
