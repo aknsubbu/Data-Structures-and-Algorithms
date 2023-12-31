@@ -88,12 +88,12 @@ void dfs(struct node **adjList, int V, int start)
     }
 }
 
+
 int main()
 {
     int V = 5;
     struct node **adjList = (struct node **)malloc(V * sizeof(struct node *));
-    for (int i = 0; i < V; i++)
-        adjList[i] = NULL;
+    for (int i = 0; i < V; i++) adjList[i] = NULL;
     addEdge(adjList, 0, 1);
     addEdge(adjList, 0, 4);
     addEdge(adjList, 1, 2);
@@ -101,7 +101,9 @@ int main()
     addEdge(adjList, 1, 4);
     addEdge(adjList, 2, 3);
     addEdge(adjList, 3, 4);
-    printGraph(adjList, V);
+    //printGraph(adjList, V);
+
+    bfs(adjList,5,3);
     return 0;
 }
 

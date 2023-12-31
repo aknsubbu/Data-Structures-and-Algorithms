@@ -22,9 +22,6 @@ int typeNode(node* tree){
 
 
 
-
-
-
 int height(node *n) { 
 	if (!n) return 0; 
 	return 1+max(height(n->lc),height(n->rc)); 
@@ -138,8 +135,9 @@ node* insert(node* tree,int val){
 	return tree;
 }
 
-node* deleteNode(node* tree,int val){
-    node* cur = searchNode(tree,val);
+node* deleteNode(node* tree,node* cur){
+    //node* cur = searchNode(tree,val);
+    int val = cur->data;
     node* parent = searchParent(tree,val,tree);
     node* temp;
 
@@ -174,11 +172,12 @@ node* deleteNode(node* tree,int val){
         cur->data = temp;
     }
 
-	
 
 }
 
-
+node deleteNodeAVL(node* tree,int val){
+    
+}
 
 void inorder(node* tree){
     if(tree->lc) inorder(tree->lc);
@@ -214,6 +213,7 @@ int main(){
 	root = insert(root, 4);
 	root = insert(root, 5);
 	root = insert(root, 6);
+    deleteNode(root,4);
 	printTree(root, 0);
 
 	return 0;

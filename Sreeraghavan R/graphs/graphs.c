@@ -40,11 +40,12 @@ node* insertAtEnd(node* start,int val){
 void displayList(node* start){
     node* iter = start;
     while(1){
-        printf(" %d <-->",iter->data);
+        printf(" %d",iter->data);
         if(iter->next == NULL){
-            printf(" NULL\n");
+            printf("\n");
             break;
         }
+        printf(" -->");
         iter = iter->next;
     }
 }
@@ -78,8 +79,13 @@ node** createAdjacencyList(int numNodes){
     return new;
 }
 
-void addEdge(node** adjList,int source, int destination){
+void addDirEdge(node** adjList,int source, int destination){
     insertAtEnd(adjList[source],destination);
+}
+
+void addUndirEdge(node** adjList,int source, int destination){
+    insertAtEnd(adjList[source],destination);
+    insertAtEnd(adjList[destination],source);
 }
 
 void displayAdjlist(node** adjList,int numNodes){
@@ -88,44 +94,23 @@ void displayAdjlist(node** adjList,int numNodes){
     }
 }
 
-int push(int* arr,int size,int top,int val){
-    if(++top<=size){
-        arr[top] = val;
-        return top;
-    }
-    printf("Stack Overflow\n");
-    return top;
-}
-
-int pop(int* arr,int* top){
-    if((*top)<0){
-        printf("Stack Overflow");
-        return *top;
-    }
-    int temp = arr[*top];
-    (*top)--;
-    return temp;
-}
 
 
-void bfs(node** adjList, int s){
-    bool visited[100];
-    for (int i = 0; i < 100; i++) {
-        visited[i] = false;
-    }
- 
-    int queue[100];
-    int front = 0, rear = 0;
- 
-    visited[s] = true;
-    queue[rear++] = s;
- 
-    while (front != rear){
+void bfs(node **adjList,int start,int numNodes){
+    int *visited = (int *)calloc(start, sizeof(int));
+    int *queue = (int *)malloc(start * sizeof(int));
+    int front = -1, rear = -1;
+    queue[++rear] = start;
+    visited[start] = 1;
+    while (front != rear)
+    {
         int u = queue[++front];
         printf("%d ", u);
         struct node *temp = adjList[u];
-        while (temp){
-            if (!visited[temp->data]){
+        while (temp)
+        {
+            if (!visited[temp->data])
+            {
                 queue[++rear] = temp->data;
                 visited[temp->data] = 1;
             }
@@ -135,18 +120,21 @@ void bfs(node** adjList, int s){
 }
 
 
-void dfs(struct node **adjList,int start){
-    bool visited[100];
-    int stack[100];
+void dfs(node **adjList,int start,int numNodes){
+    int *visited = (int *)calloc(numNodes, sizeof(int));
+    int *stack = (int *)malloc(numNodes * sizeof(int));
     int top = -1;
     stack[++top] = start;
     visited[start] = 1;
-    while (top != -1){
+    while (top != -1)
+    {
         int u = stack[top--];
         printf("%d ", u);
         struct node *temp = adjList[u];
-        while (temp){
-            if (!visited[temp->data]){
+        while (temp)
+        {
+            if (!visited[temp->data])
+            {
                 stack[++top] = temp->data;
                 visited[temp->data] = 1;
             }
@@ -155,21 +143,83 @@ void dfs(struct node **adjList,int start){
     }
 }
 
-int main() {
-    int numNodes = 5;
 
+
+
+void topoSort(node** adjList,int numNodes){
+    int *visited = (int *)calloc(numNodes, sizeof(int));
+    int *stack = (int *)malloc(numNodes * sizeof(int));
+    int top = -1;
+    
+    int* inDegrees = (int*)calloc(numNodes,sizeof(int)); 
+    for(int i = 0;i<numNodes;i++){
+        node* iter = adjList[i];
+        while(iter){
+            inDegrees[iter->data]++;
+            iter = iter->next;
+        }
+    }
+    
+    for(int i = 0;i< numNodes;i++){
+        if(inDegrees[i] == 1){
+            stack[++top] = i;
+            visited[i] = 1;
+        }
+    }
+
+    printf("top is %d\n",top);
+    
+    while (top != -1){
+        int u = stack[top--];
+        printf("%d ", u);
+        struct node *temp = adjList[u];
+        printf("Here\n");
+        while(temp){
+            inDegrees[temp->data]--;
+            temp = temp->next;
+        }
+
+        for(int i = 0;i< numNodes;i++){
+            if(inDegrees[i] == 0 && !visited[i]){
+                stack[++top] = i;
+                visited[i] = 1;
+            }
+        }
+    }
+}
+
+int inDegree(node** adjList, int numNodes, int node) {
+    int count = 0;
+
+    for (int i = 0; i < numNodes; i++) {
+        struct node* iter = adjList[i]; // Remove the redeclaration of iter here
+        while (iter) {
+            if (iter->data == node) {
+                count++;
+            }
+            iter = iter->next;
+        }
+    }
+    return count;
+}
+
+
+int main() {
+    int numNodes = 6;
 
     node** adjList = createAdjacencyList(numNodes);
 
-
-    addEdge(adjList, 0, 1);
-    addEdge(adjList, 0, 2);
-    addEdge(adjList, 1, 3);
-    addEdge(adjList, 2, 4);
-
+    addDirEdge(adjList,0,1);
+    addDirEdge(adjList,0,3);
+    addDirEdge(adjList,1,2);
+    addDirEdge(adjList,1,5);    
+    addDirEdge(adjList,1,4);
+    addDirEdge(adjList,3,2);
+    addDirEdge(adjList,4,5);
 
     displayAdjlist(adjList, numNodes);
-    bfs(adjList,0);
+    dfs(adjList,0,5);
+    topoSort(adjList,6);
     return 0;
 }
 
