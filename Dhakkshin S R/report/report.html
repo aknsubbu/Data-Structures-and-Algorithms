@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>report.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///r%3A/2.Travail/1.Enseignement/Cours/_1.Outils/2.Developpement/1.SCSS/main.css" type="text/css"><link rel="stylesheet" href="file:///d%3A/rdaros/Cours/_1.Outils/2.Developpement/1.SCSS/main.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="stacks">Stacks</h1>
+<h2 id=""></h2>
+<ol>
+<li>Stack using arrays:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RED <span class="hljs-meta-string">"\x1B[31m"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> GREEN <span class="hljs-meta-string">"\x1B[32m"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> YELLOW <span class="hljs-meta-string">"\x1B[33m"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RESET <span class="hljs-meta-string">"\x1B[0m"</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Stack</span>
+{</span>
+    <span class="hljs-keyword">int</span> top;
+    <span class="hljs-keyword">int</span>* arr;
+    <span class="hljs-keyword">int</span> <span class="hljs-built_in">max</span>;
+};
+<span class="hljs-function">struct Stack <span class="hljs-title">creatStack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(struct Stack* a, <span class="hljs-keyword">int</span> data)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">(struct Stack* a)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">peek</span><span class="hljs-params">(struct Stack* a)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">(struct Stack* a)</span></span>;
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
+</span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter the size of the stack: "</span>);
+    <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;<span class="hljs-built_in">size</span>);
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Stack</span> <span class="hljs-title">stack</span> = <span class="hljs-title">creatStack</span>(<span class="hljs-title">size</span>);</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Stack</span>* <span class="hljs-title">stackPTR</span> = &amp;<span class="hljs-title">stack</span>;</span>
+
+    <span class="hljs-comment">// while loop with switch case for menu until user exits</span>
+    <span class="hljs-keyword">int</span> choice;
+    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)
+    {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nEnter 1 to push, 2 to pop, 3 to peek, 4 display, 5 to to exit: "</span>);
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;choice);
+
+        <span class="hljs-keyword">switch</span> (choice)
+        {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter the element to push: "</span>);
+            <span class="hljs-keyword">int</span> data;
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;data);
+            push(stackPTR, data);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The popped element is: "</span>);
+            <span class="hljs-built_in">printf</span>(GREEN <span class="hljs-string">"%d\n"</span> RESET, pop(stackPTR));
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+            <span class="hljs-built_in">peek</span>(stackPTR);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:
+            <span class="hljs-built_in">display</span>(stackPTR);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Exiting...\n"</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:    
+            <span class="hljs-built_in">printf</span>(YELLOW <span class="hljs-string">"Invalid choice!!\n"</span> RESET);
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+
+}
+
+<span class="hljs-comment">// using arrays</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(struct Stack* a, <span class="hljs-keyword">int</span> data)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (a-&gt;top == a-&gt;<span class="hljs-built_in">max</span><span class="hljs-number">-1</span>)
+    {
+        <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Overflow!!\n"</span> RESET);
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        a-&gt;top = a-&gt;top + <span class="hljs-number">1</span>;
+        a-&gt;arr[a-&gt;top] = data;
+        <span class="hljs-keyword">return</span>;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">(struct Stack* a)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (a-&gt;top == <span class="hljs-number">-1</span>)
+    {
+        <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Underflow!!\n"</span> RESET);
+        <span class="hljs-comment">//return -1;</span>
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">int</span> z =  a-&gt;arr[a-&gt;top];
+        a-&gt;top = a-&gt;top - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span> z;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">peek</span><span class="hljs-params">(struct Stack* a)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (a-&gt;top == <span class="hljs-number">-1</span>)
+    {
+        <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Underflow!!\n"</span> RESET); 
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"The top element is: "</span>);
+        <span class="hljs-built_in">printf</span>(GREEN <span class="hljs-string">"%d\n"</span> RESET, a-&gt;arr[a-&gt;top]);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">(struct Stack* a)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (a-&gt;top == <span class="hljs-number">-1</span>)
+    {
+        <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Underflow!!\n"</span> RESET); 
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = a-&gt;top; i &gt;= <span class="hljs-number">0</span>; i--)
+        {
+            <span class="hljs-built_in">printf</span>(GREEN <span class="hljs-string">"| %d |\n"</span> RESET, a-&gt;arr[i]);
+        }
+        <span class="hljs-built_in">printf</span>(GREEN <span class="hljs-string">"|___|\n"</span> RESET);
+        <span class="hljs-keyword">return</span>;
+    }
+}
+<span class="hljs-comment">// create stack</span>
+<span class="hljs-function">struct Stack <span class="hljs-title">creatStack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>)</span>
+</span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Stack</span> <span class="hljs-title">a</span>;</span>
+    a.arr = <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>) * <span class="hljs-built_in">size</span>);
+    a.top = <span class="hljs-number">-1</span>;
+    a.<span class="hljs-built_in">max</span> = <span class="hljs-built_in">size</span>;
+    <span class="hljs-keyword">return</span> a;
+}
+</div></code></pre>
+<ol start="2">
+<li>Infix to postfix:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">char</span>* <span class="hljs-title">infixToPostfix</span><span class="hljs-params">(struct Stack* <span class="hljs-built_in">stack</span>, <span class="hljs-keyword">char</span>* infix)</span> </span>{
+    <span class="hljs-keyword">char</span>* postfix = (<span class="hljs-keyword">char</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">char</span>) * (<span class="hljs-number">2</span> * <span class="hljs-built_in">strlen</span>(infix) + <span class="hljs-number">1</span>));
+    <span class="hljs-keyword">int</span> postfixIndex = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; infix[i] != <span class="hljs-string">'\0'</span>; ++i) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isalnum</span>(infix[i])) {
+            postfix[postfixIndex++] = infix[i];
+            postfix[postfixIndex++] = <span class="hljs-string">' '</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (infix[i] == <span class="hljs-string">'('</span>) {
+            push(<span class="hljs-built_in">stack</span>, infix[i]);
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (infix[i] == <span class="hljs-string">')'</span>) {
+            <span class="hljs-keyword">while</span> (<span class="hljs-built_in">stack</span>-&gt;top != <span class="hljs-number">-1</span> &amp;&amp; <span class="hljs-built_in">peek</span>(<span class="hljs-built_in">stack</span>) != <span class="hljs-string">'('</span>) {
+                postfix[postfixIndex++] = pop(<span class="hljs-built_in">stack</span>);
+                postfix[postfixIndex++] = <span class="hljs-string">' '</span>;
+            }
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">stack</span>-&gt;top != <span class="hljs-number">-1</span> &amp;&amp; <span class="hljs-built_in">peek</span>(<span class="hljs-built_in">stack</span>) != <span class="hljs-string">'('</span>) {
+                <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Invalid expression\n"</span> RESET);
+                <span class="hljs-built_in">free</span>(postfix);
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+            } <span class="hljs-keyword">else</span> {
+                pop(<span class="hljs-built_in">stack</span>); 
+            }
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isOperator(infix[i])) {
+            <span class="hljs-keyword">while</span> (<span class="hljs-built_in">stack</span>-&gt;top != <span class="hljs-number">-1</span> &amp;&amp; precedence(infix[i]) &lt;= precedence(<span class="hljs-built_in">peek</span>(<span class="hljs-built_in">stack</span>))) {
+                postfix[postfixIndex++] = pop(<span class="hljs-built_in">stack</span>);
+                postfix[postfixIndex++] = <span class="hljs-string">' '</span>;
+            }
+            push(<span class="hljs-built_in">stack</span>, infix[i]);
+        }
+    }
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">stack</span>-&gt;top != <span class="hljs-number">-1</span>) {
+        postfix[postfixIndex++] = pop(<span class="hljs-built_in">stack</span>);
+        postfix[postfixIndex++] = <span class="hljs-string">' '</span>;
+    }
+
+    postfix[postfixIndex] = <span class="hljs-string">'\0'</span>; 
+
+    <span class="hljs-keyword">return</span> postfix;
+}
+</div></code></pre>
+<ol start="3">
+<li>Evaluation of postfix:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">evaluatePostfix</span><span class="hljs-params">(struct Stack* <span class="hljs-built_in">stack</span>, <span class="hljs-keyword">char</span>* postfix)</span> </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; postfix[i] != <span class="hljs-string">'\0'</span>; ++i) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isalnum</span>(postfix[i])) {
+            push(<span class="hljs-built_in">stack</span>, postfix[i] - <span class="hljs-string">'0'</span>);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">int</span> operand2 = pop(<span class="hljs-built_in">stack</span>);
+            <span class="hljs-keyword">int</span> operand1 = pop(<span class="hljs-built_in">stack</span>);
+            <span class="hljs-keyword">int</span> result = performOperation(postfix[i], operand1, operand2);
+            push(<span class="hljs-built_in">stack</span>, result);
+        }
+    }
+    <span class="hljs-keyword">return</span> pop(<span class="hljs-built_in">stack</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">performOperation</span><span class="hljs-params">(<span class="hljs-keyword">char</span> <span class="hljs-keyword">operator</span>, <span class="hljs-keyword">int</span> operand1, <span class="hljs-keyword">int</span> operand2)</span> </span>{
+    <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">operator</span>) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'+'</span>:
+            <span class="hljs-keyword">return</span> operand1 + operand2;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'-'</span>:
+            <span class="hljs-keyword">return</span> operand1 - operand2;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'*'</span>:
+            <span class="hljs-keyword">return</span> operand1 * operand2;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'/'</span>:
+            <span class="hljs-keyword">return</span> operand1 / operand2;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">'^'</span>:
+            <span class="hljs-keyword">return</span> operand1 ^ operand2;
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Invalid operator\n"</span> RESET);
+            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+}
+</div></code></pre>
+<ol start="4">
+<li>Queue using stack:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Queue</span> {</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Stack</span>* <span class="hljs-title">stack1</span>;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Stack</span>* <span class="hljs-title">stack2</span>;</span>
+};
+
+<span class="hljs-function">struct Queue* <span class="hljs-title">createQueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> capacity)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Queue</span>* <span class="hljs-title">queue</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Queue</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Queue</span>));</span>
+    <span class="hljs-built_in">queue</span>-&gt;stack1 = createStack(capacity);
+    <span class="hljs-built_in">queue</span>-&gt;stack2 = createStack(capacity);
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">queue</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">enqueue</span><span class="hljs-params">(struct Queue* <span class="hljs-built_in">queue</span>, <span class="hljs-keyword">int</span> item)</span> </span>{
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">queue</span>-&gt;stack1-&gt;top != <span class="hljs-built_in">queue</span>-&gt;stack1-&gt;capacity - <span class="hljs-number">1</span>) {
+        push(<span class="hljs-built_in">queue</span>-&gt;stack1, pop(<span class="hljs-built_in">queue</span>-&gt;stack2));
+    }
+    push(<span class="hljs-built_in">queue</span>-&gt;stack1, item);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dequeue</span><span class="hljs-params">(struct Queue* <span class="hljs-built_in">queue</span>)</span> </span>{
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">queue</span>-&gt;stack1-&gt;top != <span class="hljs-number">-1</span>) {
+        push(<span class="hljs-built_in">queue</span>-&gt;stack2, pop(<span class="hljs-built_in">queue</span>-&gt;stack1));
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">queue</span>-&gt;stack2-&gt;top == <span class="hljs-number">-1</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Queue is empty\n"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+    <span class="hljs-keyword">return</span> pop(<span class="hljs-built_in">queue</span>-&gt;stack2);
+}
+</div></code></pre>
+<ol start="5">
+<li>Stacks using linked list:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StackNode</span> {</span>
+    <span class="hljs-keyword">int</span> data;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StackNode</span>* <span class="hljs-title">next</span>;</span>
+};
+
+<span class="hljs-function">struct StackNode* <span class="hljs-title">newNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StackNode</span>* <span class="hljs-title">stackNode</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">StackNode</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">StackNode</span>));</span>
+    stackNode-&gt;data = data;
+    stackNode-&gt;next = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">return</span> stackNode;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">(struct StackNode* root)</span> </span>{
+    <span class="hljs-keyword">return</span> !root;
+}
+
+<span class="hljs-function">struct StackNode* <span class="hljs-title">push</span><span class="hljs-params">(struct StackNode* root, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StackNode</span>* <span class="hljs-title">stackNode</span> = <span class="hljs-title">newNode</span>(<span class="hljs-title">data</span>);</span>
+    stackNode-&gt;next = root;
+    <span class="hljs-keyword">return</span> stackNode;
+}
+
+<span class="hljs-function">struct StackNode* <span class="hljs-title">pop</span><span class="hljs-params">(struct StackNode* root, <span class="hljs-keyword">int</span>* popped)</span> </span>{
+    <span class="hljs-keyword">if</span> (isEmpty(root)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Stack underflow\n"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    }
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StackNode</span>* <span class="hljs-title">temp</span> = <span class="hljs-title">root</span>;</span>
+    *popped = temp-&gt;data;
+    root = root-&gt;next;
+    <span class="hljs-built_in">free</span>(temp);
+    <span class="hljs-keyword">return</span> root;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">peek</span><span class="hljs-params">(struct StackNode* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (isEmpty(root)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Stack underflow\n"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+    <span class="hljs-keyword">return</span> root-&gt;data;
+}
+</div></code></pre>
+<h1 id="queues">Queues</h1>
+<h2 id=""></h2>
+<ol>
+<li>Queue using arrays (not circular):</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RED <span class="hljs-meta-string">"\x1B[31m"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> GREEN <span class="hljs-meta-string">"\x1B[32m"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> YELLOW <span class="hljs-meta-string">"\x1B[33m"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RESET <span class="hljs-meta-string">"\x1B[0m"</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span>
+{</span>
+    <span class="hljs-keyword">int</span>* arr;
+    <span class="hljs-keyword">int</span> front;
+    <span class="hljs-keyword">int</span> rear;
+    <span class="hljs-keyword">int</span> <span class="hljs-built_in">max</span>;
+};
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">(struct <span class="hljs-built_in">queue</span>* q)</span> </span>{
+    <span class="hljs-keyword">return</span> (q-&gt;front == <span class="hljs-number">-1</span> &amp;&amp; q-&gt;rear == <span class="hljs-number">-1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isFull</span><span class="hljs-params">(struct <span class="hljs-built_in">queue</span>* q)</span> </span>{
+    <span class="hljs-keyword">return</span> ((q-&gt;rear + <span class="hljs-number">1</span>) % q-&gt;<span class="hljs-built_in">max</span> == q-&gt;front);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">enqueue</span><span class="hljs-params">(struct <span class="hljs-built_in">queue</span>* q, <span class="hljs-keyword">int</span> data)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (isFull(q))
+    {
+        <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Overflow\n"</span> RESET);
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isEmpty(q))
+    {
+        q-&gt;front = <span class="hljs-number">0</span>;
+        q-&gt;rear = <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        q-&gt;rear = (q-&gt;rear + <span class="hljs-number">1</span>) % q-&gt;<span class="hljs-built_in">max</span>;
+    }
+
+    q-&gt;arr[q-&gt;rear] = data;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dequeue</span><span class="hljs-params">(struct <span class="hljs-built_in">queue</span>* q)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (isEmpty(q))
+    {
+        <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Underflow\n"</span> RESET);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (q-&gt;front == q-&gt;rear)
+    {
+        <span class="hljs-keyword">int</span> data = q-&gt;arr[q-&gt;front];
+        q-&gt;front = <span class="hljs-number">-1</span>;
+        q-&gt;rear = <span class="hljs-number">-1</span>;
+        <span class="hljs-keyword">return</span> data;
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">int</span> data = q-&gt;arr[q-&gt;front];
+        q-&gt;front = (q-&gt;front + <span class="hljs-number">1</span>) % q-&gt;<span class="hljs-built_in">max</span>;
+        <span class="hljs-keyword">return</span> data;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">(struct <span class="hljs-built_in">queue</span>* q)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (isEmpty(q))
+    {
+        <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Underflow\n"</span> RESET);
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">int</span> front = q-&gt;front;
+        <span class="hljs-keyword">int</span> rear = q-&gt;rear;
+
+        <span class="hljs-keyword">do</span>
+        {
+            <span class="hljs-built_in">printf</span>(GREEN <span class="hljs-string">"| %d |\n"</span> RESET, q-&gt;arr[front]);
+            front = (front + <span class="hljs-number">1</span>) % q-&gt;<span class="hljs-built_in">max</span>;
+        } <span class="hljs-keyword">while</span> (front != (rear + <span class="hljs-number">1</span>) % q-&gt;<span class="hljs-built_in">max</span>);
+
+        <span class="hljs-built_in">printf</span>(GREEN <span class="hljs-string">"|___|\n"</span> RESET);
+    }
+}
+
+<span class="hljs-function">struct <span class="hljs-built_in">queue</span> <span class="hljs-title">createQueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>)</span>
+</span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">queue</span> <span class="hljs-title">q</span>;</span>
+    q.arr = (<span class="hljs-keyword">int</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>) * <span class="hljs-built_in">size</span>);
+    q.front = <span class="hljs-number">-1</span>;
+    q.rear = <span class="hljs-number">-1</span>;
+    q.<span class="hljs-built_in">max</span> = <span class="hljs-built_in">size</span>;
+    <span class="hljs-keyword">return</span> q;
+}
+</div></code></pre>
+<hr>
+<ol start="2">
+<li>Queue using linked list:</li>
+</ol>
+<pre class="hljs"><code><div>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RED <span class="hljs-meta-string">"\x1B[31m"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> GREEN <span class="hljs-meta-string">"\x1B[32m"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> YELLOW <span class="hljs-meta-string">"\x1B[33m"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RESET <span class="hljs-meta-string">"\x1B[0m"</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+    <span class="hljs-keyword">int</span> data;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">next</span>;</span>
+};
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Queue</span> {</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">front</span>;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">rear</span>;</span>
+};
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">(struct Queue* q)</span> </span>{
+    <span class="hljs-keyword">return</span> (q-&gt;front == <span class="hljs-literal">NULL</span> &amp;&amp; q-&gt;rear == <span class="hljs-literal">NULL</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">enqueue</span><span class="hljs-params">(struct Queue* q, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">newNode</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>));</span>
+    newNode-&gt;data = data;
+    newNode-&gt;next = <span class="hljs-literal">NULL</span>;
+
+    <span class="hljs-keyword">if</span> (isEmpty(q)) {
+        q-&gt;front = newNode;
+        q-&gt;rear = newNode;
+        newNode-&gt;next = newNode; 
+    } <span class="hljs-keyword">else</span> {
+        q-&gt;rear-&gt;next = newNode;
+        newNode-&gt;next = q-&gt;front;
+        q-&gt;rear = newNode;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dequeue</span><span class="hljs-params">(struct Queue* q)</span> </span>{
+    <span class="hljs-keyword">if</span> (isEmpty(q)) {
+        <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Underflow\n"</span> RESET);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+
+    <span class="hljs-keyword">int</span> data;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">temp</span> = <span class="hljs-title">q</span>-&gt;<span class="hljs-title">front</span>;</span>
+
+    <span class="hljs-keyword">if</span> (q-&gt;front == q-&gt;rear) {
+        data = temp-&gt;data;
+        <span class="hljs-built_in">free</span>(temp);
+        q-&gt;front = <span class="hljs-literal">NULL</span>;
+        q-&gt;rear = <span class="hljs-literal">NULL</span>;
+    } <span class="hljs-keyword">else</span> {
+        data = temp-&gt;data;
+        q-&gt;front = temp-&gt;next;
+        q-&gt;rear-&gt;next = q-&gt;front; 
+        <span class="hljs-built_in">free</span>(temp);
+    }
+
+    <span class="hljs-keyword">return</span> data;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">(struct Queue* q)</span> </span>{
+    <span class="hljs-keyword">if</span> (isEmpty(q)) {
+        <span class="hljs-built_in">printf</span>(RED <span class="hljs-string">"Underflow\n"</span> RESET);
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">current</span> = <span class="hljs-title">q</span>-&gt;<span class="hljs-title">front</span>;</span>
+
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-built_in">printf</span>(GREEN <span class="hljs-string">"| %d |\n"</span> RESET, current-&gt;data);
+        current = current-&gt;next;
+    } <span class="hljs-keyword">while</span> (current != q-&gt;front);
+}
+</div></code></pre>
+<hr>
+<ol start="3">
+<li>Priority Queue:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+    <span class="hljs-keyword">int</span> data;
+    <span class="hljs-keyword">int</span> priority;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">next</span>;</span>
+};
+
+<span class="hljs-function">struct Node* <span class="hljs-title">newNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data, <span class="hljs-keyword">int</span> priority)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">node</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>));</span>
+    node-&gt;data = data;
+    node-&gt;priority = priority;
+    node-&gt;next = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">return</span> node;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">peek</span><span class="hljs-params">(struct Node* head)</span> </span>{
+    <span class="hljs-keyword">return</span> head-&gt;data;
+}
+
+<span class="hljs-function">struct Node* <span class="hljs-title">pop</span><span class="hljs-params">(struct Node* head)</span> </span>{
+    <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Underflow\n"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    }
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">temp</span> = <span class="hljs-title">head</span>;</span>
+    head = head-&gt;next;
+    <span class="hljs-built_in">free</span>(temp);
+    <span class="hljs-keyword">return</span> head;
+}
+
+<span class="hljs-function">struct Node* <span class="hljs-title">push</span><span class="hljs-params">(struct Node* head, <span class="hljs-keyword">int</span> data, <span class="hljs-keyword">int</span> priority)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">temp</span> = <span class="hljs-title">newNode</span>(<span class="hljs-title">data</span>, <span class="hljs-title">priority</span>);</span>
+
+    <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">NULL</span> || head-&gt;priority &gt; priority) {
+        temp-&gt;next = head;
+        head = temp;
+    } <span class="hljs-keyword">else</span> {
+        struct Node* start = head;
+        <span class="hljs-keyword">while</span> (start-&gt;next != <span class="hljs-literal">NULL</span> &amp;&amp; start-&gt;next-&gt;priority &lt; priority) {
+            start = start-&gt;next;
+        }
+        temp-&gt;next = start-&gt;next;
+        start-&gt;next = temp;
+    }
+
+    <span class="hljs-keyword">return</span> head;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">(struct Node* head)</span> </span>{
+    <span class="hljs-keyword">return</span> head == <span class="hljs-literal">NULL</span>;
+}
+</div></code></pre>
+<hr>
+<ol start="4">
+<li>Deque:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Deque</span> {</span>
+    <span class="hljs-keyword">int</span>* arr;
+    <span class="hljs-keyword">int</span> front;
+    <span class="hljs-keyword">int</span> rear;
+    <span class="hljs-keyword">int</span> <span class="hljs-built_in">max</span>;
+};
+
+<span class="hljs-function">struct Deque* <span class="hljs-title">createDeque</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Deque</span>* <span class="hljs-title">deque</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Deque</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Deque</span>));</span>
+    <span class="hljs-built_in">deque</span>-&gt;arr = (<span class="hljs-keyword">int</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>) * <span class="hljs-built_in">size</span>);
+    <span class="hljs-built_in">deque</span>-&gt;front = <span class="hljs-number">-1</span>;
+    <span class="hljs-built_in">deque</span>-&gt;rear = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">deque</span>-&gt;<span class="hljs-built_in">max</span> = <span class="hljs-built_in">size</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">deque</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">(struct Deque* <span class="hljs-built_in">deque</span>)</span> </span>{
+    <span class="hljs-keyword">return</span> (<span class="hljs-built_in">deque</span>-&gt;front == <span class="hljs-number">-1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isFull</span><span class="hljs-params">(struct Deque* <span class="hljs-built_in">deque</span>)</span> </span>{
+    <span class="hljs-keyword">return</span> ((<span class="hljs-built_in">deque</span>-&gt;front == <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">deque</span>-&gt;rear == <span class="hljs-built_in">deque</span>-&gt;<span class="hljs-built_in">max</span> - <span class="hljs-number">1</span>) || <span class="hljs-built_in">deque</span>-&gt;front == <span class="hljs-built_in">deque</span>-&gt;rear + <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insertFront</span><span class="hljs-params">(struct Deque* <span class="hljs-built_in">deque</span>, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-keyword">if</span> (isFull(<span class="hljs-built_in">deque</span>)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Overflow\n"</span>);
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">deque</span>-&gt;front == <span class="hljs-number">-1</span>) {
+        <span class="hljs-built_in">deque</span>-&gt;front = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">deque</span>-&gt;rear = <span class="hljs-number">0</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">deque</span>-&gt;front == <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">deque</span>-&gt;front = <span class="hljs-built_in">deque</span>-&gt;<span class="hljs-built_in">max</span> - <span class="hljs-number">1</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">deque</span>-&gt;front = <span class="hljs-built_in">deque</span>-&gt;front - <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-built_in">deque</span>-&gt;arr[<span class="hljs-built_in">deque</span>-&gt;front] = data;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insertRear</span><span class="hljs-params">(struct Deque* <span class="hljs-built_in">deque</span>, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-keyword">if</span> (isFull(<span class="hljs-built_in">deque</span>)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Overflow\n"</span>);
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">deque</span>-&gt;front == <span class="hljs-number">-1</span>) {
+        <span class="hljs-built_in">deque</span>-&gt;front = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">deque</span>-&gt;rear = <span class="hljs-number">0</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">deque</span>-&gt;rear == <span class="hljs-built_in">deque</span>-&gt;<span class="hljs-built_in">max</span> - <span class="hljs-number">1</span>) {
+        <span class="hljs-built_in">deque</span>-&gt;rear = <span class="hljs-number">0</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">deque</span>-&gt;rear = <span class="hljs-built_in">deque</span>-&gt;rear + <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-built_in">deque</span>-&gt;arr[<span class="hljs-built_in">deque</span>-&gt;rear] = data;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">deleteFront</span><span class="hljs-params">(struct Deque* <span class="hljs-built_in">deque</span>)</span> </span>{
+    <span class="hljs-keyword">if</span> (isEmpty(<span class="hljs-built_in">deque</span>)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Underflow\n"</span>);
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">deque</span>-&gt;front == <span class="hljs-built_in">deque</span>-&gt;rear) {
+        <span class="hljs-built_in">deque</span>-&gt;front = <span class="hljs-number">-1</span>;
+        <span class="hljs-built_in">deque</span>-&gt;rear = <span class="hljs-number">-1</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">deque</span>-&gt;front == <span class="hljs-built_in">deque</span>-&gt;<span class="hljs-built_in">max</span> - <span class="hljs-number">1</span>) {
+        <span class="hljs-built_in">deque</span>-&gt;front = <span class="hljs-number">0</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">deque</span>-&gt;front = <span class="hljs-built_in">deque</span>-&gt;front + <span class="hljs-number">1</span>;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">deleteRear</span><span class="hljs-params">(struct Deque* <span class="hljs-built_in">deque</span>)</span> </span>{
+    <span class="hljs-keyword">if</span> (isEmpty(<span class="hljs-built_in">deque</span>)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Underflow\n"</span>);
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">deque</span>-&gt;front == <span class="hljs-built_in">deque</span>-&gt;rear) {
+        <span class="hljs-built_in">deque</span>-&gt;front = <span class="hljs-number">-1</span>;
+        <span class="hljs-built_in">deque</span>-&gt;rear = <span class="hljs-number">-1</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">deque</span>-&gt;rear == <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">deque</span>-&gt;rear = <span class="hljs-built_in">deque</span>-&gt;<span class="hljs-built_in">max</span> - <span class="hljs-number">1</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">deque</span>-&gt;rear = <span class="hljs-built_in">deque</span>-&gt;rear - <span class="hljs-number">1</span>;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getFront</span><span class="hljs-params">(struct Deque* <span class="hljs-built_in">deque</span>)</span> </span>{
+    <span class="hljs-keyword">if</span> (isEmpty(<span class="hljs-built_in">deque</span>)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Underflow\n"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">deque</span>-&gt;arr[<span class="hljs-built_in">deque</span>-&gt;front];
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getRear</span><span class="hljs-params">(struct Deque* <span class="hljs-built_in">deque</span>)</span> </span>{
+    <span class="hljs-keyword">if</span> (isEmpty(<span class="hljs-built_in">deque</span>) || <span class="hljs-built_in">deque</span>-&gt;rear &lt; <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Underflow\n"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">deque</span>-&gt;arr[<span class="hljs-built_in">deque</span>-&gt;rear];
+}
+</div></code></pre>
+<hr>
+<ol start="5">
+<li>Stack using Queue:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QueueNode</span> {</span>
+    <span class="hljs-keyword">int</span> data;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QueueNode</span>* <span class="hljs-title">next</span>;</span>
+};
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Queue</span> {</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QueueNode</span>* <span class="hljs-title">front</span>;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QueueNode</span>* <span class="hljs-title">rear</span>;</span>
+};
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Stack</span> {</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Queue</span>* <span class="hljs-title">q1</span>;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Queue</span>* <span class="hljs-title">q2</span>;</span>
+};
+
+<span class="hljs-function">struct QueueNode* <span class="hljs-title">newQueueNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QueueNode</span>* <span class="hljs-title">temp</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">QueueNode</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">QueueNode</span>));</span>
+    temp-&gt;data = data;
+    temp-&gt;next = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">return</span> temp;
+}
+
+<span class="hljs-function">struct Queue* <span class="hljs-title">createQueue</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Queue</span>* <span class="hljs-title">q</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Queue</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Queue</span>));</span>
+    q-&gt;front = q-&gt;rear = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">return</span> q;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">enqueue</span><span class="hljs-params">(struct Queue* q, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QueueNode</span>* <span class="hljs-title">temp</span> = <span class="hljs-title">newQueueNode</span>(<span class="hljs-title">data</span>);</span>
+
+    <span class="hljs-keyword">if</span> (q-&gt;rear == <span class="hljs-literal">NULL</span>) {
+        q-&gt;front = q-&gt;rear = temp;
+        <span class="hljs-keyword">return</span>;
+    }
+
+    q-&gt;rear-&gt;next = temp;
+    q-&gt;rear = temp;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dequeue</span><span class="hljs-params">(struct Queue* q)</span> </span>{
+    <span class="hljs-keyword">if</span> (q-&gt;front == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Underflow\n"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QueueNode</span>* <span class="hljs-title">temp</span> = <span class="hljs-title">q</span>-&gt;<span class="hljs-title">front</span>;</span>
+    <span class="hljs-keyword">int</span> data = temp-&gt;data;
+
+    q-&gt;front = temp-&gt;next;
+
+    <span class="hljs-keyword">if</span> (q-&gt;front == <span class="hljs-literal">NULL</span>) {
+        q-&gt;rear = <span class="hljs-literal">NULL</span>;
+    }
+
+    <span class="hljs-built_in">free</span>(temp);
+    <span class="hljs-keyword">return</span> data;
+}
+
+<span class="hljs-function">struct Stack* <span class="hljs-title">createStack</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Stack</span>* <span class="hljs-title">stack</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Stack</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Stack</span>));</span>
+    <span class="hljs-built_in">stack</span>-&gt;q1 = createQueue();
+    <span class="hljs-built_in">stack</span>-&gt;q2 = createQueue();
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">stack</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(struct Stack* <span class="hljs-built_in">stack</span>, <span class="hljs-keyword">int</span> data)</span> </span>{
+    enqueue(<span class="hljs-built_in">stack</span>-&gt;q1, data);
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">stack</span>-&gt;q2-&gt;front != <span class="hljs-literal">NULL</span>) {
+        enqueue(<span class="hljs-built_in">stack</span>-&gt;q1, dequeue(<span class="hljs-built_in">stack</span>-&gt;q2));
+    }
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Queue</span>* <span class="hljs-title">temp</span> = <span class="hljs-title">stack</span>-&gt;<span class="hljs-title">q1</span>;</span>
+    <span class="hljs-built_in">stack</span>-&gt;q1 = <span class="hljs-built_in">stack</span>-&gt;q2;
+    <span class="hljs-built_in">stack</span>-&gt;q2 = temp;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">(struct Stack* <span class="hljs-built_in">stack</span>)</span> </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">stack</span>-&gt;q2-&gt;front == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Underflow\n"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+
+    <span class="hljs-keyword">return</span> dequeue(<span class="hljs-built_in">stack</span>-&gt;q2);
+}
+</div></code></pre>
+<hr>
+<h1 id="trees">Trees:</h1>
+<h2 id=""></h2>
+<ol>
+<li>Binary Tree:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+    <span class="hljs-keyword">int</span> data;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">left</span>;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">right</span>;</span>
+};
+
+<span class="hljs-function">struct Node* <span class="hljs-title">newNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">node</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>));</span>
+    node-&gt;data = data;
+    node-&gt;left = <span class="hljs-literal">NULL</span>;
+    node-&gt;right = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">return</span> node;
+}
+
+<span class="hljs-function">struct Node* <span class="hljs-title">constructTree</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> data;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter data: "</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;data);
+
+    <span class="hljs-keyword">if</span> (data == <span class="hljs-number">-1</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    }
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">root</span> = <span class="hljs-title">newNode</span>(<span class="hljs-title">data</span>);</span>
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter left child of %d\n"</span>, data);
+    root-&gt;left = constructTree();
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter right child of %d\n"</span>, data);
+    root-&gt;right = constructTree();
+
+    <span class="hljs-keyword">return</span> root;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printTree</span><span class="hljs-params">(struct Node* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d: "</span>, root-&gt;data);
+
+    <span class="hljs-keyword">if</span> (root-&gt;left != <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"L %d "</span>, root-&gt;left-&gt;data);
+    }
+
+    <span class="hljs-keyword">if</span> (root-&gt;right != <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"R %d"</span>, root-&gt;right-&gt;data);
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+
+    printTree(root-&gt;left);
+    printTree(root-&gt;right);
+}
+</div></code></pre>
+<hr>
+<ol start="2">
+<li>Traversals:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">preorder</span><span class="hljs-params">(struct Node* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, root-&gt;data);
+    preorder(root-&gt;left);
+    preorder(root-&gt;right);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inorder</span><span class="hljs-params">(struct Node* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-keyword">return</span>;
+    }
+
+    inorder(root-&gt;left);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, root-&gt;data);
+    inorder(root-&gt;right);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">postorder</span><span class="hljs-params">(struct Node* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-keyword">return</span>;
+    }
+
+    postorder(root-&gt;left);
+    postorder(root-&gt;right);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, root-&gt;data);
+}
+</div></code></pre>
+<hr>
+<ol start="3">
+<li>Binary Search Tree (using arrays):</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;math.h&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> {</span>
+    <span class="hljs-keyword">int</span>* arr;
+    <span class="hljs-keyword">int</span> levels;
+    <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>;
+};
+
+<span class="hljs-function">struct node* <span class="hljs-title">insertNode</span><span class="hljs-params">(struct node* tree, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-keyword">if</span> (tree-&gt;arr[<span class="hljs-number">0</span>] == <span class="hljs-number">0</span>) {
+        tree-&gt;arr[<span class="hljs-number">0</span>] = data;
+        <span class="hljs-keyword">return</span> tree;
+    }
+
+    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (i &lt; tree-&gt;<span class="hljs-built_in">size</span>) {
+        <span class="hljs-keyword">if</span> (data &lt; tree-&gt;arr[i]) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span> &gt; tree-&gt;<span class="hljs-built_in">size</span>) {
+                i = <span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>;
+                <span class="hljs-keyword">break</span>;
+            }
+            <span class="hljs-keyword">if</span> (tree-&gt;arr[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) {
+                tree-&gt;arr[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>] = data;
+                <span class="hljs-keyword">return</span> tree;
+            }
+            <span class="hljs-keyword">else</span> {
+                i = <span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>;
+            }
+        }
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">if</span> (<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span> &gt; tree-&gt;<span class="hljs-built_in">size</span>) {
+                i = <span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>;
+                <span class="hljs-keyword">break</span>;
+            }
+            <span class="hljs-keyword">if</span> (tree-&gt;arr[<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>] == <span class="hljs-number">0</span>) {
+                tree-&gt;arr[<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>] = data;
+                <span class="hljs-keyword">return</span> tree;
+            }
+            <span class="hljs-keyword">else</span> {
+                i = <span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>;
+            }
+        }
+    }
+
+    <span class="hljs-keyword">int</span> oldSize = tree-&gt;<span class="hljs-built_in">size</span>;
+    tree-&gt;<span class="hljs-built_in">size</span> = <span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, ++(tree-&gt;levels)) - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span>* tmp = <span class="hljs-built_in">realloc</span>(tree-&gt;arr, (tree-&gt;<span class="hljs-built_in">size</span>)*<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));
+    <span class="hljs-keyword">if</span> (tmp == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Reallocation Error!\n"</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; oldSize; j++) {
+        tmp[j] = tree-&gt;arr[j];
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = oldSize; j &lt; tree-&gt;<span class="hljs-built_in">size</span>; j++) {
+        tmp[j] = <span class="hljs-number">0</span>;
+    }
+    tree-&gt;arr = tmp;
+
+    tree-&gt;arr[i] = data;
+    <span class="hljs-keyword">return</span> tree;
+    
+}
+
+<span class="hljs-function">struct node* <span class="hljs-title">initialise</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">new</span> = <span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">node</span>));</span>
+    <span class="hljs-keyword">new</span>-&gt;levels = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">new</span>-&gt;<span class="hljs-built_in">size</span> = <span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, <span class="hljs-keyword">new</span>-&gt;levels) - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">new</span>-&gt;arr = <span class="hljs-built_in">calloc</span>(<span class="hljs-keyword">new</span>-&gt;<span class="hljs-built_in">size</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span>;
+}
+
+<span class="hljs-function">struct node* <span class="hljs-title">newTree</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">tree</span> = <span class="hljs-title">initialise</span>();</span>
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter number of elements:"</span>);
+    <span class="hljs-keyword">int</span> val, num;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;num);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> n = <span class="hljs-number">0</span>; n &lt; num; n++)
+    {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter value: "</span>);
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;val);
+        tree = insertNode(tree, val);
+    } 
+
+    <span class="hljs-keyword">return</span> tree;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printLevelOrder</span><span class="hljs-params">(struct node* tree)</span> </span>{
+    <span class="hljs-keyword">if</span> (tree-&gt;<span class="hljs-built_in">size</span> == <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Tree is empty.\n"</span>);
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Tree Structure:\n "</span>);
+    <span class="hljs-keyword">int</span> lastSize = <span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, tree-&gt;levels - <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, levelSize = <span class="hljs-number">1</span>, level = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> space = (lastSize - <span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, level - <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; space; j++) <span class="hljs-built_in">printf</span>(<span class="hljs-string">"  "</span>);
+    
+
+    <span class="hljs-keyword">while</span> (i &lt; tree-&gt;<span class="hljs-built_in">size</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, tree-&gt;arr[i++]);
+        <span class="hljs-keyword">if</span> (i == levelSize) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+            levelSize = <span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, ++level) - <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">int</span> space = (lastSize - <span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, level - <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; space; j++) <span class="hljs-built_in">printf</span>(<span class="hljs-string">"  "</span>);
+        }
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printInorder</span><span class="hljs-params">(struct node* tree, <span class="hljs-keyword">int</span> node)</span> </span>{
+    <span class="hljs-keyword">if</span> (node &lt; tree-&gt;<span class="hljs-built_in">size</span> &amp;&amp; tree-&gt;arr[node] != <span class="hljs-number">0</span>) {
+        printInorder(tree, <span class="hljs-number">2</span> * node + <span class="hljs-number">1</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, tree-&gt;arr[node]);
+        printInorder(tree, <span class="hljs-number">2</span> * node + <span class="hljs-number">2</span>);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">delIndex</span><span class="hljs-params">(struct node* tree, <span class="hljs-keyword">int</span> data, <span class="hljs-keyword">int</span> i)</span></span>{
+    <span class="hljs-keyword">if</span> (i &gt; tree-&gt;<span class="hljs-built_in">size</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">if</span> (tree-&gt;arr[i] == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">if</span> (data == tree-&gt;arr[i]) <span class="hljs-keyword">return</span> i;
+
+    <span class="hljs-keyword">if</span> (data &lt; tree-&gt;arr[i]) <span class="hljs-keyword">return</span> delIndex(tree, data, <span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">if</span> (data &gt; tree-&gt;arr[i]) <span class="hljs-keyword">return</span> delIndex(tree, data, <span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fixTree</span><span class="hljs-params">(struct node* tree, <span class="hljs-keyword">int</span> i)</span> </span>{
+    tree-&gt;arr[(i<span class="hljs-number">-1</span>)/<span class="hljs-number">2</span>] = tree-&gt;arr[i];
+    tree-&gt;arr[i] = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span> &lt; tree-&gt;<span class="hljs-built_in">size</span> &amp;&amp; tree-&gt;arr[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>] != <span class="hljs-number">0</span>) fixTree(tree, <span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">if</span> (<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span> &lt; tree-&gt;<span class="hljs-built_in">size</span> &amp;&amp; tree-&gt;arr[<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>] != <span class="hljs-number">0</span>) fixTree(tree, <span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">inOrderSuccessor</span><span class="hljs-params">(struct node* tree, <span class="hljs-keyword">int</span> delPos)</span> </span>{
+    <span class="hljs-keyword">int</span> succ = <span class="hljs-number">2</span>*delPos+<span class="hljs-number">2</span>;
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">2</span>*succ+<span class="hljs-number">1</span> &lt; tree-&gt;<span class="hljs-built_in">size</span> &amp;&amp; tree-&gt;arr[<span class="hljs-number">2</span>*succ+<span class="hljs-number">1</span>] != <span class="hljs-number">0</span>) {
+        succ = <span class="hljs-number">2</span>*succ+<span class="hljs-number">1</span>;
+    }
+    <span class="hljs-keyword">return</span> succ;
+}
+
+<span class="hljs-function">struct node* <span class="hljs-title">delete</span><span class="hljs-params">(struct node* tree, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-keyword">int</span> delPos = delIndex(tree, data, <span class="hljs-number">0</span>);
+
+    <span class="hljs-comment">// doesn't exist</span>
+    <span class="hljs-keyword">if</span> (delPos == <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> tree;
+
+    <span class="hljs-comment">// no children</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-number">2</span>*delPos+<span class="hljs-number">1</span>&gt;tree-&gt;<span class="hljs-built_in">size</span> &amp;&amp; <span class="hljs-number">2</span>*delPos+<span class="hljs-number">2</span>&gt;tree-&gt;<span class="hljs-built_in">size</span>) {
+        tree-&gt;arr[delPos] = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> tree;
+    }
+    <span class="hljs-keyword">if</span> (tree-&gt;arr[<span class="hljs-number">2</span>*delPos+<span class="hljs-number">1</span>] == <span class="hljs-number">0</span> &amp;&amp; tree-&gt;arr[<span class="hljs-number">2</span>*delPos+<span class="hljs-number">2</span>] == <span class="hljs-number">0</span>) {
+        tree-&gt;arr[delPos] = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> tree;
+    }
+
+    <span class="hljs-comment">// right child</span>
+    <span class="hljs-keyword">if</span> (tree-&gt;arr[<span class="hljs-number">2</span>*delPos+<span class="hljs-number">1</span>] == <span class="hljs-number">0</span> &amp;&amp; tree-&gt;arr[<span class="hljs-number">2</span>*delPos+<span class="hljs-number">2</span>] != <span class="hljs-number">0</span>) {
+        fixTree(tree, <span class="hljs-number">2</span>*delPos+<span class="hljs-number">2</span>);
+        <span class="hljs-keyword">return</span> tree;
+    }
+    <span class="hljs-comment">// left child</span>
+    <span class="hljs-keyword">if</span> (tree-&gt;arr[<span class="hljs-number">2</span>*delPos+<span class="hljs-number">1</span>] != <span class="hljs-number">0</span> &amp;&amp; tree-&gt;arr[<span class="hljs-number">2</span>*delPos+<span class="hljs-number">2</span>] == <span class="hljs-number">0</span>) {
+        fixTree(tree, <span class="hljs-number">2</span>*delPos+<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">return</span> tree;
+    }
+
+    <span class="hljs-comment">// two children</span>
+    <span class="hljs-keyword">if</span> (tree-&gt;arr[<span class="hljs-number">2</span>*delPos+<span class="hljs-number">1</span>] != <span class="hljs-number">0</span> &amp;&amp; tree-&gt;arr[<span class="hljs-number">2</span>*delPos+<span class="hljs-number">2</span>] != <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">int</span> IOSuccPos = inOrderSuccessor(tree, delPos);
+        <span class="hljs-keyword">int</span> IOSuccVal = tree-&gt;arr[IOSuccPos];
+        tree = <span class="hljs-keyword">delete</span>(tree, IOSuccVal);
+        tree-&gt;arr[delPos] = IOSuccVal;
+        <span class="hljs-keyword">return</span> tree;
+    }
+    <span class="hljs-keyword">return</span> tree;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printMenu</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nMenu:\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"1. Create a new tree\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"2. Insert a node\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"3. Delete a node\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"4. Print tree\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"5. Print menu\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"6. Exit\n"</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">tree</span> = <span class="hljs-title">NULL</span>;</span> <span class="hljs-comment">// Initialize tree to NULL</span>
+
+    <span class="hljs-keyword">int</span> option;
+    printMenu();
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter your choice: "</span>);
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;option);
+
+        <span class="hljs-keyword">switch</span> (option) {
+            <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+                <span class="hljs-comment">// Create a new tree</span>
+                tree = newTree();
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+                <span class="hljs-comment">// Insert a node</span>
+                <span class="hljs-keyword">if</span> (tree == <span class="hljs-literal">NULL</span>) {
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Error: Create a new tree first.\n"</span>);
+                } 
+                <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">int</span> val;
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter value to insert: "</span>);
+                    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;val);
+                    tree = insertNode(tree, val);
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Node %d inserted.\n"</span>, val);
+                }
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+                <span class="hljs-comment">// Delete a node</span>
+                <span class="hljs-keyword">if</span> (tree == <span class="hljs-literal">NULL</span>) {
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Error: Create a new tree first.\n"</span>);
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">int</span> val;
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter value to delete: "</span>);
+                    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;val);
+                    tree = <span class="hljs-keyword">delete</span>(tree, val);
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Node %d deleted.\n"</span>, val);
+                }
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:
+                <span class="hljs-comment">// Print tree</span>
+                <span class="hljs-keyword">if</span> (tree == <span class="hljs-literal">NULL</span>) {
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Error: Create a new tree first.\n"</span>);
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nArray in memory:\n"</span>);
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; tree-&gt;<span class="hljs-built_in">size</span>; i++) <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, tree-&gt;arr[i]);
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n\nInorder: "</span>);
+                    printInorder(tree, <span class="hljs-number">0</span>);
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n\nTree Structure: "</span>);
+                    printLevelOrder(tree);
+                }
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:
+                <span class="hljs-comment">// Print menu</span>
+                printMenu();
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>:
+                <span class="hljs-comment">// Exit</span>
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Exiting program.\n"</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Invalid choice. Please enter a valid option.\n"</span>);
+        }
+
+    } <span class="hljs-keyword">while</span> (option != <span class="hljs-number">6</span>);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<ol start="4">
+<li>Binary Search Tree (using linked list):</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> {</span>
+    <span class="hljs-keyword">int</span> data;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> * <span class="hljs-title">left</span>;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> * <span class="hljs-title">right</span>;</span>
+};
+
+<span class="hljs-function">struct node* <span class="hljs-title">getNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">new</span> = <span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">node</span>));</span>
+    <span class="hljs-keyword">new</span>-&gt;data = data;
+    <span class="hljs-keyword">new</span>-&gt;left = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">new</span>-&gt;right = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span>;
+}
+
+<span class="hljs-function">struct node* <span class="hljs-title">insertNode</span><span class="hljs-params">(struct node* root, <span class="hljs-keyword">int</span> data)</span> </span>{   
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) {
+        root = getNode(data);
+        <span class="hljs-keyword">return</span> root;
+    }
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">iter</span> = <span class="hljs-title">root</span>;</span>
+
+    <span class="hljs-keyword">while</span> (iter) {
+        <span class="hljs-keyword">if</span> (data &lt; iter-&gt;data) {
+            <span class="hljs-keyword">if</span> (iter-&gt;left) {
+                iter = iter-&gt;left;
+            }
+            <span class="hljs-keyword">else</span> {
+                iter-&gt;left = getNode(data);
+                <span class="hljs-keyword">break</span>;
+            }    
+        }
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">if</span> (iter-&gt;right) {
+                iter = iter-&gt;right;
+            }
+            <span class="hljs-keyword">else</span> {
+                iter-&gt;right = getNode(data);
+                <span class="hljs-keyword">break</span>;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> root;
+}
+
+<span class="hljs-function">struct node* <span class="hljs-title">newTree</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> num, data = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"How many elemnets do you want in your tree? "</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;num);
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">tree</span> = <span class="hljs-title">NULL</span>;</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; num; i++) { 
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter the value: "</span>);
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;data);
+        tree = insertNode(tree, data);
+    }
+    <span class="hljs-keyword">return</span> tree;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printBST</span><span class="hljs-params">(struct node* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (root != <span class="hljs-literal">NULL</span>) {
+        printBST(root-&gt;left);  
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, root-&gt;data);  
+        printBST(root-&gt;right);  
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printTree</span><span class="hljs-params">(struct node* root, <span class="hljs-keyword">int</span> space)</span> </span>{
+    <span class="hljs-keyword">int</span> i;
+
+    <span class="hljs-comment">// Base case: if the node is null, return</span>
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
+
+    <span class="hljs-comment">// Increase the space count for each level</span>
+    space += <span class="hljs-number">10</span>;
+
+    <span class="hljs-comment">// Recursively print the right subtree (on top)</span>
+    printTree(root-&gt;right, space);
+
+    <span class="hljs-comment">// Print the current node</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt; space; i++) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">" "</span>);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, root-&gt;data);
+
+    <span class="hljs-comment">// Recursively print the left subtree (on bottom)</span>
+    printTree(root-&gt;left, space);
+}
+
+<span class="hljs-function">struct node* <span class="hljs-title">inorderSuccessor</span><span class="hljs-params">(struct node* node)</span>
+</span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">curr</span> = <span class="hljs-title">node</span> -&gt; <span class="hljs-title">right</span>;</span>
+
+    <span class="hljs-keyword">while</span>(curr -&gt; left) {
+        curr = curr -&gt; left;
+    }
+    <span class="hljs-keyword">return</span> curr;
+}
+
+<span class="hljs-function">struct node* <span class="hljs-title">findParent</span><span class="hljs-params">(struct node* node, <span class="hljs-keyword">int</span> val, <span class="hljs-keyword">int</span>* child)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">parent</span> = <span class="hljs-title">NULL</span>;</span>
+    <span class="hljs-keyword">while</span> (node) {
+        <span class="hljs-keyword">if</span> (node-&gt;data == val) <span class="hljs-keyword">return</span> parent;
+        parent = node;
+        <span class="hljs-keyword">if</span> (val &lt; node-&gt;data) {
+            *child = <span class="hljs-number">2</span>;
+            node = node-&gt;left;
+        }
+        <span class="hljs-keyword">else</span> {
+            *child = <span class="hljs-number">1</span>;
+            node = node-&gt;right;
+        }
+    }
+    <span class="hljs-keyword">return</span> parent;
+}
+
+<span class="hljs-function">struct node* <span class="hljs-title">deleteNode</span><span class="hljs-params">(struct node* root, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-keyword">int</span> child = <span class="hljs-number">0</span>;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">parent</span> = <span class="hljs-title">findParent</span>(<span class="hljs-title">root</span>, <span class="hljs-title">data</span>, &amp;<span class="hljs-title">child</span>);</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">TBDel</span> = <span class="hljs-title">NULL</span>;</span> 
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">tmp</span> = <span class="hljs-title">NULL</span>;</span> 
+    <span class="hljs-keyword">if</span> (parent &amp;&amp; child == <span class="hljs-number">2</span>) TBDel = parent-&gt;left;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (parent &amp;&amp; child == <span class="hljs-number">1</span>) TBDel = parent-&gt;right;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (parent == <span class="hljs-literal">NULL</span>) TBDel = root;
+
+    <span class="hljs-comment">// case 1 left no right no</span>
+    <span class="hljs-keyword">if</span> (!(TBDel-&gt;left) &amp;&amp; !(TBDel-&gt;right)) {
+        <span class="hljs-keyword">if</span> (parent == <span class="hljs-literal">NULL</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+        }
+        <span class="hljs-keyword">if</span> (child == <span class="hljs-number">2</span>) {
+           tmp = parent-&gt;left;
+           parent-&gt;left = <span class="hljs-literal">NULL</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (child == <span class="hljs-number">1</span>) {
+            tmp = parent-&gt;right;
+            parent-&gt;right = <span class="hljs-literal">NULL</span>;
+        }
+    }
+
+    <span class="hljs-comment">// case 2.1 left yes right no</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((TBDel-&gt;left) &amp;&amp; !(TBDel-&gt;right)) {
+        <span class="hljs-keyword">if</span> (parent == <span class="hljs-literal">NULL</span>) {
+            <span class="hljs-keyword">return</span> TBDel-&gt;left;
+        }
+        <span class="hljs-keyword">if</span> (child == <span class="hljs-number">2</span>) {
+            tmp = parent-&gt;left;
+            parent-&gt;left = parent-&gt;left-&gt;left;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (child == <span class="hljs-number">1</span>) {
+            tmp = parent-&gt;right;
+            parent-&gt;right = parent-&gt;right-&gt;left;
+        }
+    }
+
+    <span class="hljs-comment">// case 2.2 left no right yes</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!(TBDel-&gt;left) &amp;&amp; (TBDel-&gt;right)) {
+        <span class="hljs-keyword">if</span> (parent == <span class="hljs-literal">NULL</span>) {
+            <span class="hljs-keyword">return</span> TBDel-&gt;right;
+        }
+        <span class="hljs-keyword">if</span> (child == <span class="hljs-number">2</span>) {
+            tmp = parent-&gt;left;
+            parent-&gt;left = parent-&gt;left-&gt;right;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (child == <span class="hljs-number">1</span>) {
+            tmp = parent-&gt;right;
+            parent-&gt;right = parent-&gt;right-&gt;right;
+        }
+    }
+
+    <span class="hljs-comment">// case 3 left yes right yes</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((TBDel-&gt;left) &amp;&amp; (TBDel-&gt;right)) {
+        struct node* IOSucc = inorderSuccessor(TBDel);
+        <span class="hljs-keyword">int</span> tmp = IOSucc-&gt;data;
+        root = deleteNode(root, tmp);
+        TBDel-&gt;data = tmp;
+    }
+
+    <span class="hljs-keyword">if</span> (tmp) <span class="hljs-built_in">free</span>(tmp);
+    <span class="hljs-keyword">return</span> root;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">displayMenu</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nMenu:\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"1. New Tree\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"2. Add New Element\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"3. Delete Element\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"4. Print BST\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"5. Menu\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"6. Exit\n"</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>* <span class="hljs-title">tree</span> = <span class="hljs-title">NULL</span>;</span> 
+
+    <span class="hljs-keyword">int</span> choice;
+    <span class="hljs-keyword">int</span> element;
+
+    displayMenu();
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\nEnter your choice: "</span>);
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;choice);
+
+        <span class="hljs-keyword">switch</span> (choice) {
+            <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+                tree = newTree();
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"New tree created.\n"</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter the element to add: "</span>);
+                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;element);
+                tree = insertNode(tree, element);
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Element %d added to the tree.\n"</span>, element);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter the element to delete: "</span>);
+                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;element);
+                tree = deleteNode(tree, element);
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Element %d deleted from the tree.\n"</span>, element);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"BST in-order traversal:\n"</span>);
+                printBST(tree);
+                printTree(tree, <span class="hljs-number">0</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:
+                displayMenu();
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>:
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Exiting the program.\n"</span>);
+                <span class="hljs-keyword">break</span>;
+
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Invalid choice. Please try again.\n"</span>);
+        }
+
+    } <span class="hljs-keyword">while</span> (choice != <span class="hljs-number">6</span>);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<ol start="5">
+<li>Leetcode:<br>
+<code>116. Populating Next Right Pointers in Each Node</code></li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">connect</span><span class="hljs-params">(self, root)</span>:</span>
+        <span class="hljs-string">"""
+        :type root: Node
+        :rtype: Node
+        """</span>
+        
+        queue = [root]
+        levels = [root]
+
+        <span class="hljs-keyword">while</span> queue:
+
+            curr = queue.pop(<span class="hljs-number">0</span>)
+        
+            <span class="hljs-keyword">if</span> curr:
+                <span class="hljs-keyword">if</span> curr.left:
+                    queue.append(curr.left)
+                    levels.append(curr.left)
+                <span class="hljs-keyword">if</span> curr.right:
+                    queue.append(curr.right)
+                    levels.append(curr.right)
+
+        n = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">while</span> levels:
+            level = levels[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>**n]
+            <span class="hljs-keyword">del</span> levels[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>**n]
+            n+=<span class="hljs-number">1</span>
+
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(level)):
+                <span class="hljs-keyword">if</span> level[i]:
+                    <span class="hljs-keyword">if</span> i == <span class="hljs-number">0</span>:
+                        prev = level[i]
+                    <span class="hljs-keyword">else</span>:
+                        prev.next = level[i]
+                        prev = level[i]
+
+        <span class="hljs-keyword">return</span> root
+</div></code></pre>
+<hr>
+<h1 id="avl-and-expression-trees">AVL and Expression Trees:</h1>
+<h2 id=""></h2>
+<ol>
+<li>AVL Tree:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+    <span class="hljs-keyword">int</span> data;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">left</span>;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">right</span>;</span>
+    <span class="hljs-keyword">int</span> <span class="hljs-built_in">height</span>; 
+};
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">height</span><span class="hljs-params">(struct Node* node)</span> </span>{
+    <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> node-&gt;<span class="hljs-built_in">height</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getBalance</span><span class="hljs-params">(struct Node* node)</span> </span>{
+    <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">height</span>(node-&gt;left) - <span class="hljs-built_in">height</span>(node-&gt;right);
+}
+
+<span class="hljs-function">struct Node* <span class="hljs-title">newNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">node</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>*)<span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>));</span>
+    node-&gt;data = key;
+    node-&gt;left = <span class="hljs-literal">NULL</span>;
+    node-&gt;right = <span class="hljs-literal">NULL</span>;
+    node-&gt;<span class="hljs-built_in">height</span> = <span class="hljs-number">1</span>; 
+    <span class="hljs-keyword">return</span> node;
+}
+
+<span class="hljs-function">struct Node* <span class="hljs-title">rightRotate</span><span class="hljs-params">(struct Node* y)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">x</span> = <span class="hljs-title">y</span>-&gt;<span class="hljs-title">left</span>;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">T2</span> = <span class="hljs-title">x</span>-&gt;<span class="hljs-title">right</span>;</span>
+
+    x-&gt;right = y;
+    y-&gt;left = T2;
+
+    y-&gt;<span class="hljs-built_in">height</span> = <span class="hljs-number">1</span> + (<span class="hljs-built_in">height</span>(y-&gt;left) &gt; <span class="hljs-built_in">height</span>(y-&gt;right) ? <span class="hljs-built_in">height</span>(y-&gt;left) : <span class="hljs-built_in">height</span>(y-&gt;right));
+    x-&gt;<span class="hljs-built_in">height</span> = <span class="hljs-number">1</span> + (<span class="hljs-built_in">height</span>(x-&gt;left) &gt; <span class="hljs-built_in">height</span>(x-&gt;right) ? <span class="hljs-built_in">height</span>(x-&gt;left) : <span class="hljs-built_in">height</span>(x-&gt;right));
+
+    <span class="hljs-keyword">return</span> x;
+}
+
+<span class="hljs-function">struct Node* <span class="hljs-title">leftRotate</span><span class="hljs-params">(struct Node* x)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">y</span> = <span class="hljs-title">x</span>-&gt;<span class="hljs-title">right</span>;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">T2</span> = <span class="hljs-title">y</span>-&gt;<span class="hljs-title">left</span>;</span>
+
+    y-&gt;left = x;
+    x-&gt;right = T2;
+
+    x-&gt;<span class="hljs-built_in">height</span> = <span class="hljs-number">1</span> + (<span class="hljs-built_in">height</span>(x-&gt;left) &gt; <span class="hljs-built_in">height</span>(x-&gt;right) ? <span class="hljs-built_in">height</span>(x-&gt;left) : <span class="hljs-built_in">height</span>(x-&gt;right));
+    y-&gt;<span class="hljs-built_in">height</span> = <span class="hljs-number">1</span> + (<span class="hljs-built_in">height</span>(y-&gt;left) &gt; <span class="hljs-built_in">height</span>(y-&gt;right) ? <span class="hljs-built_in">height</span>(y-&gt;left) : <span class="hljs-built_in">height</span>(y-&gt;right));
+
+    <span class="hljs-keyword">return</span> y;
+}
+
+<span class="hljs-function">struct Node* <span class="hljs-title">insert</span><span class="hljs-params">(struct Node* node, <span class="hljs-keyword">int</span> key)</span> </span>{
+    <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">NULL</span>)
+        <span class="hljs-keyword">return</span> newNode(key);
+
+    <span class="hljs-keyword">if</span> (key &lt; node-&gt;data)
+        node-&gt;left = insert(node-&gt;left, key);
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key &gt; node-&gt;data)
+        node-&gt;right = insert(node-&gt;right, key);
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> node; 
+
+    node-&gt;<span class="hljs-built_in">height</span> = <span class="hljs-number">1</span> + (<span class="hljs-built_in">height</span>(node-&gt;left) &gt; <span class="hljs-built_in">height</span>(node-&gt;right) ? <span class="hljs-built_in">height</span>(node-&gt;left) : <span class="hljs-built_in">height</span>(node-&gt;right));
+
+    <span class="hljs-keyword">int</span> balance = getBalance(node);
+
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; key &lt; node-&gt;left-&gt;data)
+        <span class="hljs-keyword">return</span> rightRotate(node);
+
+    <span class="hljs-keyword">if</span> (balance &lt; <span class="hljs-number">-1</span> &amp;&amp; key &gt; node-&gt;right-&gt;data)
+        <span class="hljs-keyword">return</span> leftRotate(node);
+
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; key &gt; node-&gt;left-&gt;data) {
+        node-&gt;left = leftRotate(node-&gt;left);
+        <span class="hljs-keyword">return</span> rightRotate(node);
+    }
+
+    <span class="hljs-keyword">if</span> (balance &lt; <span class="hljs-number">-1</span> &amp;&amp; key &lt; node-&gt;right-&gt;data) {
+        node-&gt;right = rightRotate(node-&gt;right);
+        <span class="hljs-keyword">return</span> leftRotate(node);
+    }
+
+    <span class="hljs-keyword">return</span> node;
+}
+
+<span class="hljs-function">struct Node* <span class="hljs-title">InOrderSuccessor</span><span class="hljs-params">(struct Node* node)</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">current</span> = <span class="hljs-title">node</span>;</span>
+    <span class="hljs-keyword">while</span> (current-&gt;left != <span class="hljs-literal">NULL</span>)
+        current = current-&gt;left;
+    <span class="hljs-keyword">return</span> current;
+}
+
+<span class="hljs-function">struct Node* <span class="hljs-title">deleteNode</span><span class="hljs-params">(struct Node* root, <span class="hljs-keyword">int</span> key)</span> </span>{
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>)
+        <span class="hljs-keyword">return</span> root;
+
+    <span class="hljs-keyword">if</span> (key &lt; root-&gt;data)
+        root-&gt;left = deleteNode(root-&gt;left, key);
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key &gt; root-&gt;data)
+        root-&gt;right = deleteNode(root-&gt;right, key);
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">if</span> (root-&gt;left == <span class="hljs-literal">NULL</span> || root-&gt;right == <span class="hljs-literal">NULL</span>) {
+            struct Node* temp = (root-&gt;left) ? root-&gt;left : root-&gt;right;
+
+            <span class="hljs-keyword">if</span> (temp == <span class="hljs-literal">NULL</span>) {
+                temp = root;
+                root = <span class="hljs-literal">NULL</span>;
+            } <span class="hljs-keyword">else</span> 
+                *root = *temp; 
+
+            <span class="hljs-built_in">free</span>(temp);
+        } <span class="hljs-keyword">else</span> {
+            struct Node* temp = InOrderSuccessor(root-&gt;right);
+
+            root-&gt;data = temp-&gt;data;
+
+            root-&gt;right = deleteNode(root-&gt;right, temp-&gt;data);
+        }
+    }
+
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>)
+        <span class="hljs-keyword">return</span> root;
+
+    root-&gt;<span class="hljs-built_in">height</span> = <span class="hljs-number">1</span> + (<span class="hljs-built_in">height</span>(root-&gt;left) &gt; <span class="hljs-built_in">height</span>(root-&gt;right) ? <span class="hljs-built_in">height</span>(root-&gt;left) : <span class="hljs-built_in">height</span>(root-&gt;right));
+
+    <span class="hljs-keyword">int</span> balance = getBalance(root);
+
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; getBalance(root-&gt;left) &gt;= <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span> rightRotate(root);
+
+    <span class="hljs-keyword">if</span> (balance &gt; <span class="hljs-number">1</span> &amp;&amp; getBalance(root-&gt;left) &lt; <span class="hljs-number">0</span>) {
+        root-&gt;left = leftRotate(root-&gt;left);
+        <span class="hljs-keyword">return</span> rightRotate(root);
+    }
+
+    <span class="hljs-keyword">if</span> (balance &lt; <span class="hljs-number">-1</span> &amp;&amp; getBalance(root-&gt;right) &lt;= <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span> leftRotate(root);
+
+    <span class="hljs-keyword">if</span> (balance &lt; <span class="hljs-number">-1</span> &amp;&amp; getBalance(root-&gt;right) &gt; <span class="hljs-number">0</span>) {
+        root-&gt;right = rightRotate(root-&gt;right);
+        <span class="hljs-keyword">return</span> leftRotate(root);
+    }
+
+    <span class="hljs-keyword">return</span> root;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">inOrder</span><span class="hljs-params">(struct Node* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (root != <span class="hljs-literal">NULL</span>) {
+        inOrder(root-&gt;left);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, root-&gt;data);
+        inOrder(root-&gt;right);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">freeTree</span><span class="hljs-params">(struct Node* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (root != <span class="hljs-literal">NULL</span>) {
+        freeTree(root-&gt;left);
+        freeTree(root-&gt;right);
+        <span class="hljs-built_in">free</span>(root);
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">root</span> = <span class="hljs-title">NULL</span>;</span>
+
+    root = insert(root, <span class="hljs-number">10</span>);
+    root = insert(root, <span class="hljs-number">20</span>);
+    root = insert(root, <span class="hljs-number">30</span>);
+    root = insert(root, <span class="hljs-number">40</span>);
+    root = insert(root, <span class="hljs-number">50</span>);
+    root = insert(root, <span class="hljs-number">25</span>);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"In-order traversal of the AVL tree: "</span>);
+    inOrder(root);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+
+    root = deleteNode(root, <span class="hljs-number">30</span>);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"In-order traversal after deleting 30: "</span>);
+    inOrder(root);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+
+    freeTree(root);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<ol start="2">
+<li>Expression Tree:</li>
+</ol>
+<pre class="hljs"><code><div></div></code></pre>
+
+</body>
+
+</html>

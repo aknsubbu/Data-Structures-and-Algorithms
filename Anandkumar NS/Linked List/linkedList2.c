@@ -39,65 +39,65 @@ struct Node *getData(int data) {
 }
 
 int main() {
-    //empty linked list testcase
-    // struct Node* head = NULL; 
-    // printf("Empty Linked List: ");
-    // printList(head);
-    // insertAtBeginning(&head, 3);
-    // printf("Linked List: ");
-    // printList(head);
-    // // inserted element 1 into empty linked list
+    empty linked list testcase
+    struct Node* head = NULL; 
+    printf("Empty Linked List: ");
+    printList(head);
+    insertAtBeginning(&head, 3);
+    printf("Linked List: ");
+    printList(head);
+    // inserted element 1 into empty linked list
 
 
-// Linked List with one element
-    // struct Node* head1 = (struct Node*)malloc(sizeof(struct Node));
-    // if (head1 == NULL) {
-    //     printf("Memory allocation failed.\n");
-    //     return 1; //  error code
-    // }
-    // head1->data = 1; //  data of the head node
-    // head1->next = NULL;
-    // insertAtBeginning(&head1, 3);
-    // printf("Linked List with one element insert with function: ");
-    // printList(head1);
-    // printf("Linked List with one element above");
+Linked List with one element
+    struct Node* head1 = (struct Node*)malloc(sizeof(struct Node));
+    if (head1 == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1; //  error code
+    }
+    head1->data = 1; //  data of the head node
+    head1->next = NULL;
+    insertAtBeginning(&head1, 3);
+    printf("Linked List with one element insert with function: ");
+    printList(head1);
+    printf("Linked List with one element above");
 
 
-// Linked list with 3 elements
-    // struct Node* head2_1,*head2_2,*head2_3; 
-    // head2_1=getData(1);
-    // head2_2=getData(2);
-    // head2_3=getData(3);
-    // head2_1->next=head2_2;
-    // head2_2->next=head2_3;
-    // printf("Linked List: ");
-    // printList(head2_1);
+Linked list with 3 elements
+    struct Node* head2_1,*head2_2,*head2_3; 
+    head2_1=getData(1);
+    head2_2=getData(2);
+    head2_3=getData(3);
+    head2_1->next=head2_2;
+    head2_2->next=head2_3;
+    printf("Linked List: ");
+    printList(head2_1);
 
-    // insertAtBeginning(&head2_1, 3);
-    // printf("Linked List with one element insert with function: ");
-    // printList(head2_1);
-    // printf("Linked List with one element above");
+    insertAtBeginning(&head2_1, 3);
+    printf("Linked List with one element insert with function: ");
+    printList(head2_1);
+    printf("Linked List with one element above");
     
 
-// // Linked list with 5 elements
-//     struct Node* head3_1,*head3_2,*head3_3,*head3_4,*head3_5; 
-//     head3_1=getData(1);
-//     head3_2=getData(2);
-//     head3_3=getData(3);
-//     head3_4=getData(4);
-//     head3_5=getData(5);
-//     head3_1->next=head3_2;
-//     head3_2->next=head3_3;
-//     head3_3->next=head3_4;
-//     head3_4->next=head3_5;
+// Linked list with 5 elements
+    struct Node* head3_1,*head3_2,*head3_3,*head3_4,*head3_5; 
+    head3_1=getData(1);
+    head3_2=getData(2);
+    head3_3=getData(3);
+    head3_4=getData(4);
+    head3_5=getData(5);
+    head3_1->next=head3_2;
+    head3_2->next=head3_3;
+    head3_3->next=head3_4;
+    head3_4->next=head3_5;
 
-//     printf("Linked List: ");
-//     printList(head3_1);
+    printf("Linked List: ");
+    printList(head3_1);
 
-//     insertAtBeginning(&head3_1, 3);
-//     printf("Linked List with five element insert with function: ");
-//     printList(head3_1);
-//     printf("Linked List with one element above");
+    insertAtBeginning(&head3_1, 3);
+    printf("Linked List with five element insert with function: ");
+    printList(head3_1);
+    printf("Linked List with one element above");
     
 //Linked List with 10 elements
     struct Node* head4_1,*head4_2,*head4_3,*head4_4,*head4_5,*head4_6,*head4_7,*head4_8,*head4_9,*head4_10;; 
