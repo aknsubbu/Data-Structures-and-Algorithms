@@ -63,7 +63,7 @@
 //     for (int i = 0; i < graph->numVertices; i++)
 //     {
 //         if (graph->adjMatrix[startVertex][i] == 1 && !visited[i])
-//         {1
+//         {
 //             dfsRecursive(graph, i, visited);
 //         }
 //     }
