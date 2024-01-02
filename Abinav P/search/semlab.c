@@ -1190,80 +1190,80 @@
 //     return 0;
 // }
 
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-// Define a structure for a tree node
-struct TreeNode
-{
-    int data;
-    struct TreeNode *left;
-    struct TreeNode *right;
-};
+// // Define a structure for a tree node
+// struct TreeNode
+// {
+//     int data;
+//     struct TreeNode *left;
+//     struct TreeNode *right;
+// };
 
-// Create a new tree node
-struct TreeNode *createNode(int data)
-{
-    struct TreeNode *newNode = (struct TreeNode *)malloc(sizeof(struct TreeNode));
-    newNode->data = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
-    return newNode;
-}
+// // Create a new tree node
+// struct TreeNode *createNode(int data)
+// {
+//     struct TreeNode *newNode = (struct TreeNode *)malloc(sizeof(struct TreeNode));
+//     newNode->data = data;
+//     newNode->left = NULL;
+//     newNode->right = NULL;
+//     return newNode;
+// }
 
-// Function to find the height of a tree
-int height(struct TreeNode *root)
-{
-    if (root == NULL)
-    {
-        return 0;
-    }
+// // Function to find the height of a tree
+// int height(struct TreeNode *root)
+// {
+//     if (root == NULL)
+//     {
+//         return 0;
+//     }
 
-    int leftHeight = height(root->left);
-    int rightHeight = height(root->right);
+//     int leftHeight = height(root->left);
+//     int rightHeight = height(root->right);
 
-    return 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
-}
+//     return 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
+// }
 
-// Function to find the diameter of a tree
-int diameter(struct TreeNode *root)
-{
-    if (root == NULL)
-    {
-        return 0;
-    }
+// // Function to find the diameter of a tree
+// int diameter(struct TreeNode *root)
+// {
+//     if (root == NULL)
+//     {
+//         return 0;
+//     }
 
-    // Calculate the height of the left and right subtrees
-    int leftHeight = height(root->left);
-    int rightHeight = height(root->right);
+//     // Calculate the height of the left and right subtrees
+//     int leftHeight = height(root->left);
+//     int rightHeight = height(root->right);
 
-    // Calculate the diameter passing through the current node
-    int currentDiameter = leftHeight + rightHeight + 1;
+//     // Calculate the diameter passing through the current node
+//     int currentDiameter = leftHeight + rightHeight + 1;
 
-    // Recursively calculate the diameter in the left and right subtrees
-    int leftDiameter = diameter(root->left);
-    int rightDiameter = diameter(root->right);
+//     // Recursively calculate the diameter in the left and right subtrees
+//     int leftDiameter = diameter(root->left);
+//     int rightDiameter = diameter(root->right);
 
-    // Return the maximum of the three diameters
-    return (currentDiameter > leftDiameter) ? (currentDiameter > rightDiameter ? currentDiameter : rightDiameter) : (leftDiameter > rightDiameter ? leftDiameter : rightDiameter);
-}
+//     // Return the maximum of the three diameters
+//     return (currentDiameter > leftDiameter) ? (currentDiameter > rightDiameter ? currentDiameter : rightDiameter) : (leftDiameter > rightDiameter ? leftDiameter : rightDiameter);
+// }
 
-int main()
-{
-    // Create a sample tree
-    struct TreeNode *root = createNode(1);
-    root->left = createNode(2);
-    root->right = createNode(3);
-    root->left->left = createNode(4);
-    root->left->right = createNode(5);
-    root->right->right = createNode(6);
-    root->left->right->left = createNode(7);
-    root->left->right->right = createNode(8);
+// int main()
+// {
+//     // Create a sample tree
+//     struct TreeNode *root = createNode(1);
+//     root->left = createNode(2);
+//     root->right = createNode(3);
+//     root->left->left = createNode(4);
+//     root->left->right = createNode(5);
+//     root->right->right = createNode(6);
+//     root->left->right->left = createNode(7);
+//     root->left->right->right = createNode(8);
 
-    // Find the diameter of the tree
-    int treeDiameter = diameter(root);
+//     // Find the diameter of the tree
+//     int treeDiameter = diameter(root);
 
-    printf("Diameter of the tree: %d\n", treeDiameter);
+//     printf("Diameter of the tree: %d\n", treeDiameter);
 
-    return 0;
-}
+//     return 0;
+// }
