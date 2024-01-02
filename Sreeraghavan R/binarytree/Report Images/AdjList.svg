@@ -1,0 +1,151 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="646pt" height="314pt" viewBox="0.00 0.00 646.47 313.6">
+<g id="graph0" class="graph" transform="translate(36.59474255275552,292.57756249460476) scale(0.9125110980986835)" data-name="multiple_linked_lists">
+
+<polygon fill="white" stroke="none" points="-4,4 -4,-309.6 642.47,-309.6 642.47,4 -4,4"/>
+<!-- node1 -->
+<g id="node1" class="node" pointer-events="visible" data-name="node1">
+
+<polygon fill="lightblue" stroke="black" points="0,-85.5 0,-135.1 62.7,-135.1 62.7,-85.5 0,-85.5"/>
+<text text-anchor="middle" x="31.35" y="-118.5" font-family="Arial" font-size="14.00">Node A</text>
+<polyline fill="none" stroke="black" points="0,-110.3 62.7,-110.3"/>
+<text text-anchor="middle" x="31.35" y="-93.7" font-family="Arial" font-size="14.00"> </text>
+</g>
+<!-- node2 -->
+<g id="node2" class="node" pointer-events="visible" data-name="node2">
+
+<polygon fill="lightblue" stroke="black" points="134.7,-85.5 134.7,-135.1 197.39,-135.1 197.39,-85.5 134.7,-85.5"/>
+<text text-anchor="middle" x="166.04" y="-118.5" font-family="Arial" font-size="14.00">Node B</text>
+<polyline fill="none" stroke="black" points="134.7,-110.3 197.39,-110.3"/>
+<text text-anchor="middle" x="166.04" y="-93.7" font-family="Arial" font-size="14.00"> </text>
+</g>
+<!-- node1&#45;&gt;node2 -->
+<g id="edge1" class="edge" data-name="node1xt-&gt;node2xt" data-comment="node1-&gt;node2">
+
+<path fill="none" stroke="black" d="M62.35,-98.3C62.35,-98.3 103.24,-98.3 123.69,-98.3"/>
+<polygon fill="black" stroke="black" points="123.53,-101.8 133.53,-98.3 123.53,-94.8 123.53,-101.8"/>
+</g>
+<!-- node3 -->
+<g id="node3" class="node" pointer-events="visible" data-name="node3">
+
+<polygon fill="lightblue" stroke="black" points="269.39,-85.5 269.39,-135.1 332.86,-135.1 332.86,-85.5 269.39,-85.5"/>
+<text text-anchor="middle" x="301.13" y="-118.5" font-family="Arial" font-size="14.00">Node C</text>
+<polyline fill="none" stroke="black" points="269.39,-110.3 332.86,-110.3"/>
+<text text-anchor="middle" x="301.13" y="-93.7" font-family="Arial" font-size="14.00"> </text>
+</g>
+<!-- node2&#45;&gt;node3 -->
+
+<!-- invisibleNode1 -->
+<!-- node3&#45;&gt;invisibleNode1 -->
+<!-- nodeA -->
+<g id="node4" class="node" pointer-events="visible" data-name="nodeA">
+
+<polygon fill="lightblue" stroke="black" points="221.78,-170.5 221.78,-220.1 284.48,-220.1 284.48,-170.5 221.78,-170.5"/>
+<text text-anchor="middle" x="253.13" y="-203.5" font-family="Arial" font-size="14.00">Node X</text>
+<polyline fill="none" stroke="black" points="221.78,-195.3 284.48,-195.3"/>
+<text text-anchor="middle" x="253.13" y="-178.7" font-family="Arial" font-size="14.00"> </text>
+</g><g id="edge2" class="edge" data-name="node2xt-&gt;node3xt" data-comment="nodeA">
+
+<path fill="none" stroke="black" d="M197.04,-98.3C197.04,-98.3 237.59,-98.3 257.86,-98.3"/>
+<polygon fill="black" stroke="black" points="257.61,-101.8 267.61,-98.3 257.61,-94.8 257.61,-101.8"/>
+</g>
+<!-- nodeB -->
+<g id="node5" class="node" pointer-events="visible" data-name="nodeB">
+
+<polygon fill="lightblue" stroke="black" points="356.48,-170.5 356.48,-220.1 419.17,-220.1 419.17,-170.5 356.48,-170.5"/>
+<text text-anchor="middle" x="387.82" y="-203.5" font-family="Arial" font-size="14.00">Node Y</text>
+<polyline fill="none" stroke="black" points="356.48,-195.3 419.17,-195.3"/>
+<text text-anchor="middle" x="387.82" y="-178.7" font-family="Arial" font-size="14.00"> </text>
+</g>
+<!-- nodeA&#45;&gt;nodeB -->
+
+<!-- nodeC -->
+<g id="node6" class="node" pointer-events="visible" data-name="nodeC">
+
+<polygon fill="lightblue" stroke="black" points="491.17,-170.5 491.17,-220.1 553.08,-220.1 553.08,-170.5 491.17,-170.5"/>
+<text text-anchor="middle" x="522.13" y="-203.5" font-family="Arial" font-size="14.00">Node Z</text>
+<polyline fill="none" stroke="black" points="491.17,-195.3 553.08,-195.3"/>
+<text text-anchor="middle" x="522.13" y="-178.7" font-family="Arial" font-size="14.00"> </text>
+</g><g id="edge3" class="edge" data-name="nodeAxt-&gt;nodeBxt" data-comment="nodeC">
+
+<path fill="none" stroke="black" d="M284.13,-183.3C284.13,-183.3 325.02,-183.3 345.46,-183.3"/>
+<polygon fill="black" stroke="black" points="345.31,-186.8 355.31,-183.3 345.31,-179.8 345.31,-186.8"/>
+</g>
+<!-- nodeB&#45;&gt;nodeC -->
+
+<!-- invisibleNode2 -->
+<!-- nodeC&#45;&gt;invisibleNode2 -->
+<!-- nodeD -->
+<g id="node7" class="node" pointer-events="visible" data-name="nodeD">
+
+<polygon fill="lightblue" stroke="black" points="170.22,-0.5 170.22,-50.1 232.92,-50.1 232.92,-0.5 170.22,-0.5"/>
+<text text-anchor="middle" x="201.57" y="-33.5" font-family="Arial" font-size="14.00">Node P</text>
+<polyline fill="none" stroke="black" points="170.22,-25.3 232.92,-25.3"/>
+<text text-anchor="middle" x="201.57" y="-8.7" font-family="Arial" font-size="14.00"> </text>
+</g>
+<!-- nodeE -->
+
+<!-- nodeC&#45;&gt;invisibleNode2 -->
+<!-- nodeE -->
+<g id="node8" class="node" pointer-events="visible" data-name="nodeE">
+
+<polygon fill="lightblue" stroke="black" points="304.92,-0.5 304.92,-50.1 369.17,-50.1 369.17,-0.5 304.92,-0.5"/>
+<text text-anchor="middle" x="337.04" y="-33.5" font-family="Arial" font-size="14.00">Node Q</text>
+<polyline fill="none" stroke="black" points="304.92,-25.3 369.17,-25.3"/>
+<text text-anchor="middle" x="337.04" y="-8.7" font-family="Arial" font-size="14.00"> </text>
+</g><g id="edge4" class="edge" data-name="nodeBxt-&gt;nodeCxt" data-comment="nodeE">
+
+<path fill="none" stroke="black" d="M418.82,-183.3C418.82,-183.3 459.49,-183.3 479.83,-183.3"/>
+<polygon fill="black" stroke="black" points="479.61,-186.8 489.61,-183.3 479.61,-179.8 479.61,-186.8"/>
+</g>
+
+
+
+
+<g id="node9" class="node" pointer-events="visible" data-name="nodeF" data-comment="nodeE">
+
+<polygon fill="lightblue" stroke="black" points="441.17,-0.5 441.17,-50.1 504.64,-50.1 504.64,-0.5 441.17,-0.5"/>
+<text text-anchor="middle" x="472.9" y="-33.5" font-family="Arial" font-size="14.00">Node R</text>
+<polyline fill="none" stroke="black" points="441.17,-25.3 504.64,-25.3"/>
+<text text-anchor="middle" x="472.9" y="-8.7" font-family="Arial" font-size="14.00"> </text>
+</g>
+<!-- nodeD&#45;&gt;nodeE -->
+<g id="edge5" class="edge" data-name="nodeDxt-&gt;nodeExt" data-comment="nodeD-&gt;nodeE">
+
+<path fill="none" stroke="black" d="M232.57,-13.3C232.57,-13.3 273.34,-13.3 293.72,-13.3"/>
+<polygon fill="black" stroke="black" points="293.53,-16.8 303.53,-13.3 293.53,-9.8 293.53,-16.8"/>
+</g>
+<!-- nodeG -->
+<g id="node10" class="node" pointer-events="visible" data-name="nodeG">
+
+<polygon fill="lightblue" stroke="black" points="306.39,-255.5 306.39,-305.1 369.09,-305.1 369.09,-255.5 306.39,-255.5"/>
+<text text-anchor="middle" x="337.74" y="-288.5" font-family="Arial" font-size="14.00">Node S</text>
+<polyline fill="none" stroke="black" points="306.39,-280.3 369.09,-280.3"/>
+<text text-anchor="middle" x="337.74" y="-263.7" font-family="Arial" font-size="14.00"> </text>
+</g>
+<g id="edge6" class="edge" data-name="nodeExt-&gt;nodeFxt" data-comment="nodeG">
+
+<path fill="none" stroke="black" d="M369.04,-13.3C369.04,-13.3 409.46,-13.3 429.67,-13.3"/>
+<polygon fill="black" stroke="black" points="429.39,-16.8 439.39,-13.3 429.39,-9.8 429.39,-16.8"/>
+</g><g id="node11" class="node" pointer-events="visible" data-name="nodeH" data-comment="nodeG">
+
+<polygon fill="lightblue" stroke="black" points="441.09,-255.5 441.09,-305.1 503,-305.1 503,-255.5 441.09,-255.5"/>
+<text text-anchor="middle" x="472.04" y="-288.5" font-family="Arial" font-size="14.00">Node T</text>
+<polyline fill="none" stroke="black" points="441.09,-280.3 503,-280.3"/>
+<text text-anchor="middle" x="472.04" y="-263.7" font-family="Arial" font-size="14.00"> </text>
+</g><g id="edge7" class="edge" data-name="nodeGxt-&gt;nodeHxt" data-comment="nodeG">
+
+<path fill="none" stroke="black" d="M368.74,-268.3C368.74,-268.3 409.41,-268.3 429.75,-268.3"/>
+<polygon fill="black" stroke="black" points="429.53,-271.8 439.53,-268.3 429.53,-264.8 429.53,-271.8"/>
+</g><g id="node12" class="node" pointer-events="visible" data-name="nodeI" data-comment="nodeG">
+
+<polygon fill="lightblue" stroke="black" points="575,-255.5 575,-305.1 638.47,-305.1 638.47,-255.5 575,-255.5"/>
+<text text-anchor="middle" x="606.73" y="-288.5" font-family="Arial" font-size="14.00">Node U</text>
+<polyline fill="none" stroke="black" points="575,-280.3 638.47,-280.3"/>
+<text text-anchor="middle" x="606.73" y="-263.7" font-family="Arial" font-size="14.00"> </text>
+</g><g id="edge8" class="edge" data-name="nodeHxt-&gt;nodeIxt" data-comment="nodeG">
+
+<path fill="none" stroke="black" d="M503.04,-268.3C503.04,-268.3 543.37,-268.3 563.53,-268.3"/>
+<polygon fill="black" stroke="black" points="563.22,-271.8 573.22,-268.3 563.22,-264.8 563.22,-271.8"/>
+</g></g>
+</svg>

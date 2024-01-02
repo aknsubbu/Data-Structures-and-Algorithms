@@ -25,28 +25,6 @@ int greater(int a,int b){
     return 0;
 }
 
-void percolateDown(int* heap,int i){
-
-    //already a heap
-    if(heap[i]>heap[2*i+1] && heap[i]>heap[2*i+2]) return;
-
-    switch (heap[2*i+1]>heap[2*i+2])
-    {
-    case true:
-        /* code */
-        swap(heap,i,2*i+1);
-        percolateDown(heap,2*i+1);
-        break;
-    
-    default:
-        swap(heap,i,2*i+2);
-        percolateDown(heap,2*i+2);
-        break;
-    }
-}
-
-//construct a binary tree,ask the user for the input
-
 void insertElement(int* tree,int x){
     int i = 0;
     while(tree[i] != 0){
@@ -114,11 +92,6 @@ int searchNode(int* tree,int val){
     if(tree[i] == val) return i;
     return -1;
 }
-
-int inorderSuccessor(int* tree,int val){
-
-}
-
 
 
 int main(){

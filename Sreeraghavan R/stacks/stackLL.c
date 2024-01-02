@@ -1,78 +1,56 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
-
-struct Node{
+struct node{
     int data;
-    struct Node* below;
+    struct node* below;
 };
 
-struct Stack{
-    struct Node* top;
-    int size;
-    int num;
-};
+typedef struct node node;
 
-typedef struct Stack Stack;
-typedef struct Node Node;
+int isEmpty(node* s){
+    return !s;
+}
 
-Node* getNode(int val){
-    Node* newNode = (Node *)malloc(sizeof(Node));
+node* getNode(int val){
+    node* newNode = (node *)malloc(sizeof(node));
     newNode->data = val;
     newNode->below = NULL;
     return newNode;
 }
 
-void push(Stack* s,int val){
-    if(s->num + 1 < s->size){
-        Node* newTop = getNode(val);
-        newTop->below = s->top;
-        s->top = newTop;
-        ++(s->num);
-        return;
-    }
-    printf("OVERFLOW\n");
+node* push(node* s,int val){
+    node* new = getNode(val);
+    new->below = s;
+    return new;
 }
 
-void print(Stack* s){
-    Node* node = s->top;
-    while(node){
-        printf("%d ",node->data);
-        node = node->below;
+void print(node* s){
+    node* iter = s;
+    while(iter){
+        printf("%d ",iter->data);
+        iter = iter->below;
     }
 }
 
-Stack* createStack(int val,int size){
-    Stack* newStack = (Stack *)malloc(sizeof(Stack));
-    newStack->top = getNode(val);
-    newStack->size = size;
-    newStack->num = 0;
-    return newStack;
-}
 
-int pop(Stack* s){
-    if(!s->num){
-        print("UNDERFLOW\n");
-        return -99999;
+int pop(node* s){
+    if(isEmpty(s)){
+        printf("UNDERFLOW\n");
+        return -999999;
     }
-    if(s->num == 1){
-        int temp = s->top->data;
-        s->top = NULL;
-        --(s->num);
-        return temp;
-    }
-    int temp = s->top->data;
-    s->top = s->top->below;
-    --(s->num);
-    return temp;
+    int tbReturned = s->data;
+    s = s->below;
+    return tbReturned;
 }
 
 int main(){
-    Stack* s = createStack(0,4);
-    push(s,1);
-    push(s,2);
-    push(s,3);
+    node* s = getNode(0);
+    s = push(s,1);
+    s = push(s,2);
+    s = push(s,3);
     printf("%d\n",pop(s));
-    push(s,4);
+    s = push(s,4);
     print(s);
 }

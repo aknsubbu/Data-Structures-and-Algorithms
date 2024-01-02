@@ -1,0 +1,84 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="217pt" height="204pt" viewBox="0.00 0.00 216.69 204.16">
+<g id="graph0" class="graph" transform="translate(4,200.16000366210938) scale(1)" data-name="">
+<polygon fill="white" stroke="none" points="-4,4 -4,-200.16 212.69,-200.16 212.69,4 -4,4"/>
+<!-- 1 -->
+<g id="node2" class="node" pointer-events="visible" data-name="10" data-comment="1">
+
+<ellipse fill="rgb(255, 255, 255)" stroke="black" cx="100" cy="-175.47" rx="20.89" ry="20.89"/>
+<text text-anchor="middle" x="100" y="-171.27" font-family="Times,serif" font-size="14.00">10</text>
+</g>
+<!-- 5 -->
+<g id="node3" class="node" pointer-events="visible" data-name="5">
+
+<ellipse fill="rgb(255, 255, 255)" stroke="black" cx="72" cy="-98.08" rx="18" ry="18"/>
+<text text-anchor="middle" x="72" y="-93.88" font-family="Times,serif" font-size="14.00">5</text>
+</g>
+<!-- 10&#45;&gt;5 -->
+<g id="edge1" class="edge" data-name="10-&gt;5">
+
+<path fill="none" stroke="black" d="M92.93,-155.44C89.65,-146.6 85.69,-135.93 82.09,-126.26"/>
+<polygon fill="black" stroke="black" points="85.4,-125.11 78.64,-116.96 78.84,-127.55 85.4,-125.11"/>
+</g>
+<!-- &#45;1 -->
+<g id="node4" class="node" pointer-events="visible" data-name="15" data-comment="-1">
+
+<ellipse fill="rgb(255, 255, 255)" stroke="black" cx="129" cy="-98.08" rx="20.89" ry="20.89"/>
+<text text-anchor="middle" x="129" y="-93.88" font-family="Times,serif" font-size="14.00">15</text>
+</g>
+<!-- 10&#45;&gt;1 -->
+<g id="edge2" class="edge" data-name="10-&gt;15" data-comment="10-&gt;1">
+
+<path fill="none" stroke="black" d="M107.32,-155.44C110.44,-147.32 114.16,-137.65 117.63,-128.63"/>
+<polygon fill="black" stroke="black" points="120.82,-130.1 121.14,-119.51 114.28,-127.59 120.82,-130.1"/>
+</g>
+<!-- 3 -->
+<g id="node5" class="node" pointer-events="visible" data-name="3">
+
+<ellipse fill="rgb(255, 255, 255)" stroke="black" cx="18" cy="-20.69" rx="18" ry="18"/>
+<text text-anchor="middle" x="18" y="-16.49" font-family="Times,serif" font-size="14.00">3</text>
+</g>
+<!-- 5&#45;&gt;3 -->
+<g id="edge3" class="edge" data-name="5-&gt;3">
+
+<path fill="none" stroke="black" d="M61.84,-82.9C54.23,-72.27 43.63,-57.47 34.76,-45.09"/>
+<polygon fill="black" stroke="black" points="37.66,-43.13 28.99,-37.04 31.97,-47.21 37.66,-43.13"/>
+</g>
+<!-- 7 -->
+<g id="node6" class="node" pointer-events="visible" data-name="7">
+
+<ellipse fill="rgb(255, 255, 255)" stroke="black" cx="72" cy="-20.69" rx="18" ry="18"/>
+<text text-anchor="middle" x="72" y="-16.49" font-family="Times,serif" font-size="14.00">7</text>
+</g>
+<!-- 5&#45;&gt;7 -->
+<g id="edge4" class="edge" data-name="5-&gt;7">
+
+<path fill="none" stroke="black" d="M72,-79.6C72,-70.94 72,-60.26 72,-50.44"/>
+<polygon fill="black" stroke="black" points="75.5,-50.6 72,-40.6 68.5,-50.6 75.5,-50.6"/>
+</g>
+<!-- 1 -->
+<g id="node1" class="node" pointer-events="visible" data-name="12" data-comment="1">
+
+<ellipse fill="rgb(32, 178, 170)" stroke="black" cx="129" cy="-20.69" rx="20.89" ry="20.89"/>
+<text text-anchor="middle" x="129" y="-16.49" font-family="Times,serif" font-size="14.00">12</text>
+</g>
+<!-- 15&#45;&gt;1 -->
+<g id="edge5" class="edge" data-name="15-&gt;12" data-comment="15-&gt;1">
+
+<path fill="none" stroke="black" d="M129,-76.88C129,-69.61 129,-61.23 129,-53.23"/>
+<polygon fill="black" stroke="black" points="132.5,-53.47 129,-43.47 125.5,-53.47 132.5,-53.47"/>
+</g>
+<!-- 1 -->
+<g id="node7" class="node" pointer-events="visible" data-name="20" data-comment="1">
+
+<ellipse fill="rgb(255, 255, 255)" stroke="black" cx="188" cy="-20.69" rx="20.89" ry="20.89"/>
+<text text-anchor="middle" x="188" y="-16.49" font-family="Times,serif" font-size="14.00">20</text>
+</g>
+<!-- 15&#45;&gt;17 -->
+<g id="edge6" class="edge" data-name="15-&gt;20" data-comment="15-&gt;17">
+
+<path fill="none" stroke="black" d="M141.51,-81.09C149.33,-71.1 159.57,-58.01 168.45,-46.67"/>
+<polygon fill="black" stroke="black" points="171.17,-48.88 174.57,-38.85 165.65,-44.57 171.17,-48.88"/>
+</g>
+</g>
+</svg>

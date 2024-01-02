@@ -1,0 +1,62 @@
+
+
+
+
+// digraph multiple_linked_lists {
+//     node [shape=record, style=filled, fillcolor=lightblue, fontname=Arial]; // Define node attributes
+
+//     // First linked list
+//     node1 [label="{ Node A | <next> }"];
+//     node2 [label="{ Node B | <next> }"];
+//     node3 [label="{ Node C | <next> }"];
+
+//     // Connections for the first linked list
+//     node1:next -> node2:next;
+//     node2:next -> node3:next;
+
+    
+//     // Second linked list
+//     nodeA [label="{ Node X | <next> }"];
+//     nodeB [label="{ Node Y | <next> }"];
+//     nodeC [label="{ Node Z | <next> }"];
+
+//     // Connections for the second linked list
+//     nodeA:next -> nodeB:next;
+//     nodeB:next -> nodeC:next;
+//     // Third linked list
+//     nodeD [label="{ Node P | <next> }"];
+//     nodeE [label="{ Node Q | <next> }"];
+//     nodeF [label="{ Node R | <next> }"];
+
+//     // Connections for the third linked list
+//     nodeD:next -> nodeE:next;
+//     nodeE:next -> nodeF:next;
+
+    
+
+//     // Fourth linked list
+//     nodeG [label="{ Node S | <next> }"];
+//     nodeH [label="{ Node T | <next> }"];
+//     nodeI [label="{ Node U | <next> }"];
+
+//     // Connections for the fourth linked list
+//     nodeG:next -> nodeH:next;
+//     nodeH:next -> nodeI:next;
+
+
+//     // // Connect the first nodes of all the lists together
+//     // node1:next -> nodeA:next -> nodeD:next -> nodeG:next;
+// }
+
+digraph{
+    node [shape = circle, style = filled, fillcolor = white, fontcolor = black]
+
+    nodeA [label = "A"]
+    nodeB [label = "B"]
+    nodeC [label = "C"]
+    nodeD [label = "D"]
+
+    nodeA -> nodeB -> nodeC -> nodeD
+
+}
+

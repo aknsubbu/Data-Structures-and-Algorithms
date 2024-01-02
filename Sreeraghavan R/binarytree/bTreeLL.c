@@ -114,25 +114,25 @@ void deleteNode(node* tree,int val){
             return;
         }
         parent->rc = NULL;
-        
+        return;
     }
 
     node* child;
     if(typeNode(cur) == LEFT){
         child = cur->lc;
         if(typeChild(tree,val) == LC){
-            parent->lc = child;
-            
+            parent->lc = child;     
             return;
         }
         parent->rc = child;
+        return;
+
     }
 
     if(typeNode(cur) == RIGHT){
         child = cur->rc;
         if(typeChild(tree,val) == LC){
             parent->lc = child;
-
             return;
         }
         parent->rc = child;
@@ -145,6 +145,19 @@ void deleteNode(node* tree,int val){
     }
 }
 
+void printTree(node* tree, int level) {
+	if (tree == NULL)
+		return;
+
+	printTree(tree->rc, level + 1);
+
+	for (int i = 0; i < level; i++)
+		printf("    ");
+
+	printf("%d\n", tree->data);
+
+	printTree(tree->lc, level + 1);
+}
 
 int main(){
     node* root1 = createNode(9);
@@ -160,9 +173,9 @@ int main(){
 
 
     
-    inordernl(root1);
-    printf("%d\n",typeChild(root1,9));
-    deleteNode(root1,16);
-    inorder(root1);
+    printTree(root1,0);
+    printf("\n\n");
+    deleteNode(root1,2);
+    printTree(root1,0);
 
 }

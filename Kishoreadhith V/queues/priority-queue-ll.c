@@ -1,66 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node{
+struct node{
     int data;
-    int priority;
-    struct Node * next;
+    struct node * next;
 };
+
+typedef struct node node;
 
 struct Queue{
-    struct Node * front;
-    struct Node * rear;
+    node * front;
+    node * rear;
 };
 
-struct Queue ** createPriorityQueue(int size){
-    struct Queue **pq = (struct Queue **)malloc(sizeof(struct Queue *) * size);
+typedef struct Queue Queue;
+
+
+Queue ** createPriorityQueue(int size){
+    Queue **pq = (Queue **)malloc(sizeof(Queue *) * size);
     for (int i = 0; i < size; i++)
     {
-        pq[i] = (struct Queue *)malloc(sizeof(struct Queue));
+        pq[i] = (Queue *)malloc(sizeof(Queue));
         pq[i]->front = NULL;
         pq[i]->rear = NULL;
     }
     return pq;
 }
 
-void enqueue(struct Queue **pq, int data, int priority){
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-    newNode->data = data;
-    // empty check
+void enqueue(Queue **pq, int data, int priority){
+    node *new = (node *)malloc(sizeof(node));
+    new->data = data;
     if (pq[priority]->front == NULL && pq[priority]->rear == NULL)
     {
-        newNode->next = NULL;
-        pq[priority]->front = newNode;
-        pq[priority]->rear = newNode;
+        new->next = NULL;
+        pq[priority]->front = new;
+        pq[priority]->rear = new;
         return;
     }
-    // non-empty
-    pq[priority]->rear->next = newNode;
-    pq[priority]->rear = newNode;
+    pq[priority]->rear->next = new;
+    pq[priority]->rear = new;
     return;
 }
 
-int dequeue(struct Queue **pq, int size){
+int dequeue(Queue **pq, int size){
     for(int i = 0; i < size; i++){
         if(pq[i]->front != NULL){
-            struct Node *temp = pq[i]->front;
+            node *temp = pq[i]->front;
             int data = temp->data;
             pq[i]->front = pq[i]->front->next;
             free(temp);
             return data;
         }
     }
-    printf("Queue is empty!\n");
-    return -1;
+    printf("EMPTY QUEUE\n");
+    return -999999;
 }
 
-void printQueue(struct Queue **pq, int size){
+void printQueue(Queue **pq, int size){
     for(int i = 0; i < size; i++){
         if(pq[i]->front == NULL){
             printf("Queue %d is empty\n", i);
             continue;
         }
-        struct Node *temp = pq[i]->front;
+        node *temp = pq[i]->front;
         while(temp != NULL){
             printf("%d\t", temp->data);
             temp = temp->next;
@@ -73,7 +75,7 @@ int main(){
     int size, data, priority, choice;
     printf("Enter the number of queues: ");
     scanf("%d", &size);
-    struct Queue **pq = createPriorityQueue(size);
+    Queue **pq = createPriorityQueue(size);
     while (1)
     {
         printf("1. Enqueue\n2. Dequeue\n3. Print\n4. Exit\nEnter your choice: ");

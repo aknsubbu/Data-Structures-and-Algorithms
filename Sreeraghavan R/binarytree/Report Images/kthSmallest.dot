@@ -1,0 +1,12 @@
+digraph{
+    node [shape = circle, style = filled, fillcolor = white, fontcolor = black]
+
+
+    12[fillcolor=lightseagreen]
+    10->5
+    10->15
+    5->3
+    5->7
+    15->12
+    15->20
+}
