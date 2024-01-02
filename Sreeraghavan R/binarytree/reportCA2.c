@@ -112,53 +112,10 @@ node* inorderSuccessor(node* tree,node* cur){
     return searchNode(tree,temp);
 }
 
-// void deleteNode(node* tree,int val){
-//     node* parent = searchParent(tree,val,tree);
-//     if(val > parent->data){
-//         node* cur = parent->rc;
-//         if(!cur->lc && !cur->rc){
-//             free(cur);
-//             parent->rc = NULL;
-//             return;
-//         }
-//         if(cur->lc && cur->rc){
-//             node* tempNode = inorderSuccessor(cur);
-//             int tempVal = tempNode->data;
-//             deleteNode(tree,tempNode->data);
-//             cur->data = tempNode->data;
-//         }
-//         if(cur->lc){
-//             parent->rc = cur->lc;
-//             free(cur);
-//         }
-//         if(cur->rc){
-//             parent->rc = cur->rc;
-//             free(cur);
-//         }
-//     }
-//     if(val < parent->data){
-//         node* cur = parent->lc;
-//         if(!cur->lc && !cur->rc){
-//             free(cur);
-//             parent->lc = NULL;
-//             return;
-//         }
-//         if(cur->lc && cur->rc){
-//             node* tempNode = inorderSuccessor(cur);
-//             int tempVal = tempNode->data;
-//             deleteNode(tree,tempNode->data);
-//             cur->data = tempNode->data;
-//         }
-//         if(cur->lc){
-//             parent->lc = cur->lc;
-//             free(cur);
-//         }
-//         if(cur->rc){
-//             parent->lc = cur->rc;
-//             free(cur);
-//         }
-//     }
-// }
+void deleteNode(node* tree,int val){
+    node* parent = searchParent(tree,val,tree);
+    node* cur = searchNode(tree,val);
+}
 
 bool isUnival(node* tree){
     switch(typeNode(tree)){
@@ -209,7 +166,7 @@ int power2(int a){
 }
 
 int heightTree(node* tree){
-    if (tree == NULL) {
+    if (!tree) {
         return 0;
     }
     
@@ -233,7 +190,7 @@ void serializeBST(node* tree,char* s){
 
     int offset = 0;
     for (i = 0; i < size; i++) {
-        offset += sprintf(s + offset, "%d,", array[i]); // Convert integer to string and append
+        offset += sprintf(s + offset, "%d,", array[i]); 
     }
 }
 
@@ -279,6 +236,9 @@ node *kthSmallest(node* tree,int k){
     }
     return kthSmallestNode;
 }
+
+
+
 
 node* lowestAncestor(node* tree,node* n1,node* n2){
     

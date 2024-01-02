@@ -61,8 +61,6 @@ struct node* insertAtBeginning(struct node* start,int val){
     struct node* new = (struct node*)malloc(sizeof(struct node));
     new->data = val;
     new->next = start;
-    // printf("List after adding:\n");
-    // displayListRec(new);
     return new;
 }
 

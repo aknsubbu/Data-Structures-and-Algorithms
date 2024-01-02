@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#define left(i) (2*i+1)
+#define right(i) (2*i+2)
+
 
 struct heap{
     int* arr;
@@ -18,56 +21,77 @@ void swap(int*l, int i, int j){
 
 void percolateDown(heap* heap,int i){
 
-    //already a heap
-    if(heap->arr[i]>heap->arr[2*i+1] && heap->arr[i]>heap->arr[2*i+2]) return;
+    if(heap->arr[i]<heap->arr[left(i)] && heap->arr[i]<heap->arr[right(i)]) return;
 
-    switch (heap->arr[2*i+1]>heap->arr[2*i+2])
+    switch (heap->arr[left(i)]<heap->arr[right(i)])
     {
     case true:
-        swap(heap->arr,i,2*i+1);
-        percolateDown(heap,2*i+1);
+        swap(heap->arr,i,left(i));
+        percolateDown(heap,left(i));
         break;   
     default:
-        swap(heap->arr,i,2*i+2);
-        percolateDown(heap,2*i+2);
+        swap(heap->arr,i,right(i));
+        percolateDown(heap,right(i));
         break;
     }
 
     
 }
 
-void percolateUp(int* heap,int i){
+void percolateUp(heap* heap,int i){
     // in correct position
     int prevIndex = (i-1)/2;
-    if(heap[i] < heap[prevIndex]) return;
-    else{
-        swap(heap,i,prevIndex);
-        percolateUp(heap,prevIndex);
-    }
-}
+    if(prevIndex < 0 ) return;
+    if(heap->last <= 0) return;
+    if(heap->arr[i] < heap->arr[prevIndex]) return;
+    printf("Hello World!\n");
 
-
-void insert(int* heap,int val){
-    int lastIndex = lastIndex(heap);
+    swap(heap->arr,i,prevIndex);
+    i = prevIndex;
+    percolateUp(heap,prevIndex);
     
 }
 
-int lastIndex(int* heap){
-    int j = 0;
-    int size = sizeof(heap)/sizeof(int);
-    for(int i = 0;i<size;i++){
-        if(heap[i] != 0){
-            j = i;
-        }
-    }
-    return j;
+void insert(heap* heap,int val){
+    heap->arr[heap->last] = val;
+    percolateUp(heap,heap->last);
+    heap->last++;
 }
 
-int parentIndex(int i){
-    return (i-1)/2;
+heap* createHeap(int size){
+    heap* new = (heap*)malloc(sizeof(heap));
+    new->arr = (int*) calloc(size,sizeof(int));
+    new->last = 0;
+    return new;
 }
 
-int nextPos(int* heap){
-    
+void inorder(heap* heap,int i){
+    printf("%d %d\n",left(i),right(i));
+    if(heap->arr[left(i)] != 0) inorder(heap,left(i));
+    printf("%d ",heap->arr[i]);
+    if(heap->arr[right(i)] != 0) inorder(heap,right(i));
 }
 
+void inordernl(heap* heap){
+    inorder(heap,0);
+    printf("\n");
+}
+
+
+int extractMax(heap* heap){
+    return heap->arr[0];
+}
+
+int main(){
+    heap* heap1 = createHeap(15);
+    insert(heap1,8);
+    insert(heap1,1);
+    insert(heap1,2);
+    insert(heap1,7);
+    insert(heap1,3);
+    insert(heap1,4);
+    insert(heap1,6);
+    insert(heap1,5);
+    for(int i = 0;i<15;i++) printf("%d ",heap1->arr[i]);
+    // inordernl(heap1);
+}

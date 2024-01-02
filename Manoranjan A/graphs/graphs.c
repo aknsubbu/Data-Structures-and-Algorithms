@@ -8,7 +8,7 @@ typedef struct {
     int adjMatrix[MAX_VERTICES][MAX_VERTICES];
     int numVertices;
 } Graph;
- 
+    
 void initGraph(Graph* graph, int numVertices) {
     graph->numVertices = numVertices;
     for (int i = 0; i < numVertices; i++) {
