@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+
  
 struct Node
 {
@@ -40,6 +42,29 @@ struct Node *buildExpressionTree(char postfix[])
  
     return stack[top];
 }
+
+int evaluate(struct Node *root)
+{
+    if (root == NULL)
+        return 0;
+ 
+    if (root->left == NULL && root->right == NULL)
+        return root->data - '0';
+ 
+    int l_val = evaluate(root->left);
+    int r_val = evaluate(root->right);
+ 
+    if (root->data == '+')
+        return l_val + r_val;
+ 
+    if (root->data == '-')
+        return l_val - r_val;
+ 
+    if (root->data == '*')
+        return l_val * r_val;
+ 
+    return l_val / r_val;
+}
  
 void inorderTraversal(struct Node *root)
 {
@@ -55,7 +80,8 @@ int main()
 {
     char postfix[] = "ab+ef*g*-";
     struct Node *root = buildExpressionTree(postfix);
- 
+
+    printf("evaluation expression tree: %d", evaluate(root));
     printf("Inorder traversal of expression tree: ");
     inorderTraversal(root);
  

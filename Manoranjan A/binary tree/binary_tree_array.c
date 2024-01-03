@@ -32,15 +32,28 @@ void printTree(struct BinaryTree* tree, int index, int level) {
     }
 }
 
+int inorder(struct BinaryTree* tree, int index) {
+    if (index < tree->size) {
+        inorder(tree, 2 * index + 1);
+        printf("%d ", tree->arr[index]);
+        inorder(tree, 2 * index + 2);
+    }
+}
+
 int main() {
     struct BinaryTree myTree;
     createtree(&myTree);
 
-    insertNode(&myTree, 1);
-    insertNode(&myTree, 2);
-    insertNode(&myTree, 3);
-    insertNode(&myTree, 4);
-    insertNode(&myTree, 5);
+    insertNode(&myTree, 100);
+    insertNode(&myTree, 90);
+    insertNode(&myTree, 80);
+    insertNode(&myTree, 95);
+    insertNode(&myTree, 120);
+    insertNode(&myTree, 110);
+
+    printf("Inorder traversal:\n");
+    inorder(&myTree, 0);
+    
 
     printf("Binary Tree:\n");
     printTree(&myTree, 0, 0);
